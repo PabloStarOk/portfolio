@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource-variable/montserrat':
+        specifier: ^5.1.0
+        version: 5.1.0
       astro:
         specifier: ^5.0.2
         version: 5.0.2(rollup@4.28.0)(typescript@5.7.2)
@@ -332,6 +335,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource-variable/montserrat@5.1.0':
+    resolution: {integrity: sha512-1bloVBKJx/ABBmF+/VzhJZDLzaDNUxw/8Pt5AOgfKL6N3t1fAhwtJBb1gdqU7ABckSNLsKf572A5Inv9YneRug==}
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -1686,6 +1692,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.24.0':
     optional: true
+
+  '@fontsource-variable/montserrat@5.1.0': {}
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:
