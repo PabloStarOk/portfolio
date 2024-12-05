@@ -1,0 +1,72 @@
+{
+    "name": "Astro Devcontainer",
+    "workspaceMount": "type=${WORKSPACE_MOUNT_TYPE},source=${localWorkspaceFolder},target=${WORKSPACE_TARGET}",
+    "workspaceFolder": "/home/node/app",
+    "containerUser": "${CONTAINER_USER}",
+    "dockerComposeFile": "./compose.yaml",
+    "service": "astro",
+    "customizations": {
+        "codespaces":{
+            "openFiles": ["src/pages/index.astro"]
+        },
+        "vscode": {
+            "extensions":
+            [
+                "astro-build.astro-vscode",
+                "esbenp.prettier-vscode",
+                "stylelint.vscode-stylelint",
+                "dbaeumer.vscode-eslint",
+                "ms-vscode.vscode-typescript-next",
+                "eamodio.gitlens",
+                "usernamehw.errorlens",
+                "christian-kohler.path-intellisense",
+                "leizongmin.node-module-intellisense",
+                "formulahendry.auto-rename-tag",
+                "naumovs.color-highlight",
+                "solnurkarim.html-to-css-autocompletion",
+                "Zignd.html-css-class-completion",
+                "antfu.file-nesting",
+                "EditorConfig.EditorConfig",
+                "WallabyJs.console-ninja",
+                "mguellsegarra.highlight-on-copy",
+                "yoavbls.pretty-ts-errors",
+                "meganrogge.template-string-converter"
+            ],
+            "settings": {
+				"terminal.integrated.defaultProfile.linux": "bash",
+
+                // Formatting
+				"editor.defaultFormatter": "vscode.typescript-language-features",
+				"editor.formatOnPaste": true,
+				"editor.formatOnSave": true,
+				"editor.formatOnType": true,
+				"editor.codeActionsOnSave": {
+					"source.fixAll.eslint": "always",
+					"source.organizeImports": "always",
+					"source.sortImports": "always",
+					"source.removeUnusedImports": "always",
+					"source.removeUnused.ts": "always",
+					"source.addMissingImports.ts": "always"
+				},
+
+				// Files
+				"files.trimFinalNewlines": false,
+    			"files.trimTrailingWhitespace": true,
+
+				// Explorer
+				"explorer.sortOrder": "type"
+			}
+        }
+    },
+    "portsAttributes": {
+    "4321": {
+            "label": "Application",
+            "onAutoForward": "openBrowser",
+            "protocol": "http",
+            "requireLocalPort": true
+        }
+    },
+    "forwardPorts": ["localhost:4321"],
+    "postCreateCommand": "if [ -f package.json ]; then npm i || true; else echo 'No package.json found, skipping npm install'; fi",
+    "shutdownAction": "stopCompose"
+}
