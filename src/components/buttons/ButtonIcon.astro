@@ -1,0 +1,32 @@
+---
+import "@/styles/global.css";
+
+interface Props {
+  buttonType: "primary" | "secondary" | "tertiary";
+  id?: string;
+  className?: string;
+  onclick?: string;
+}
+
+const { id, className, buttonType, onclick } = Astro.props;
+---
+
+<button id={id} class={className} data-type={buttonType} onclick={onclick}>
+  <slot />
+</button>
+
+<style>
+  button[data-type="tertiary"] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: auto;
+    height: 100%;
+    padding: 0;
+
+    background-color: transparent;
+    border: transparent;
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+import Menu from "@/components/header/Menu.astro";
+import ThemeToggle from "@/components/themes/ThemeToggle.astro";
+import FavIcon from "@/icons/FavIcon.astro";
+import Hamburger from "@/icons/Hamburger.astro";
+import "@/styles/global.css";
+import ButtonIcon from "./buttons/ButtonIcon.astro";
+import MenuLinks from "./header/MenuLinks.astro";
+
+interface Props {
+  themeToggleName: string;
+  hamburgerMenuName: string;
+}
+
+const { themeToggleName, hamburgerMenuName } = Astro.props;
+---
+
+<header class="nav-bar">
+  <FavIcon style="fill: url(#brandGradient);" />
+  <MenuLinks device="desktop" />
+  <ThemeToggle className={themeToggleName} />
+
+  <!-- Menu button to open the menu in mobile and tablet-->
+  <ButtonIcon id="openMenuButton" buttonType="tertiary">
+    <Hamburger
+      style="fill: url(#brandGradient);"
+      className={hamburgerMenuName}
+    />
+  </ButtonIcon>
+</header>
+<Menu id="navMenu" />
+
+<style>
+  .nav-bar {
+    /* Background with 10% transparency */
+    background: var(--primary-color-100);
+
+    /* Use a pseudo-element for the border */
+    position: relative;
+    border-radius: var(--radius-100); /* Ensure border radius is applied */
+    overflow: hidden; /* Ensures the pseudo-element respects the border radius */
+
+    width: 87.5%;
+    max-width: 62.5rem;
+    max-height: 4.6875rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+
+    padding: var(--space-300) var(--space-600);
+  }
+
+  .nav-bar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    /* Solid gradient border */
+    border: 1px solid transparent;
+    background: var(--primary-color-1000);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+
+    /* Ensures the pseudo-element matches the border-radius */
+    border-radius: inherit;
+    z-index: 0; /* Places the pseudo-element behind the content */
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 26.563rem) {
+    .nav-bar {
+      padding: var(--space-200) var(--space-300);
+      max-height: 3.125rem;
+    }
+  }
+
+  @media screen (max-width: 48rem) {
+    .nav-bar {
+      padding: var(--space-300);
+    }
+  }
+</style>
+
+<script>
+  const openMenuButton = document.getElementById(
+    "openMenuButton"
+  ) as HTMLButtonElement;
+  const navMenu = document.getElementById("navMenu") as HTMLElement;
+
+  function openMenu() {
+    navMenu.dataset.visible = "true";
+    document.body.style.overflow = "hidden";
+  }
+
+  openMenuButton.addEventListener("click", openMenu);
+</script>

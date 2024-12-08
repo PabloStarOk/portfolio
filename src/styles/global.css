@@ -1,0 +1,74 @@
+@import "@fontsource-variable/montserrat";
+
+:root {
+    --primary-color-1000: linear-gradient(to right, var(--left-color-1000), var(--right-color-1000));
+    --primary-color-100: linear-gradient(to right, var(--left-color-100), var(--right-color-100));
+
+    /* Primary Color Variants */
+    --primary-color-top-1000: linear-gradient(to bottom, var(--left-color-1000), var(--right-color-1000)); /* Starts from top */
+
+    --space-50: 0.125rem;
+    --space-100: 0.25rem;
+    --space-200: 0.5rem;
+    --space-300: 0.75rem;
+    --space-400: 1rem;
+    --space-600: 1.50rem;
+
+    --space-negative-100: -0.5rem;
+
+    /* Radius */
+    --radius-50: 0.125rem;
+    --radius-100: 0.25rem;
+
+    /* Typography */
+    --subtitle-font-weight: 400;
+    --font-weight-semibold: 600;
+
+    --subheading-size-base: 1rem;
+}
+
+/* Default Theme */
+:root, :root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --background-color: #1E1E1E;
+    --background-color-500: rgba(30, 30, 30, 0.5);
+
+    --left-color-1000: #FF67A7;
+    --left-color-100: rgba(255, 103, 167, 0.1);
+
+    --right-color-1000: #FC8E50;
+    --right-color-100: rgba(252, 142, 80, 0.1);
+
+    /* Border */
+    --color-border-default-default: rgba(68, 68, 68, 1);
+
+    /* Typography */
+    --color-text-default-default: #fff;
+    --color-text-default-secondary: rgba(255, 255, 255, 0.7);
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+
+    --background-color: #fff;
+    --background-color-500: rgba(255, 255, 255, 0.5);
+
+    --left-color-1000: #3563CB;
+    --left-color-100: rgba(53, 99, 203, 0.1);
+
+    --right-color-1000: #A242BF;
+    --right-color-100: rgba(162, 66, 191, 0.1);
+
+    /* Border */
+    --color-border-default-default: rgba(217, 217, 217, 1);
+
+    /* Typography */
+    --color-text-default-default: #1E1E1E;
+    --color-text-default-secondary: rgba(117, 117, 117, 1);
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: "Montserrat Variable";
+}

@@ -1,0 +1,144 @@
+---
+interface Props {
+  device: "desktop" | "mobile";
+}
+
+const { device } = Astro.props;
+---
+
+<nav class="menu-links" data-device={device}>
+  <a class="menu-links__link" href="../#principal">Inicio</a>
+  <a class="menu-links__link" href="../#experience">Experiencia</a>
+  <a class="menu-links__link" href="../#projects">Proyectos</a>
+  <a class="menu-links__link" href="../#skills">Habilidades</a>
+  <a class="menu-links__link" href="../#contact">Contacto</a>
+  <a class="menu-links__link" href="/about">Sobre Mí</a>
+</nav>
+
+<style>
+  /* Don't display it by default, just let decided according to the device.*/
+  .menu-links {
+    display: none;
+  }
+
+  .menu-links__link {
+    display: inline-block;
+    position: relative;
+    align-content: center;
+
+    text-decoration: none;
+    text-align: center;
+    line-height: 120%;
+
+    color: var(--color-text-default-secondary);
+    font-size: var(--subheading-size-base);
+    font-weight: var(--subtitle-font-weight);
+
+    transition:
+      color 0.3s ease-in-out,
+      font-weight 0.2s ease-in-out;
+  }
+
+  .menu-links__link:hover,
+  .menu-links__link:focus-visible {
+    color: var(--color-text-default-default);
+
+    transition:
+      color 0.2s ease-in-out,
+      background-image 0.2s ease-in-out;
+  }
+
+  .menu-links__link:focus-visible {
+    outline: var(--space-100) solid var(--right-color-1000);
+    outline-width: 0.188rem;
+    outline-offset: var(--space-200);
+    border-radius: var(--radius-50);
+
+    transition: outline-offset 0.2s ease-in-out;
+  }
+
+  .menu-links__link.active {
+    font-weight: var(--font-weight-semibold);
+
+    background: var(--primary-color-1000);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+
+    transition:
+      color 0.3s ease-in-out,
+      font-weight 0.2s ease-in-out;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .menu-links[data-device="desktop"] {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-600);
+    }
+
+    .menu-links__link::after {
+      content: "";
+      position: absolute;
+
+      width: 100%;
+      height: 0.125rem; /* Adjust thickness of the underline */
+
+      left: 0;
+      bottom: var(--space-negative-100);
+
+      transform: scaleX(0); /* Start with no width */
+
+      background: var(--primary-color-1000); /* Color of the underline */
+      border-radius: var(--radius-100);
+
+      transform-origin: bottom center;
+      transition: transform 0.3s ease-in-out; /* Smooth transition for underline */
+    }
+
+    .menu-links__link.active::after {
+      transform-origin: bottom center;
+      transform: scaleX(1);
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    /* Mobile & Tablet */
+    .menu-links[data-device="mobile"] {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .menu-links[data-device="mobile"] .menu-links__link {
+      width: 100%;
+      display: block;
+      box-sizing: border-box;
+      padding: var(--space-400);
+
+      text-align: center;
+      align-content: center;
+
+      border-top: 1px solid var(--color-border-default-default);
+    }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll(".menu-links__link");
+
+    links.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        // Remove 'active' class from all links
+        links.forEach((link) => link.classList.remove("active"));
+
+        // Add 'active' class to the clicked link
+        event.target.classList.add("active");
+      });
+    });
+  });
+</script>
