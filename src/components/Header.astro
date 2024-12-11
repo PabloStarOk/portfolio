@@ -8,17 +8,16 @@ import ButtonIcon from "./buttons/ButtonIcon.astro";
 import MenuLinks from "./header/MenuLinks.astro";
 
 interface Props {
-  themeToggleName: string;
   hamburgerMenuName: string;
 }
 
-const { themeToggleName, hamburgerMenuName } = Astro.props;
+const { hamburgerMenuName } = Astro.props;
 ---
 
 <header class="nav-bar">
   <FavIcon style="fill: url(#brandGradient);" />
   <MenuLinks device="desktop" />
-  <ThemeToggle className={themeToggleName} />
+  <ThemeToggle isVisibleOnMobile={false} />
 
   <!-- Menu button to open the menu in mobile and tablet-->
   <ButtonIcon id="openMenuButton" buttonType="tertiary">

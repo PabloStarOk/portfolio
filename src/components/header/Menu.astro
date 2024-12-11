@@ -14,7 +14,7 @@ const { id } = Astro.props;
 
 <div id={id} class="menu" data-visible="false">
   <div class="menu__buttons">
-    <ThemeToggle className="menu__theme-toggle" />
+    <ThemeToggle isVisibleOnMobile={true} />
     <ButtonIcon id="menuCloseButton" buttonType="tertiary">
       <CloseIcon size={32} style="fill: url(#brandGradient)" />
     </ButtonIcon>

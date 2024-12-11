@@ -9,6 +9,7 @@
 
     --space-50: 0.125rem;
     --space-100: 0.25rem;
+    --space-150: 0.375rem;
     --space-200: 0.5rem;
     --space-300: 0.75rem;
     --space-400: 1rem;
@@ -25,6 +26,7 @@
     --font-weight-semibold: 600;
 
     --subheading-size-base: 1rem;
+    --body-size-small: 0.875rem;
 }
 
 /* Default Theme */
@@ -40,12 +42,16 @@
     --right-color-1000: #FC8E50;
     --right-color-100: rgba(252, 142, 80, 0.1);
 
+    /* Icon */
+    --color-icon-neutral-onneutral: rgba(36, 36, 36, 1);
+
     /* Border */
     --color-border-default-default: rgba(68, 68, 68, 1);
 
     /* Typography */
     --color-text-default-default: #fff;
     --color-text-default-secondary: rgba(255, 255, 255, 0.7);
+    --color-text-neutral-onneutral: rgba(36, 36, 36, 1);
 }
 
 :root[data-theme="light"] {
@@ -60,12 +66,21 @@
     --right-color-1000: #A242BF;
     --right-color-100: rgba(162, 66, 191, 0.1);
 
+    /* Icon Colors */
+    --color-icon-neutral-onneutral: rgba(243, 243, 243, 1);
+
     /* Border */
     --color-border-default-default: rgba(217, 217, 217, 1);
 
     /* Typography */
     --color-text-default-default: #1E1E1E;
     --color-text-default-secondary: rgba(117, 117, 117, 1);
+    --color-text-neutral-onneutral: rgba(243, 243, 243, 1);
+}
+
+* {
+    padding: 0;
+    margin: 0;
 }
 
 body {

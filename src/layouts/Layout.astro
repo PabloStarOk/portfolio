@@ -27,10 +27,7 @@ import { ViewTransitions } from "astro:transitions";
     <ViewTransitions />
   </head>
   <body>
-    <Header
-      themeToggleName="nav-bar__theme-toggle"
-      hamburgerMenuName="nav-bar__hamburger-menu"
-    />
+    <Header hamburgerMenuName="nav-bar__hamburger-menu" />
     <slot />
   </body><style is:global>
     html,
@@ -45,22 +42,12 @@ import { ViewTransitions } from "astro:transitions";
       box-sizing: border-box;
     }
 
-    .nav-bar__theme-toggle {
-      display: none;
-      visibility: hidden;
-    }
-
     .nav-bar__hamburger-menu {
       display: initial;
       visibility: visible;
     }
 
     @media screen and (min-width: 1024px) {
-      .nav-bar__theme-toggle {
-        display: initial;
-        visibility: visible;
-      }
-
       .nav-bar__hamburger-menu {
         display: none;
         visibility: hidden;
