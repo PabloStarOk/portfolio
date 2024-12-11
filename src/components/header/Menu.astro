@@ -15,7 +15,12 @@ const { id } = Astro.props;
 <div id={id} class="menu" data-visible="false">
   <div class="menu__buttons">
     <ThemeToggle isVisibleOnMobile={true} />
-    <ButtonIcon id="menuCloseButton" buttonType="tertiary">
+    <ButtonIcon
+      id="menuCloseButton"
+      ariaLabel="Close Menu"
+      buttonType="tertiary"
+      isVisibleOnDesktop={true}
+    >
       <CloseIcon size={32} style="fill: url(#brandGradient)" />
     </ButtonIcon>
   </div>
