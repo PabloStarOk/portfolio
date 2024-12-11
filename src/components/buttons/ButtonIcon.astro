@@ -6,13 +6,20 @@ interface Props {
   id?: string;
   className?: string;
   onclick?: string;
+  ariaLabel?: string;
   isVisibleOnDesktop: boolean;
 }
 
-const { id, className, buttonType, onclick, isVisibleOnDesktop } = Astro.props;
+const { id, className, buttonType, onclick, ariaLabel, isVisibleOnDesktop } = Astro.props;
 ---
 
-<button id={id} class={className} data-type={buttonType} onclick={onclick} data-visible-on-desktop={isVisibleOnDesktop}>
+<button
+id={id}
+class={className}
+data-type={buttonType}
+onclick={onclick}
+aria-label={ariaLabel}
+data-visible-on-desktop={isVisibleOnDesktop}>
   <slot />
 </button>
 
