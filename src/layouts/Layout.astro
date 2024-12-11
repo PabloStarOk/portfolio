@@ -3,7 +3,6 @@ import SvgDefs from "@/components/defs/SvgDefs.astro";
 import Header from "@/components/Header.astro";
 import ThemeManager from "@/components/themes/ThemeManager.astro";
 import Montserrat from "@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url";
-import { ViewTransitions } from "astro:transitions";
 ---
 
 <!doctype html>
@@ -24,7 +23,6 @@ import { ViewTransitions } from "astro:transitions";
     <SvgDefs />
 
     <ThemeManager defaultTheme="auto" />
-    <ViewTransitions />
   </head>
   <body>
     <Header />
