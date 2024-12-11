@@ -6,12 +6,13 @@ interface Props {
   id?: string;
   className?: string;
   onclick?: string;
+  isVisibleOnDesktop: boolean;
 }
 
-const { id, className, buttonType, onclick } = Astro.props;
+const { id, className, buttonType, onclick, isVisibleOnDesktop } = Astro.props;
 ---
 
-<button id={id} class={className} data-type={buttonType} onclick={onclick}>
+<button id={id} class={className} data-type={buttonType} onclick={onclick} data-visible-on-desktop={isVisibleOnDesktop}>
   <slot />
 </button>
 
@@ -29,4 +30,11 @@ const { id, className, buttonType, onclick } = Astro.props;
     background-color: transparent;
     border: transparent;
   }
+
+   @media screen and (min-width: 1024px) {
+    button[data-visible-on-desktop="false"] {
+      display: none;
+    }
+  }
+  button[]
 </style>

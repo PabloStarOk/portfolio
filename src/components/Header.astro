@@ -6,12 +6,6 @@ import Hamburger from "@/icons/Hamburger.astro";
 import "@/styles/global.css";
 import ButtonIcon from "@/components/buttons/ButtonIcon.astro";
 import MenuLinks from "@/components/header/MenuLinks.astro";
-
-interface Props {
-  hamburgerMenuName: string;
-}
-
-const { hamburgerMenuName } = Astro.props;
 ---
 
 <header class="nav-bar">
@@ -20,11 +14,12 @@ const { hamburgerMenuName } = Astro.props;
   <ThemeToggle isVisibleOnMobile={false} />
 
   <!-- Menu button to open the menu in mobile and tablet-->
-  <ButtonIcon id="openMenuButton" buttonType="tertiary">
-    <Hamburger
-      style="fill: url(#brandGradient);"
-      className={hamburgerMenuName}
-    />
+  <ButtonIcon
+    id="openMenuButton"
+    buttonType="tertiary"
+    isVisibleOnDesktop={false}
+  >
+    <Hamburger style="fill: url(#brandGradient);" />
   </ButtonIcon>
 </header>
 <Menu id="navMenu" />
