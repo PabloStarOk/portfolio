@@ -7,11 +7,11 @@ const { device } = Astro.props;
 ---
 
 <nav class="menu-links" data-device={device}>
-  <a class="menu-links__link" href="../#principal">Inicio</a>
-  <a class="menu-links__link" href="../#experience">Experiencia</a>
-  <a class="menu-links__link" href="../#projects">Proyectos</a>
-  <a class="menu-links__link" href="../#skills">Habilidades</a>
-  <a class="menu-links__link" href="../#contact">Contacto</a>
+  <a class="menu-links__link" href="#principal">Inicio</a>
+  <a class="menu-links__link" href="#experience">Experiencia</a>
+  <a class="menu-links__link" href="#projects">Proyectos</a>
+  <a class="menu-links__link" href="#skills">Habilidades</a>
+  <a class="menu-links__link" href="#contact">Contacto</a>
   <a class="menu-links__link" href="/about">Sobre Mí</a>
 </nav>
 
@@ -127,18 +127,92 @@ const { device } = Astro.props;
   }
 </style>
 
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    const links = document.querySelectorAll(".menu-links__link");
+<script>
+  const observerOptions: IntersectionObserverInit = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.745,
+  };
+  const linkClickedOpts: IntersectionObserverInit = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.9,
+  };
 
-    links.forEach((link) => {
-      link.addEventListener("click", (event) => {
-        // Remove 'active' class from all links
-        links.forEach((link) => link.classList.remove("active"));
+  // TODO: Change section to an specific class name.
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(
+    ".menu-links__link"
+  ) as NodeListOf<HTMLLinkElement>;
+  const linksMap = new Map<string, HTMLLinkElement[]>();
+  const sectionsMap = new WeakMap<HTMLLinkElement, HTMLElement>();
+  let lastLinksActive: HTMLLinkElement[] = [];
+  let ignoreIntersectionEvents: boolean = false;
+  let lastClickedLinkTimeout: NodeJS.Timeout;
 
-        // Add 'active' class to the clicked link
-        event.target.classList.add("active");
-      });
+  for (const link of navLinks) {
+    const id = new URL(link.href).hash.substring(1);
+    const section = Array.from(sections).find((s) => s.id === id);
+
+    if (!linksMap.has(id)) linksMap.set(id, [link]);
+    else linksMap.get(id)?.push(link);
+
+    if (section) sectionsMap.set(link, section);
+  }
+
+  // Updates style of the last and current active link.
+  function updateActiveLinks(links: HTMLLinkElement[]) {
+    lastLinksActive.forEach((link) => link.classList.remove("active"));
+    links.forEach((link) => link.classList.add("active"));
+    if (lastLinksActive != links) lastLinksActive = links;
+  }
+
+  const observerCallback = (entries: IntersectionObserverEntry[]): void => {
+    if (ignoreIntersectionEvents) return;
+
+    entries.forEach((entry) => {
+      const links = linksMap.get(entry.target.id);
+      if (links && entry.isIntersecting) updateActiveLinks(links);
     });
+  };
+  const linkClickedCallback = (entries: IntersectionObserverEntry[]): void => {
+    const entry = entries[0];
+    if (!entry.isIntersecting) return;
+
+    ignoreIntersectionEvents = false;
+    if (lastClickedLinkTimeout) clearTimeout(lastClickedLinkTimeout);
+    linkClickedObserver.disconnect();
+  };
+
+  function onLinkClicked(link: HTMLLinkElement) {
+    ignoreIntersectionEvents = true;
+
+    const section = sectionsMap.get(link);
+    if (!section) return;
+
+    updateActiveLinks([link]);
+
+    // Observe section and reset state after timeout
+    linkClickedObserver.observe(section);
+    if (lastClickedLinkTimeout) clearTimeout(lastClickedLinkTimeout);
+
+    lastClickedLinkTimeout = setTimeout(() => {
+      ignoreIntersectionEvents = false;
+      linkClickedObserver.unobserve(section);
+    }, 2000);
+  }
+
+  const scrollObserver = new IntersectionObserver(
+    observerCallback,
+    observerOptions
+  );
+  const linkClickedObserver = new IntersectionObserver(
+    linkClickedCallback,
+    linkClickedOpts
+  );
+
+  sections.forEach((section) => scrollObserver.observe(section));
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => onLinkClicked(link));
   });
 </script>
