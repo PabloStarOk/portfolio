@@ -2,7 +2,7 @@
 import "@/styles/global.css";
 
 interface Props {
-  buttonType: "primary" | "secondary" | "tertiary";
+  buttonType: "button-primary" | "button-secondary" | "button-tertiary";
   id?: string;
   className?: string;
   onclick?: string;
@@ -10,21 +10,26 @@ interface Props {
   isVisibleOnDesktop: boolean;
 }
 
-const { id, className, buttonType, onclick, ariaLabel, isVisibleOnDesktop } = Astro.props;
+const { id, className, buttonType, onclick, ariaLabel, isVisibleOnDesktop } =
+  Astro.props;
+
+const classes = ["button-icon", buttonType, className]
+  .filter(Boolean)
+  .join(" ");
 ---
 
 <button
-id={id}
-class={className}
-data-type={buttonType}
-onclick={onclick}
-aria-label={ariaLabel}
-data-visible-on-desktop={isVisibleOnDesktop}>
+  id={id}
+  class={classes}
+  onclick={onclick}
+  aria-label={ariaLabel}
+  data-visible-on-desktop={isVisibleOnDesktop}
+>
   <slot />
 </button>
 
 <style>
-  button[data-type="tertiary"] {
+  .button-tertiary {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,10 +43,9 @@ data-visible-on-desktop={isVisibleOnDesktop}>
     border: transparent;
   }
 
-   @media screen and (min-width: 1024px) {
-    button[data-visible-on-desktop="false"] {
+  @media screen and (min-width: 1024px) {
+    .button-icon[data-visible-on-desktop="false"] {
       display: none;
     }
   }
-  button[]
 </style>
