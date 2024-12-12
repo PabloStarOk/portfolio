@@ -57,6 +57,10 @@ const { targetDevice } = Astro.props;
     transition: outline-offset 0.2s ease-in-out;
   }
 
+  .menu-links__link:active {
+    background: var(--primary-color-100);
+  }
+
   .menu-links__link.active {
     font-weight: var(--font-weight-semibold);
 
