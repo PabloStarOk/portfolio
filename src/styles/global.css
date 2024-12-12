@@ -13,7 +13,10 @@
     --space-200: 0.5rem;
     --space-300: 0.75rem;
     --space-400: 1rem;
+    --space-500: 1.25rem;
     --space-600: 1.50rem;
+    --space-800: 2rem;
+    --space-2400: 6rem;
 
     --space-negative-100: -0.5rem;
 
@@ -25,6 +28,7 @@
     --subtitle-font-weight: 400;
     --font-weight-semibold: 600;
 
+    --subtitle-font-base: 2rem;
     --subheading-size-base: 1rem;
     --body-size-small: 0.875rem;
 }
@@ -86,4 +90,9 @@
 body {
     background-color: var(--background-color);
     font-family: "Montserrat Variable";
+}
+
+h1 {
+    text-align: center;
+    font-size: var(--subtitle-font-base);
 }
