@@ -10,15 +10,15 @@ import MenuLinks from "@/components/header/MenuLinks.astro";
 
 <header class="nav-bar">
   <FavIcon style="fill: url(#brandGradient);" size="42" />
-  <MenuLinks device="desktop" />
-  <ThemeToggle isVisibleOnMobile={false} />
+  <MenuLinks targetDevice="desktop" />
+  <ThemeToggle targetDevice="desktop" />
 
   <!-- Menu button to open the menu in mobile and tablet-->
   <ButtonIcon
     id="openMenuButton"
     buttonType="button-tertiary"
     ariaLabel="Navigation Menu"
-    isVisibleOnDesktop={false}
+    targetDevice="mobile"
   >
     <Hamburger style="fill: url(#brandGradient);" />
   </ButtonIcon>
@@ -73,14 +73,14 @@ import MenuLinks from "@/components/header/MenuLinks.astro";
     pointer-events: none;
   }
 
-  @media screen and (max-width: 26.563rem) {
+  @media screen and (max-width: 26.563em) {
     .nav-bar {
       padding: var(--space-200) var(--space-300);
       max-height: 3.125rem;
     }
   }
 
-  @media screen (max-width: 48rem) {
+  @media screen (max-width: 48em) {
     .nav-bar {
       padding: var(--space-300);
     }

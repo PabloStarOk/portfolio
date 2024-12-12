@@ -7,10 +7,10 @@ interface Props {
   className?: string;
   onclick?: string;
   ariaLabel?: string;
-  isVisibleOnDesktop: boolean;
+  targetDevice?: "mobile" | "desktop";
 }
 
-const { id, className, buttonType, onclick, ariaLabel, isVisibleOnDesktop } =
+const { id, className, buttonType, onclick, ariaLabel, targetDevice } =
   Astro.props;
 
 const classes = ["button-icon", buttonType, className]
@@ -23,7 +23,7 @@ const classes = ["button-icon", buttonType, className]
   class={classes}
   onclick={onclick}
   aria-label={ariaLabel}
-  data-visible-on-desktop={isVisibleOnDesktop}
+  data-target-device={targetDevice}
 >
   <slot />
 </button>
@@ -64,8 +64,8 @@ const classes = ["button-icon", buttonType, className]
     animation: bounce 0.3s ease;
   }
 
-  @media screen and (min-width: 1024px) {
-    .button-icon[data-visible-on-desktop="false"] {
+  @media screen and (min-width: 64em) {
+    .button-icon[data-target-device="mobile"] {
       display: none;
     }
   }

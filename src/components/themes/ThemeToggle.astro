@@ -4,17 +4,17 @@ interface Props {
    * Determines if the theme toggle is visible on mobile and tablet devices.
    * Set to `true` for mobile-specific instances.
    */
-  isVisibleOnMobile: boolean;
+  targetDevice?: "mobile" | "desktop";
 }
 
-const { isVisibleOnMobile } = Astro.props;
+const { targetDevice } = Astro.props;
 ---
 
 <div
   id="toggleContainer"
   class="theme-toggle"
   data-state="auto"
-  data-visible-on-mobile={isVisibleOnMobile}
+  data-target-device={targetDevice}
 >
   <button
     id="themeToggle"
@@ -210,8 +210,14 @@ const { isVisibleOnMobile } = Astro.props;
   }
 
   /* Media Queries */
-  @media screen and (max-width: 1023px) {
-    .theme-toggle[data-visible-on-mobile="false"] {
+  @media screen and (max-width: 48em) {
+    .theme-toggle[data-target-device="desktop"] {
+      display: none !important;
+    }
+  }
+
+  @media screen and (max-width: 64em) {
+    .theme-toggle[data-target-device="mobile"] {
       display: none !important;
     }
   }
