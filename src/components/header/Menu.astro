@@ -46,7 +46,13 @@ const { id } = Astro.props;
 
     z-index: 1000;
 
-    transition: transform 0.3s ease-in-out;
+    transition:
+      transform 0.3s ease-in-out,
+      box-shadow 0.3s ease-in-out;
+  }
+
+  .menu[data-visible="false"] {
+    box-shadow: none;
   }
 
   .menu[data-visible="true"] {
