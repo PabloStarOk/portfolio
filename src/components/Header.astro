@@ -9,7 +9,7 @@ import MenuLinks from "@/components/header/MenuLinks.astro";
 ---
 
 <header class="nav-bar">
-  <FavIcon style="fill: url(#brandGradient);" />
+  <FavIcon style="fill: url(#brandGradient);" size="42" />
   <MenuLinks device="desktop" />
   <ThemeToggle isVisibleOnMobile={false} />
 
@@ -27,17 +27,17 @@ import MenuLinks from "@/components/header/MenuLinks.astro";
 
 <style>
   .nav-bar {
-    /* Background with 10% transparency */
     background: var(--primary-color-100);
 
-    /* Use a pseudo-element for the border */
-    position: relative;
-    border-radius: var(--radius-100); /* Ensure border radius is applied */
-    overflow: hidden; /* Ensures the pseudo-element respects the border radius */
+    position: sticky;
+    top: var(--space-200);
+    border-radius: var(--radius-100);
+
+    overflow: hidden;
 
     width: 87.5%;
     max-width: 62.5rem;
-    max-height: 4.6875rem;
+    max-height: 4rem;
 
     display: flex;
     flex-direction: row;
@@ -45,6 +45,8 @@ import MenuLinks from "@/components/header/MenuLinks.astro";
     justify-content: space-between;
     box-sizing: border-box;
 
+    z-index: 999;
+    backdrop-filter: blur(0.938rem);
     padding: var(--space-300) var(--space-600);
   }
 
