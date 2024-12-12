@@ -29,7 +29,7 @@ const classes = ["button-icon", buttonType, className]
 </button>
 
 <style>
-  .button-tertiary {
+  .button-icon {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,13 +39,46 @@ const classes = ["button-icon", buttonType, className]
     height: 100%;
     padding: 0;
 
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .button-tertiary {
     background-color: transparent;
     border: transparent;
+  }
+
+  .button-icon:hover {
+    transform: scale(1.1);
+  }
+
+  .button-icon:focus-visible {
+    outline: var(--space-100) solid var(--right-color-1000);
+    outline-width: 0.188rem;
+    outline-offset: var(--space-50);
+    border-radius: var(--radius-50);
+
+    transition: outline 0.1s ease-in-out;
+  }
+
+  .button-icon:active {
+    animation: bounce 0.3s ease;
   }
 
   @media screen and (min-width: 1024px) {
     .button-icon[data-visible-on-desktop="false"] {
       display: none;
+    }
+  }
+
+  @keyframes bounce {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 </style>
