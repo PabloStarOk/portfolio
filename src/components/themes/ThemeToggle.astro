@@ -1,0 +1,360 @@
+---
+interface Props {
+  /*
+   * Determines if the theme toggle is visible on mobile and tablet devices.
+   * Set to `true` for mobile-specific instances.
+   */
+  targetDevice?: "mobile" | "desktop";
+}
+
+const { targetDevice } = Astro.props;
+---
+
+<div
+  id="toggleContainer"
+  class="theme-toggle"
+  data-state="auto"
+  data-target-device={targetDevice}
+>
+  <button
+    id="themeToggle"
+    class="theme-toggle__button"
+    data-state="auto"
+    aria-label="Toggle Theme"
+  >
+    <div class="theme-toggle__icons">
+      <svg
+        role="img"
+        aria-hidden="true"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="theme-toggle__icon"
+        data-icon="auto"
+      >
+        <path
+          d="M12.166 4.163a8.125 8.125 0 1 1 0 16.25V4.163Zm0-1.875a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"
+          fill="var(--color-icon-neutral-onneutral)"></path>
+      </svg>
+      <svg
+        role="img"
+        aria-hidden="true"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="theme-toggle__icon"
+        data-icon="dark"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M9.373 4.45c.22.182.317.48.248.763a7.192 7.192 0 0 0-.205 1.708c0 3.828 2.992 6.931 6.682 6.931 1.091 0 2.12-.27 3.028-.75.25-.133.552-.101.771.08.22.183.317.481.248.763-.891 3.645-4.074 6.343-7.865 6.343-4.481 0-8.113-3.768-8.113-8.416 0-3.276 1.804-6.113 4.435-7.503.25-.133.552-.1.771.081Z"
+          fill="var(--color-icon-neutral-onneutral)"></path>
+      </svg>
+      <svg
+        role="img"
+        aria-hidden="true"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="theme-toggle__icon"
+        data-icon="light"
+      >
+        <path
+          d="M12.166.288c.51 0 .924.413.924.923v2.77a.923.923 0 0 1-1.847 0V1.21c0-.51.414-.923.923-.923ZM6.628 12.288a5.538 5.538 0 1 1 11.077 0 5.538 5.538 0 0 1-11.077 0ZM20.652 5.108a.923.923 0 0 0-1.306-1.305L17.388 5.76a.923.923 0 1 0 1.306 1.305l1.958-1.958ZM24.166 12.288c0 .51-.413.923-.923.923h-2.769a.923.923 0 0 1 0-1.846h2.77c.51 0 .922.413.922.923ZM19.346 20.773a.923.923 0 1 0 1.306-1.305l-1.958-1.959a.923.923 0 0 0-1.306 1.306l1.958 1.958ZM12.166 19.672c.51 0 .924.414.924.924v2.769a.923.923 0 0 1-1.847 0v-2.77c0-.51.414-.922.923-.922ZM6.945 18.815a.923.923 0 1 0-1.305-1.306L3.68 19.468a.923.923 0 1 0 1.306 1.305l1.958-1.958ZM4.782 12.288c0 .51-.413.923-.923.923h-2.77a.923.923 0 0 1 0-1.846h2.77c.51 0 .923.413.923.923ZM5.64 7.066a.923.923 0 1 0 1.305-1.305L4.987 3.803A.923.923 0 0 0 3.68 5.108L5.64 7.066Z"
+          fill="var(--color-icon-neutral-onneutral)"
+        >
+        </path>
+      </svg>
+    </div>
+    <p class="theme-toggle__content">Auto</p>
+  </button>
+</div>
+
+<style>
+  /* Classes */
+  .theme-toggle {
+    position: relative;
+
+    background: transparent;
+
+    display: flex;
+    flex-direction: row;
+
+    min-width: 5.5rem;
+    max-height: 2.5rem;
+
+    padding: var(--space-100);
+    border-radius: var(--radius-100);
+
+    box-sizing: border-box;
+  }
+
+  .theme-toggle__button {
+    width: 2rem;
+    min-height: 1.8rem;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-150);
+
+    padding: var(--space-50);
+    background: var(--primary-color-1000);
+    border-radius: var(--radius-100);
+    border: transparent;
+
+    transform: translateX(0);
+
+    transition:
+      transform 0.2s ease-in-out,
+      width 0.2s ease;
+  }
+
+  .theme-toggle__icons {
+    position: relative;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .theme-toggle__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(0.8) rotate(-90deg);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .theme-toggle__content {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+    font-family: "Montserrat Variable";
+    font-size: var(--body-size-small);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-neutral-onneutral);
+
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Pseudo Elements */
+  .theme-toggle::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    /* Solid gradient border */
+    border: 1px solid transparent;
+    background: var(--primary-color-1000);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+
+    border-radius: inherit;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Pseudo Classes */
+  .theme-toggle__button:hover {
+    transform: scale(1.05);
+  }
+
+  .theme-toggle__button:focus-visible {
+    outline: var(--space-100) solid var(--right-color-1000);
+    outline-width: 0.188rem;
+    outline-offset: var(--space-200);
+    border-radius: var(--radius-50);
+
+    transition: outline-offset 0.2s ease-in-out;
+  }
+
+  /* Data Attributes */
+  .theme-toggle[data-state="light"] {
+    justify-content: flex-end;
+  }
+
+  .theme-toggle__button[data-state="auto"] {
+    width: 100%;
+  }
+
+  .theme-toggle__button[data-state="auto"] [data-icon="auto"],
+  .theme-toggle__button[data-state="dark"] [data-icon="dark"],
+  .theme-toggle__button[data-state="light"] [data-icon="light"] {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  .theme-toggle__button[data-state="auto"] .theme-toggle__content {
+    visibility: visible;
+    opacity: 1;
+    display: inline;
+  }
+
+  /* Media Queries */
+  @media screen and (max-width: 48em) {
+    .theme-toggle[data-target-device="desktop"] {
+      display: none !important;
+    }
+  }
+
+  @media screen and (max-width: 64em) {
+    .theme-toggle[data-target-device="mobile"] {
+      display: none !important;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Apply styles before loading.
+  (function () {
+    const storedTheme = window.theme.getTheme();
+    const toggles = document.querySelectorAll(".theme-toggle__button");
+
+    for (const toggle of toggles) {
+      const container = toggle.closest(".theme-toggle");
+
+      toggle.dataset.state = storedTheme;
+      container.dataset.state = storedTheme;
+    }
+  })();
+</script>
+
+<script>
+  // Types
+  type ToggleElements = {
+    container: HTMLDivElement;
+    icon: HTMLImageElement;
+    content: HTMLParagraphElement;
+  };
+
+  type ToggleState = {
+    content: string;
+    width: string;
+    alignment: string;
+    hasTimeout: boolean;
+    timeout?: number;
+  };
+
+  // Global constants
+  const toggles = document.querySelectorAll(
+    ".theme-toggle__button"
+  ) as NodeListOf<HTMLButtonElement>;
+  const containersMap = new WeakMap<HTMLButtonElement, ToggleElements>();
+  const timeoutPool: WeakMap<HTMLButtonElement, { timeout: NodeJS.Timeout }> =
+    new WeakMap();
+
+  const defaultState: ToggleState = {
+    content: "Auto",
+    width: "100%",
+    alignment: "flex-start",
+    hasTimeout: false,
+    timeout: 0,
+  };
+  const toggleStates: Map<string, ToggleState> = new Map([
+    ["auto", defaultState],
+    [
+      "dark",
+      {
+        content: "",
+        width: "2rem",
+        alignment: "flex-start",
+        hasTimeout: true,
+        timeout: 150,
+      },
+    ],
+    [
+      "light",
+      {
+        content: "",
+        width: "2rem",
+        alignment: "flex-end",
+        hasTimeout: false,
+        timeout: 0,
+      },
+    ],
+  ]);
+
+  // Map related elements (container <div>, icon <svg> and content <p>) of each toggle.
+  for (const toggle of toggles) {
+    let icon: HTMLImageElement | any;
+    let content: HTMLParagraphElement | any;
+
+    const container = toggle.closest(".theme-toggle") as HTMLDivElement;
+
+    for (const child of toggle.children) {
+      switch (child.tagName) {
+        case "IMG":
+          icon = child as HTMLImageElement;
+        case "P":
+          content = child as HTMLParagraphElement;
+      }
+    }
+
+    const elements: ToggleElements = {
+      container,
+      icon,
+      content,
+    };
+    containersMap.set(toggle, elements);
+  }
+
+  // Set the state of the toggle
+  function setToggleState(toggle: HTMLButtonElement, targetTheme: string) {
+    if (toggle.dataset.state === targetTheme) return;
+
+    clearTimeout(timeoutPool.get(toggle)?.timeout);
+
+    const state = toggleStates.get(targetTheme) || defaultState;
+    const elements = containersMap.get(toggle);
+
+    if (state && elements) {
+      elements.content.textContent = state.content;
+      // Fill the container to simulate an translation animation.
+      // (Specially used to move from light theme (right side) to dark theme (left side) mode)
+      if (state.hasTimeout) toggle.style.width = "100%";
+      let timeout = setTimeout(() => {
+        toggle.style.width = state.width;
+        elements.container.dataset.state = targetTheme;
+        toggle.dataset.state = targetTheme;
+      }, state.timeout);
+
+      timeoutPool.set(toggle, { timeout });
+    }
+  }
+
+  // Change the current theme of the portfolio
+  function changeTheme(toggle: HTMLButtonElement) {
+    const stateCycle = ["dark", "auto", "light"];
+    const currentState = toggle.dataset.state || "dark";
+    const nextTheme =
+      stateCycle[(stateCycle.indexOf(currentState) + 1) % stateCycle.length];
+    window.theme.setTheme(nextTheme as "auto" | "dark" | "light");
+  }
+
+  toggles.forEach((s) => s.addEventListener("click", () => changeTheme(s)));
+  document.addEventListener("theme-changed", (event: Event) => {
+    const themeChangedEvent = event as CustomEvent<ThemeChangedDetail>;
+    for (const toggle of toggles) {
+      setToggleState(toggle, themeChangedEvent.detail.theme);
+    }
+  });
+</script>
