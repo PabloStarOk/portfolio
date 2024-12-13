@@ -1,0 +1,55 @@
+---
+import SectionLayout from "@/layouts/SectionLayout.astro";
+---
+
+<SectionLayout id="hero">
+  <div class="hero">
+    <header class="hero-header">
+      <!--<Image /> -->
+      <div class="hero-header__info">
+        <h1 class="hero-header__title">Pedro Pablo Rodriguez Carranza</h1>
+        <h2 class="hero-header__ocuppation">Desarrollador Fullstack</h2>
+      </div>
+    </header>
+    <main>
+      <p class="hero-main">
+        Lorem ipsum dolor sit amet consectetur. Diam id mauris placerat volutpat
+        sit quam. Sed eget a in elementum massa semper tellus. Sagittis massa
+        tristique cursus at eget viverra accumsan.
+      </p>
+    </main>
+    <footer class="hero-footer">
+      <div class="hero-footer__buttons">
+        <a>Ver CV</a>
+        <a>GitHub</a>
+        <a>LinkedIn</a>
+      </div>
+    </footer>
+  </div>
+</SectionLayout>
+
+<style>
+  .hero-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-header__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-header__title {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .hero-header__ocuppation {
+    text-align: center;
+    font-size: 1rem;
+  }
+</style>
