@@ -1,0 +1,43 @@
+---
+import FavIcon from "@/icons/FavIcon.astro";
+---
+
+<footer class="footer">
+  <FavIcon style="fill: url(#brandGradient);" size="51" />
+  <p class="footer__text">©️ Pablo Rodriguez</p>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-200);
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    padding: var(--space-800);
+
+    background-image: url("src/assets/FooterBackground.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-clip: padding-box;
+    background-position: center;
+    box-sizing: border-box;
+
+    border-style: solid none none none;
+    border-width: 1px;
+    border-image: var(--primary-color-1000) 1;
+  }
+
+  .footer__text {
+    text-align: center;
+    justify-content: center;
+    font-weight: var(--font-weight-semibold);
+
+    background: var(--primary-color-1000);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
+</style>
