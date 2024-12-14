@@ -7,6 +7,7 @@
     /* Primary Color Variants */
     --primary-color-top-1000: linear-gradient(to bottom, var(--left-color-1000), var(--right-color-1000)); /* Starts from top */
 
+    --space-25: 0.063rem;
     --space-50: 0.125rem;
     --space-100: 0.25rem;
     --space-150: 0.375rem;

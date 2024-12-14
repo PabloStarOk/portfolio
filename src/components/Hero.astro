@@ -1,5 +1,9 @@
 ---
+import GitHubIcon from "@/icons/GitHub.astro";
+import LinkedinIcon from "@/icons/Linkedin.astro";
+import OpenInNewIcon from "@/icons/OpenInNew.astro";
 import SectionLayout from "@/layouts/SectionLayout.astro";
+import AnchorButton from "./buttons/AnchorButton.astro";
 ---
 
 <SectionLayout id="hero">
@@ -21,17 +25,26 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
       tristique cursus at eget viverra accumsan.
     </p>
     <footer class="hero-footer">
-      <a class="hero-footer__button">Ver CV</a>
-      <a
-        class="hero-footer__button"
+      <AnchorButton href="cv.pdf" ariaLabel="Hoja de vida en una nueva página">
+        <OpenInNewIcon style="stroke: var(--color-icon-neutral-onneutral);" />
+        Ver CV
+      </AnchorButton>
+
+      <AnchorButton
         href="https://github.com/PabloStarOk"
-        target="_blank">GitHub</a
+        ariaLabel="Perfil de GitHub en una nueva página"
+        type="secondary"
       >
-      <a
-        class="hero-footer__button"
+        <GitHubIcon style="fill: url(#brandGradient)" />
+      </AnchorButton>
+
+      <AnchorButton
         href="http://www.linkedin.com/in/pedro-pablo-rodriguez"
-        target="_blank">LinkedIn</a
+        ariaLabel="Perfil de LinkedIn en una nueva página"
+        type="secondary"
       >
+        <LinkedinIcon style="fill: url(#brandGradient)" />
+      </AnchorButton>
     </footer>
   </div>
 </SectionLayout>
@@ -123,15 +136,8 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: var(--space-200);
+    gap: var(--space-300);
     align-self: stretch;
-  }
-
-  .hero-footer__button {
-    padding: var(--space-200);
-
-    border: 1px solid var(--right-color-1000);
-    border-radius: var(--radius-100);
   }
 
   @media (min-width: 768px) {
