@@ -3,53 +3,153 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
 ---
 
 <SectionLayout id="hero">
-  <div class="hero">
+  <div class="hero-container">
+    <img
+      class="hero-header__picture"
+      src="public/Profile.webp"
+      alt="Foto de perfil de Pedro Pablo Rodriguez Carranza"
+    />
     <header class="hero-header">
-      <!--<Image /> -->
-      <div class="hero-header__info">
-        <h1 class="hero-header__title">Pedro Pablo Rodriguez Carranza</h1>
-        <h2 class="hero-header__ocuppation">Desarrollador Fullstack</h2>
-      </div>
+      <h1 class="hero-header__title">Pedro Pablo Rodriguez Carranza</h1>
+      <h2 class="hero-header__occupation">Desarrollador Fullstack</h2>
     </header>
-    <main>
-      <p class="hero-main">
-        Lorem ipsum dolor sit amet consectetur. Diam id mauris placerat volutpat
-        sit quam. Sed eget a in elementum massa semper tellus. Sagittis massa
-        tristique cursus at eget viverra accumsan.
-      </p>
-    </main>
+    <p class="hero__content">
+      Lorem ipsum dolor sit amet consectetur. Diam id mauris placerat volutpat
+      sit quam. Sed eget a in elementum massa semper tellus. Sagittis massa
+      tristique cursus at eget viverra accumsan.
+    </p>
     <footer class="hero-footer">
-      <div class="hero-footer__buttons">
-        <a>Ver CV</a>
-        <a>GitHub</a>
-        <a>LinkedIn</a>
-      </div>
+      <a class="hero-footer__button">Ver CV</a>
+      <a
+        class="hero-footer__button"
+        href="https://github.com/PabloStarOk"
+        target="_blank">GitHub</a
+      >
+      <a
+        class="hero-footer__button"
+        href="http://www.linkedin.com/in/pedro-pablo-rodriguez"
+        target="_blank">LinkedIn</a
+      >
     </footer>
   </div>
 </SectionLayout>
 
 <style>
-  .hero-header {
+  .hero-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: var(--space-200) 0;
+    gap: var(--space-600);
+    width: 100%;
   }
 
-  .hero-header__info {
+  .hero-header__picture {
+    border-radius: 50%;
+    border: 2.5px solid var(--right-color-1000);
+    object-fit: cover;
+    width: 50%;
+    max-width: 25rem;
+    aspect-ratio: 1/1;
+  }
+
+  .hero-header {
+    align-self: stretch;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: var(--space-100);
   }
 
   .hero-header__title {
+    /* Layout */
+    align-self: stretch;
+
+    /* Typography */
     text-align: center;
-    font-size: 1.5rem;
+    font-size: var(--heading-size-base);
+    font-style: normal;
+    font-weight: var(--title-page-font-weight);
+    line-height: 120%;
+    letter-spacing: -0.03rem;
+
+    /* Sytle */
+    background: var(--primary-color-1000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .hero-header__ocuppation {
+  .hero-header__occupation {
+    /* Layout */
+    align-self: stretch;
+
+    /* Typography */
+    color: var(--color-text-default-default);
     text-align: center;
-    font-size: 1rem;
+    font-size: var(--subheading-size-medium);
+    font-style: normal;
+    font-weight: var(--typography-weight-bold);
+    line-height: 120%;
+  }
+
+  .hero__content {
+    /* Layout */
+    width: 100%;
+    max-width: 30rem;
+
+    /* Typography */
+    color: var(--color-text-default-default);
+    text-align: center;
+    font-size: var(--body-size-small);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+    line-height: 140%;
+  }
+
+  .hero-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-200);
+    align-self: stretch;
+  }
+
+  .hero-footer__button {
+    padding: var(--space-200);
+
+    border: 1px solid var(--right-color-1000);
+    border-radius: var(--radius-100);
+  }
+
+  @media (min-width: 768px) {
+    .hero-container {
+      /* Layout */
+      padding: var(--space-1200) 0;
+      gap: var(--space-800);
+    }
+
+    .hero-header__picture {
+      border: 5px solid var(--right-color-1000);
+    }
+
+    .hero-header__title {
+      /* Typography */
+      font-size: var(--title-page-size-base);
+      font-weight: var(--title-page-font-weight);
+      letter-spacing: -0.06rem;
+    }
+
+    .hero-header__occupation {
+      /* Typography */
+      font-size: var(--subtitle-size-base);
+    }
+
+    .hero__content {
+      /* Typography */
+      font-size: var(--body-size-medium);
+    }
   }
 </style>
