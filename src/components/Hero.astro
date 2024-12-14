@@ -4,11 +4,13 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
 
 <SectionLayout id="hero">
   <div class="hero-container">
-    <img
-      class="hero-header__picture"
-      src="public/Profile.webp"
-      alt="Foto de perfil de Pedro Pablo Rodriguez Carranza"
-    />
+    <div class="hero-header__picture-wrapper">
+      <img
+        class="hero-header__picture"
+        src="public/Profile.webp"
+        alt="Foto de perfil de Pedro Pablo Rodriguez Carranza"
+      />
+    </div>
     <header class="hero-header">
       <h1 class="hero-header__title">Pedro Pablo Rodriguez Carranza</h1>
       <h2 class="hero-header__occupation">Desarrollador Fullstack</h2>
@@ -45,13 +47,21 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
     width: 100%;
   }
 
-  .hero-header__picture {
+  .hero-header__picture-wrapper {
+    display: inline-block;
     border-radius: 50%;
-    border: 2.5px solid var(--right-color-1000);
-    object-fit: cover;
     width: 50%;
     max-width: 25rem;
+    background: var(--primary-color-1000);
+    padding: 2.5px;
+  }
+
+  .hero-header__picture {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100%;
     aspect-ratio: 1/1;
+    display: block;
   }
 
   .hero-header {
@@ -131,10 +141,9 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
       gap: var(--space-800);
     }
 
-    .hero-header__picture {
-      border: 5px solid var(--right-color-1000);
+    .hero-header__picture-wrapper {
+      padding: 5px;
     }
-
     .hero-header__title {
       /* Typography */
       font-size: var(--title-page-size-base);
