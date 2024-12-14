@@ -66,6 +66,12 @@ const relation =
     text-align: center;
     text-wrap: nowrap;
     text-overflow: ellipsis;
+
+    /* Animations */
+    transition:
+      transform 0.2s ease-in-out,
+      filter 0.2s ease-in-out,
+      outline-offset 0.2s ease-in-out;
   }
 
   .anchor-button--primary {
@@ -93,5 +99,34 @@ const relation =
     /* Style */
     background-color: var(--background-color);
     border-radius: calc(var(--space-25) + var(--radius-50));
+  }
+
+  .anchor-button:hover,
+  .anchor-button:focus-visible {
+    transform: scale(1.1);
+  }
+
+  .anchor-button:focus-visible {
+    outline: var(--space-100) solid var(--right-color-1000);
+    outline-width: 0.188rem;
+    outline-offset: var(--space-100);
+    border-radius: var(--radius-100);
+  }
+
+  .anchor-button:active {
+    filter: brightness(0.8);
+    animation: bounce 0.2s ease-in-out;
+  }
+
+  @keyframes bounce {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+    }
   }
 </style>
