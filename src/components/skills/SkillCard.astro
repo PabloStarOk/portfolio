@@ -27,6 +27,7 @@ else selfAssessedLevel = "Principiante";
 <style>
   .skill-card {
     /* Layout */
+    position: relative;
     display: inline-flex;
     min-width: 9.25rem;
     max-width: 9.25rem;
@@ -40,11 +41,12 @@ else selfAssessedLevel = "Principiante";
     /* Style */
     border-radius: var(--radius-100);
     border: 1px solid var(--color-border-default-default);
-    background: var(--background-color);
 
-    /* Drop Shadow/Card */
     box-shadow: var(--size-depth-0) var(--size-depth-200) var(--size-depth-400)
       var(--size-depth-negative-200) var(--color-black-300);
+
+    /* Animations */
+    transition: border-color 0.3s ease-in-out;
   }
 
   .skill-card__icon {
@@ -85,6 +87,42 @@ else selfAssessedLevel = "Principiante";
     font-style: normal;
     font-weight: var(--body-font-weight-regular);
     line-height: 120%;
+  }
+
+  .skill-card:hover {
+    /* Style */
+    border-color: var(--right-color-1000);
+  }
+
+  .skill-card:hover .skill-card__title {
+    /* Style */
+    background: var(--primary-color-1000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .skill-card::before {
+    /* Layout */
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+
+    /* Style */
+    background-image: var(--primary-color-100);
+
+    /* Animations */
+    transition: opacity 0.3s linear;
+  }
+
+  .skill-card:hover::before {
+    /* Style */
+    opacity: 1;
   }
 
   @media (min-width: 48em) {
