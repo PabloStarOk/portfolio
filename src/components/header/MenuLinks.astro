@@ -35,17 +35,14 @@ const { targetDevice } = Astro.props;
     font-weight: var(--subtitle-font-weight);
 
     transition:
-      color 0.3s ease-in-out,
-      font-weight 0.2s ease-in-out;
+      color 0.2s ease-in-out,
+      font-weight 0.2s ease-in-out,
+      outline-offset 0.2s ease-in-out;
   }
 
   .menu-links__link:hover,
   .menu-links__link:focus-visible {
     color: var(--color-text-default-default);
-
-    transition:
-      color 0.2s ease-in-out,
-      background-image 0.2s ease-in-out;
   }
 
   .menu-links__link:focus-visible {
@@ -53,8 +50,6 @@ const { targetDevice } = Astro.props;
     outline-width: 0.188rem;
     outline-offset: var(--space-200);
     border-radius: var(--radius-50);
-
-    transition: outline-offset 0.2s ease-in-out;
   }
 
   .menu-links__link:active {
@@ -67,10 +62,6 @@ const { targetDevice } = Astro.props;
     background: var(--primary-color-1000);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
-
-    transition:
-      color 0.3s ease-in-out,
-      font-weight 0.2s ease-in-out;
   }
 
   .menu-links[data-target-device="mobile"] {
