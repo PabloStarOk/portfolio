@@ -17,7 +17,98 @@ else selfAssessedLevel = "Principiante";
 ---
 
 <article class="skill-card">
-  <Image src={iconSrc} alt={iconAlt} />
-  <h3 class="skill-card__title">{title}</h3>
-  <p class="skill-card__level">{selfAssessedLevel}</p>
+  <Image class="skill-card__icon" src={iconSrc} alt={iconAlt} />
+  <header class="skill-card__header">
+    <h3 class="skill-card__title">{title}</h3>
+    <small class="skill-card__level">Nivel {selfAssessedLevel}</small>
+  </header>
 </article>
+
+<style>
+  .skill-card {
+    /* Layout */
+    display: inline-flex;
+    min-width: 9.25rem;
+    max-width: 9.25rem;
+    aspect-ratio: 1/1;
+    padding: var(--space-200);
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+
+    /* Style */
+    border-radius: var(--radius-100);
+    border: 1px solid var(--color-border-default-default);
+    background: var(--background-color);
+
+    /* Drop Shadow/Card */
+    box-shadow: var(--size-depth-0) var(--size-depth-200) var(--size-depth-400)
+      var(--size-depth-negative-200) var(--color-black-300);
+  }
+
+  .skill-card__icon {
+    /* Layout */
+    max-height: 3.5rem;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .skill-card__header {
+    /* Layout */
+    display: flex;
+    padding: var(--space-0);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-50);
+  }
+
+  .skill-card__title {
+    /* Layout */
+    align-self: stretch;
+
+    /* Typography */
+    color: var(--color-text-default-default);
+    text-align: center;
+    font-size: var(--subheading-size-base);
+    font-style: normal;
+    font-weight: var(--subheading-font-weight-strong);
+    line-height: 120%;
+  }
+
+  .skill-card__level {
+    /* Typography */
+    color: var(--color-text-default-secondary);
+    text-align: center;
+    font-size: var(--body-size-small);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+    line-height: 120%;
+  }
+
+  @media (min-width: 48em) {
+    .skill-card {
+      /* Layout */
+      min-width: 18.75rem;
+      max-width: 18.75rem;
+      min-height: 12.5rem;
+      max-height: 12.5rem;
+      padding: var(--space-400) var(--space-200);
+    }
+
+    .skill-card__icon {
+      /* Layout */
+      max-height: 5.25rem;
+    }
+
+    .skill-card__title {
+      font-size: var(--subheading-size-medium);
+    }
+
+    .skill-card__level {
+      /* Typography */
+      font-size: var(--body-size-base);
+    }
+  }
+</style>

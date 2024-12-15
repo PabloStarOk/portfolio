@@ -5,7 +5,7 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
 ---
 
 <SectionLayout id="skills" title="Habilidades">
-  <div class="skill-cards__container">
+  <div class="skill-cards-container">
     <SkillCard
       title=".NET"
       level={2}
@@ -14,3 +14,20 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
     />
   </div>
 </SectionLayout>
+
+<style>
+  .skill-cards-container {
+    align-self: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-400);
+  }
+
+  @media (min-width: 768px) {
+    .skill-cards-container {
+      gap: var(--space-1200);
+    }
+  }
+</style>
