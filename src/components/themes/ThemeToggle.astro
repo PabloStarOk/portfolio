@@ -209,16 +209,20 @@ const { targetDevice } = Astro.props;
     display: inline;
   }
 
+  .theme-toggle[data-target-device="desktop"] {
+    display: none !important;
+  }
+
   /* Media Queries */
-  @media screen and (max-width: 48em) {
-    .theme-toggle[data-target-device="desktop"] {
+  @media screen and (max-width: 64em) {
+    .theme-toggle[data-target-device="mobile"] {
       display: none !important;
     }
   }
 
-  @media screen and (max-width: 64em) {
-    .theme-toggle[data-target-device="mobile"] {
-      display: none !important;
+  @media screen and (min-width: 64em) {
+    .theme-toggle[data-target-device="desktop"] {
+      display: flex !important;
     }
   }
 </style>

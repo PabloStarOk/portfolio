@@ -2,7 +2,7 @@
 import ThemeToggle from "@/components/themes/ThemeToggle.astro";
 import CloseIcon from "@/icons/Close.astro";
 import "@/styles/global.css";
-import ButtonIcon from "@/components/buttons/ButtonIcon.astro";
+import IconButton from "@/components/buttons/IconButton.astro";
 import MenuLinks from "@/components/header/MenuLinks.astro";
 
 interface Props {
@@ -15,13 +15,13 @@ const { id } = Astro.props;
 <div id={id} class="menu" data-visible="false">
   <div class="menu__buttons">
     <ThemeToggle />
-    <ButtonIcon
+    <IconButton
       id="menuCloseButton"
       ariaLabel="Close Menu"
       buttonType="button-tertiary"
     >
       <CloseIcon size={32} style="fill: url(#brandGradient)" />
-    </ButtonIcon>
+    </IconButton>
   </div>
   <MenuLinks targetDevice="mobile" />
 </div>
@@ -53,6 +53,7 @@ const { id } = Astro.props;
 
   .menu[data-visible="false"] {
     box-shadow: none;
+    visibility: hidden;
   }
 
   .menu[data-visible="true"] {
@@ -79,8 +80,6 @@ const { id } = Astro.props;
       border-style: none none none solid;
       border-width: 1px;
       border-image: var(--primary-color-top-1000) 1;
-
-      transform: transform 0.3s ease-in-out;
     }
   }
 
@@ -92,9 +91,18 @@ const { id } = Astro.props;
 </style>
 
 <script>
+  let menuHideTimeout: NodeJS.Timeout;
+
   function findMenuElement(event: Event): HTMLDivElement {
     const targetElement = event.target as HTMLElement;
     return targetElement.closest(".menu") as HTMLDivElement;
+  }
+
+  function hideMenu(menuElement: HTMLDivElement) {
+    if (menuHideTimeout) clearTimeout(menuHideTimeout);
+    menuHideTimeout = setTimeout(() => {
+      menuElement.style.visibility = "hidden";
+    }, 300);
   }
 
   function closeMenu(event: Event) {
@@ -102,12 +110,8 @@ const { id } = Astro.props;
     if (menuElement) {
       menuElement.dataset.visible = "false";
       document.body.style.overflow = "visible";
+      hideMenu(menuElement);
     }
-  }
-
-  function moveToSection(event: Event) {
-    closeMenu(event);
-    // TODO: Add logic to move to the section.
   }
 
   const closeButton = document.getElementById(
@@ -121,6 +125,6 @@ const { id } = Astro.props;
   const sectionLinks = [...sectionLinksCollection];
 
   sectionLinks.forEach((link: HTMLAnchorElement) =>
-    link.addEventListener("click", moveToSection)
+    link.addEventListener("click", closeMenu)
   );
 </script>
