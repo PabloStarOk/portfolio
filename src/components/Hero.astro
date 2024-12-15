@@ -11,9 +11,9 @@ import AnchorButton from "./buttons/AnchorButton.astro";
 
 <SectionLayout id="hero">
   <div class="hero-container">
-    <div class="hero-header__picture-wrapper">
+    <div class="hero__picture-wrapper">
       <Image
-        class="hero-header__picture"
+        class="hero__picture"
         src={ProfilePhoto}
         alt="Foto de perfil de Pedro Pablo Rodriguez Carranza"
       />
@@ -69,7 +69,7 @@ import AnchorButton from "./buttons/AnchorButton.astro";
     width: 100%;
   }
 
-  .hero-header__picture-wrapper {
+  .hero__picture-wrapper {
     display: inline-block;
     border-radius: 50%;
     width: 50%;
@@ -78,7 +78,7 @@ import AnchorButton from "./buttons/AnchorButton.astro";
     padding: 2.5px;
   }
 
-  .hero-header__picture {
+  .hero__picture {
     border-radius: 50%;
     object-fit: cover;
     width: 100%;
@@ -167,7 +167,7 @@ import AnchorButton from "./buttons/AnchorButton.astro";
       gap: var(--space-800);
     }
 
-    .hero-header__picture-wrapper {
+    .hero__picture-wrapper {
       padding: 5px;
     }
     .hero-header__title {
