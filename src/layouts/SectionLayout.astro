@@ -1,14 +1,14 @@
 ---
 interface Props {
   id: string;
-  title: string;
+  title?: string;
 }
 
 const { id, title } = Astro.props;
 ---
 
 <section id={id} class="section-layout">
-  <h1 class="section-layout__title">{title}</h1>
+  {title && <h1 class="section-layout__title">{title}</h1>}
   <slot />
 </section>
 
