@@ -1,48 +1,41 @@
-# Astro Starter Kit: Basics
+# Portfolio
 
-```sh
-npm create astro@latest -- --template basics
-```
+Hi, I'm Pedro Pablo Rodriguez Carranza, and this is my portfolio. It is built with the Astro framework and includes my basic information, skills, personal projects, and contact details. The design is based on a Figma prototype created by me.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Live Portfolio
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Not hosted yet.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+### Figma Prototypes
 
-## 🚀 Project Structure
+> [!NOTE]
+> Prototypes may differ from the live due to the complexity of Figma to add transitions and animations for small projects or because some minimal features on Figma prototypes are considered unnecessary for the live.
 
-Inside of your Astro project, you'll see the following folders and files:
+- [Mobile Prototype (320 x 568)](https://www.figma.com/proto/1Tt1jXKBHxTCTl31OJPIPS/Portfolio?node-id=5109-20105&t=3mrXBcdVFGckruP2-1&scaling=scale-down&content-scaling=fixed&page-id=5109%3A18978)
+- [Tablet Prototype (744 x 1133)](https://www.figma.com/proto/1Tt1jXKBHxTCTl31OJPIPS/Portfolio?node-id=5118-27373&t=DqSoRUAXzobQS7xG-1&scaling=scale-down&content-scaling=fixed&page-id=5118%3A25315)
+- [Desktop Prototype (1728 x 1117)](https://www.figma.com/proto/1Tt1jXKBHxTCTl31OJPIPS/Portfolio?node-id=5002-10656&t=vSypmpcl1ij1gkLO-1&scaling=scale-down&content-scaling=fixed&page-id=522%3A12151)
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Features
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- **Responsive design:** Optimized for most modern devices.
+- **Accessibility:** Designed with accessibility in mind.
+- **Personal Projects:** A showcase of projects I've worked on.
+- **Skills:** Technologies I am proficient in.
+- **Contact:** My basic contact information.
 
-## 🧞 Commands
+## Technologies Used
 
-All commands are run from the root of the project, from a terminal:
+- **Figma:** Used for designing my portfolio.
+- **Astro:** Supports all my portfolio structure, styles and functionalities with modular components and some other interesting features mostly for static websites.
+- **HTML:** Provides a semantic structure for the site.
+- **CSS:** Styles the semantic structure.
+- **TypeScript and JavaScript:** Enable client-side functionalities and animations.
+- **Docker Dev Container:** Containerizes NodeJs, useful VS Code extensions and all dependencies needed to develop this portfolio.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Acknowledgments
 
-## 👀 Want to learn more?
+- The [theme toggle manager component](src/components/themes/ThemeManager.astro) was adapted from a **[post](https://astro-tips.dev/recipes/dark-mode/)** on the [Astro Tips](https://astro-tips.dev/) website. (Thanks a lot!, it looks very clean)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## License
+
+This project is open-source and available under the [MIT License](LICENSE.md).
