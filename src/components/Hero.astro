@@ -29,9 +29,11 @@ import AnchorButton from "./buttons/AnchorButton.astro";
       <h2 class="hero-header__occupation">Desarrollador Fullstack</h2>
     </header>
     <p class="hero__content">
-      Lorem ipsum dolor sit amet consectetur. Diam id mauris placerat volutpat
-      sit quam. Sed eget a in elementum massa semper tellus. Sagittis massa
-      tristique cursus at eget viverra accumsan.
+      Estudiante de ingeniería de sistemas. Desarrollo productos de calidad,
+      aplicando buenas prácticas y arquitecturas.
+      <strong class="hero__content__strong">
+        Me enfoco en contribuir al éxito empresarial a través del proceso.
+      </strong>
     </p>
     <footer class="hero-footer">
       <AnchorButton href="cv.pdf" ariaLabel="Hoja de vida en una nueva página">
@@ -150,6 +152,10 @@ import AnchorButton from "./buttons/AnchorButton.astro";
     font-style: normal;
     font-weight: var(--body-font-weight-regular);
     line-height: 140%;
+  }
+
+  .hero__content__strong {
+    font-weight: var(--body-font-weight-strong);
   }
 
   .hero-footer {
