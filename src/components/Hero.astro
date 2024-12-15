@@ -5,15 +5,16 @@ import LinkedinIcon from "@/icons/Linkedin.astro";
 import OpenInNewIcon from "@/icons/OpenInNew.astro";
 import SectionLayout from "@/layouts/SectionLayout.astro";
 import { Image } from "astro:assets";
+import ProfilePhoto from "public/Profile.webp";
 import AnchorButton from "./buttons/AnchorButton.astro";
 ---
 
 <SectionLayout id="hero">
   <div class="hero-container">
     <div class="hero-header__picture-wrapper">
-      <img
+      <Image
         class="hero-header__picture"
-        src="Profile.webp"
+        src={ProfilePhoto}
         alt="Foto de perfil de Pedro Pablo Rodriguez Carranza"
       />
     </div>
@@ -81,6 +82,7 @@ import AnchorButton from "./buttons/AnchorButton.astro";
     border-radius: 50%;
     object-fit: cover;
     width: 100%;
+    height: auto;
     aspect-ratio: 1/1;
     display: block;
   }
