@@ -1,8 +1,10 @@
 ---
+import CloudOverlay from "@/assets/CloudOverlay.svg";
 import GitHubIcon from "@/icons/GitHub.astro";
 import LinkedinIcon from "@/icons/Linkedin.astro";
 import OpenInNewIcon from "@/icons/OpenInNew.astro";
 import SectionLayout from "@/layouts/SectionLayout.astro";
+import { Image } from "astro:assets";
 import AnchorButton from "./buttons/AnchorButton.astro";
 ---
 
@@ -16,6 +18,12 @@ import AnchorButton from "./buttons/AnchorButton.astro";
       />
     </div>
     <header class="hero-header">
+      <Image
+        class="hero-header__overlay"
+        src={CloudOverlay}
+        alt="Imagen decorativa"
+        loading="lazy"
+      />
       <h1 class="hero-header__title">Pedro Pablo Rodriguez Carranza</h1>
       <h2 class="hero-header__occupation">Desarrollador Fullstack</h2>
     </header>
@@ -84,6 +92,16 @@ import AnchorButton from "./buttons/AnchorButton.astro";
     align-items: center;
     justify-content: center;
     gap: var(--space-100);
+  }
+
+  .hero-header__overlay {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    max-height: 20rem;
+    aspect-ratio: 10/3;
+    object-fit: cover;
+    z-index: -1;
   }
 
   .hero-header__title {
