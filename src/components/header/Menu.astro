@@ -2,7 +2,7 @@
 import ThemeToggle from "@/components/themes/ThemeToggle.astro";
 import CloseIcon from "@/icons/Close.astro";
 import "@/styles/global.css";
-import ButtonIcon from "@/components/buttons/ButtonIcon.astro";
+import IconButton from "@/components/buttons/IconButton.astro";
 import MenuLinks from "@/components/header/MenuLinks.astro";
 
 interface Props {
@@ -15,13 +15,13 @@ const { id } = Astro.props;
 <div id={id} class="menu" data-visible="false">
   <div class="menu__buttons">
     <ThemeToggle />
-    <ButtonIcon
+    <IconButton
       id="menuCloseButton"
       ariaLabel="Close Menu"
       buttonType="button-tertiary"
     >
       <CloseIcon size={32} style="fill: url(#brandGradient)" />
-    </ButtonIcon>
+    </IconButton>
   </div>
   <MenuLinks targetDevice="mobile" />
 </div>

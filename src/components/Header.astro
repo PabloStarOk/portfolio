@@ -4,7 +4,7 @@ import ThemeToggle from "@/components/themes/ThemeToggle.astro";
 import FavIcon from "@/icons/FavIcon.astro";
 import Hamburger from "@/icons/Hamburger.astro";
 import "@/styles/global.css";
-import ButtonIcon from "@/components/buttons/ButtonIcon.astro";
+import IconButton from "@/components/buttons/IconButton.astro";
 import MenuLinks from "@/components/header/MenuLinks.astro";
 ---
 
@@ -14,14 +14,14 @@ import MenuLinks from "@/components/header/MenuLinks.astro";
   <ThemeToggle targetDevice="desktop" />
 
   <!-- Menu button to open the menu in mobile and tablet-->
-  <ButtonIcon
+  <IconButton
     id="openMenuButton"
     buttonType="button-tertiary"
     ariaLabel="Navigation Menu"
     targetDevice="mobile"
   >
     <Hamburger style="fill: url(#brandGradient);" />
-  </ButtonIcon>
+  </IconButton>
 </header>
 <Menu id="navMenu" />
 
