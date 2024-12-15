@@ -1,0 +1,197 @@
+---
+import CloudOverlay from "@/assets/CloudOverlay.svg";
+import GitHubIcon from "@/icons/GitHub.astro";
+import LinkedinIcon from "@/icons/Linkedin.astro";
+import OpenInNewIcon from "@/icons/OpenInNew.astro";
+import SectionLayout from "@/layouts/SectionLayout.astro";
+import { Image } from "astro:assets";
+import ProfilePhoto from "public/Profile.webp";
+import AnchorButton from "./buttons/AnchorButton.astro";
+---
+
+<SectionLayout id="hero">
+  <div class="hero-container">
+    <div class="hero__picture-wrapper">
+      <Image
+        class="hero__picture"
+        src={ProfilePhoto}
+        alt="Foto de perfil de Pedro Pablo Rodriguez Carranza"
+        loading="eager"
+      />
+    </div>
+    <header class="hero-header">
+      <Image
+        class="hero-header__overlay"
+        src={CloudOverlay}
+        alt="Imagen decorativa"
+        loading="eager"
+      />
+      <h1 class="hero-header__title">Pedro Pablo Rodriguez Carranza</h1>
+      <h2 class="hero-header__occupation">Desarrollador Fullstack</h2>
+    </header>
+    <p class="hero__content">
+      Estudiante de ingeniería de sistemas. Desarrollo productos de calidad,
+      aplicando buenas prácticas y arquitecturas.
+      <strong class="hero__content__strong">
+        Me enfoco en contribuir al éxito empresarial a través del proceso.
+      </strong>
+    </p>
+    <footer class="hero-footer">
+      <AnchorButton href="cv.pdf" ariaLabel="Hoja de vida en una nueva página">
+        <OpenInNewIcon style="stroke: var(--color-icon-neutral-onneutral);" />
+        Ver CV
+      </AnchorButton>
+
+      <AnchorButton
+        href="https://github.com/PabloStarOk"
+        ariaLabel="Perfil de GitHub en una nueva página"
+        type="secondary"
+      >
+        <GitHubIcon style="fill: url(#brandGradient)" />
+      </AnchorButton>
+
+      <AnchorButton
+        href="http://www.linkedin.com/in/pedro-pablo-rodriguez"
+        ariaLabel="Perfil de LinkedIn en una nueva página"
+        type="secondary"
+      >
+        <LinkedinIcon style="fill: url(#brandGradient)" />
+      </AnchorButton>
+    </footer>
+  </div>
+</SectionLayout>
+
+<style>
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-200) 0;
+    gap: var(--space-600);
+    width: 100%;
+  }
+
+  .hero__picture-wrapper {
+    display: inline-block;
+    border-radius: 50%;
+    width: 50%;
+    max-width: 25rem;
+    background: var(--primary-color-1000);
+    padding: 2.5px;
+  }
+
+  .hero__picture {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    display: block;
+  }
+
+  .hero-header {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-100);
+  }
+
+  .hero-header__overlay {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    max-height: 20rem;
+    aspect-ratio: 10/3;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .hero-header__title {
+    /* Layout */
+    align-self: stretch;
+
+    /* Typography */
+    text-align: center;
+    font-size: var(--heading-size-base);
+    font-style: normal;
+    font-weight: var(--title-page-font-weight);
+    line-height: 120%;
+    letter-spacing: -0.03rem;
+
+    /* Sytle */
+    background: var(--primary-color-1000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-header__occupation {
+    /* Layout */
+    align-self: stretch;
+
+    /* Typography */
+    color: var(--color-text-default-default);
+    text-align: center;
+    font-size: var(--subheading-size-medium);
+    font-style: normal;
+    font-weight: var(--typography-weight-bold);
+    line-height: 120%;
+  }
+
+  .hero__content {
+    /* Layout */
+    width: 100%;
+    max-width: 30rem;
+
+    /* Typography */
+    color: var(--color-text-default-default);
+    text-align: center;
+    font-size: var(--body-size-small);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+    line-height: 140%;
+  }
+
+  .hero__content__strong {
+    font-weight: var(--body-font-weight-strong);
+  }
+
+  .hero-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-300);
+    align-self: stretch;
+  }
+
+  @media (min-width: 48em) {
+    .hero-container {
+      /* Layout */
+      padding: var(--space-1200) 0;
+      gap: var(--space-800);
+    }
+
+    .hero__picture-wrapper {
+      padding: 5px;
+    }
+    .hero-header__title {
+      /* Typography */
+      font-size: var(--title-page-size-base);
+      font-weight: var(--title-page-font-weight);
+      letter-spacing: -0.06rem;
+    }
+
+    .hero-header__occupation {
+      /* Typography */
+      font-size: var(--subtitle-size-base);
+    }
+
+    .hero__content {
+      /* Typography */
+      font-size: var(--body-size-medium);
+    }
+  }
+</style>
