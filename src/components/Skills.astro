@@ -1,0 +1,16 @@
+---
+import SkillCard from "@/components/skills/SkillCard.astro";
+import DotnetIcon from "@/icons/skills/DotnetIcon.svg";
+import SectionLayout from "@/layouts/SectionLayout.astro";
+---
+
+<SectionLayout id="skills" title="Habilidades">
+  <div class="skill-cards__container">
+    <SkillCard
+      title=".NET"
+      level={2}
+      iconSrc={DotnetIcon}
+      iconAlt="Logo de .NET"
+    />
+  </div>
+</SectionLayout>

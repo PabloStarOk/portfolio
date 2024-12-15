@@ -1,0 +1,23 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  level: 1 | 2 | 3;
+  iconSrc: ImageMetadata;
+  iconAlt: string;
+}
+
+const { title: title, level, iconSrc, iconAlt } = Astro.props;
+
+let selfAssessedLevel: string;
+if (level === 3) selfAssessedLevel = "Avanzado";
+else if (level === 2) selfAssessedLevel = "Intermedio";
+else selfAssessedLevel = "Principiante";
+---
+
+<article class="skill-card">
+  <Image src={iconSrc} alt={iconAlt} />
+  <h3 class="skill-card__title">{title}</h3>
+  <p class="skill-card__level">{selfAssessedLevel}</p>
+</article>
