@@ -1,0 +1,106 @@
+---
+import AstroIcon from "@/assets/skills/AstroIcon.svg";
+import CsharpIcon from "@/assets/skills/CsharpIcon.svg";
+import CssIcon from "@/assets/skills/CssIcon.svg";
+import DockerIcon from "@/assets/skills/DockerIcon.svg";
+import DotnetIcon from "@/assets/skills/DotnetIcon.svg";
+import FigmaIcon from "@/assets/skills/FigmaIcon.svg";
+import HtmlIcon from "@/assets/skills/HtmlIcon.svg";
+import JavascriptIcon from "@/assets/skills/JavascriptIcon.svg";
+import MysqlIcon from "@/assets/skills/MysqlIcon.svg";
+import TypescriptIcon from "@/assets/skills/TypescriptIcon.svg";
+import SkillCard from "@/components/skills/SkillCard.astro";
+import SectionLayout from "@/layouts/SectionLayout.astro";
+---
+
+<SectionLayout id="skills" title="Habilidades">
+  <div class="skill-cards-container">
+    <SkillCard
+      title=".NET"
+      level={2}
+      iconSrc={DotnetIcon}
+      iconAlt="Logo de .NET"
+      type="framework"
+    />
+    <SkillCard
+      title="Astro"
+      level={1}
+      iconSrc={AstroIcon}
+      iconAlt="Logo de Astro framework"
+      type="framework"
+    />
+    <SkillCard
+      title="C#"
+      level={2}
+      iconSrc={CsharpIcon}
+      iconAlt="Logo de CSharp"
+      type="lang"
+    />
+    <SkillCard
+      title="JavaScript"
+      level={1}
+      iconSrc={JavascriptIcon}
+      iconAlt="Logo de JavaScript"
+      type="lang"
+    />
+    <SkillCard
+      title="TypeScript"
+      level={1}
+      iconSrc={TypescriptIcon}
+      iconAlt="Logo de TypeScript"
+      type="lang"
+    />
+    <SkillCard
+      title="HTML"
+      level={1}
+      iconSrc={HtmlIcon}
+      iconAlt="Logo de HTML"
+      type="lang"
+    />
+    <SkillCard
+      title="CSS"
+      level={1}
+      iconSrc={CssIcon}
+      iconAlt="Logo de CSS"
+      type="lang"
+    />
+    <SkillCard
+      title="MySQL"
+      level={2}
+      iconSrc={MysqlIcon}
+      iconAlt="Logo de MySQL"
+      type="db"
+    />
+    <SkillCard
+      title="Figma"
+      level={2}
+      iconSrc={FigmaIcon}
+      iconAlt="Logo de Figma"
+      type="tool"
+    />
+    <SkillCard
+      title="Docker"
+      level={1}
+      iconSrc={DockerIcon}
+      iconAlt="Logo de Docker"
+      type="tool"
+    />
+  </div>
+</SectionLayout>
+
+<style>
+  .skill-cards-container {
+    align-self: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-400);
+  }
+
+  @media (min-width: 768px) {
+    .skill-cards-container {
+      gap: var(--space-1200);
+    }
+  }
+</style>
