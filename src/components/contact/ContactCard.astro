@@ -1,0 +1,27 @@
+---
+import Image from "astro/components/Image.astro";
+
+interface Props {
+  title: string;
+  contactInfo: string;
+  iconSrc: ImageMetadata;
+  iconAlt: string;
+}
+
+const { title, iconSrc, iconAlt, contactInfo } = Astro.props;
+---
+
+<article class="contact-card">
+  <header class="contact-card__header">
+    <h3 class="contact-card__title">
+      {title}
+    </h3>
+  </header>
+  <div class="contact-card__content">
+    <Image class="contact-card__icon" src={iconSrc} alt={iconAlt} />
+    <p class="contact-card__info">{contactInfo}</p>
+  </div>
+  <footer class="contact-card__buttons">
+    <slot />
+  </footer>
+</article>
