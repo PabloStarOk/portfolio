@@ -1,6 +1,8 @@
 ---
 import DatabaseIcon from "@/icons/DbIcon.svg";
+import FrameworkIcon from "@/icons/FrameworkIcon.svg";
 import LanguageIcon from "@/icons/LanguageIcon.svg";
+import ToolIcon from "@/icons/ToolIcon.svg";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -8,7 +10,7 @@ interface Props {
   level: 1 | 2 | 3;
   iconSrc: ImageMetadata;
   iconAlt: string;
-  type: "lang" | "db";
+  type: "lang" | "db" | "framework" | "tool";
 }
 
 const { title, level, iconSrc, iconAlt, type: stackType } = Astro.props;
@@ -18,12 +20,31 @@ let typeAlt: string;
 let selfAssessedLevel: string;
 
 // Get skill type
-if (stackType === "lang") {
-  typeIcon = LanguageIcon;
-  typeAlt = "Database icon";
-} else {
-  typeIcon = DatabaseIcon;
-  typeAlt = "Language icon";
+switch (stackType) {
+  case "lang":
+    typeIcon = LanguageIcon;
+    typeAlt = "Database icon";
+    break;
+
+  case "db":
+    typeIcon = DatabaseIcon;
+    typeAlt = "Database icon";
+    break;
+
+  case "framework":
+    typeIcon = FrameworkIcon;
+    typeAlt = "Framework icon";
+    break;
+
+  case "tool":
+    typeIcon = ToolIcon;
+    typeAlt = "Tool icon";
+    break;
+
+  default:
+    typeIcon = LanguageIcon;
+    typeAlt = "Language icon";
+    break;
 }
 
 // Get level
