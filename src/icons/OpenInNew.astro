@@ -3,7 +3,7 @@ interface Props {
   style?: string;
 }
 
-const { style } = Astro.props;
+const { style = "stroke: #1E1E1E" } = Astro.props;
 ---
 
 <svg
