@@ -1,14 +1,32 @@
 ---
+import AnchorButton from "@/components/buttons/AnchorButton.astro";
+import OpenInNewIcon from "@/icons/OpenInNew.astro";
+import SendIcon from "@/icons/Send.astro";
 import Image from "astro/components/Image.astro";
+
+type ButtonData = {
+  href?: string;
+  ariaLabel: string;
+};
 
 interface Props {
   title: string;
   contactInfo: string;
   iconSrc: ImageMetadata;
   iconAlt: string;
+  sendButtonData?: ButtonData;
+  redirectButtonData?: ButtonData;
+  copyButtonData?: ButtonData;
 }
 
-const { title, iconSrc, iconAlt, contactInfo } = Astro.props;
+const {
+  title,
+  iconSrc,
+  iconAlt,
+  contactInfo,
+  sendButtonData = { ariaLabel: "" },
+  redirectButtonData = { ariaLabel: "" },
+} = Astro.props;
 ---
 
 <article class="contact-card">
@@ -22,6 +40,28 @@ const { title, iconSrc, iconAlt, contactInfo } = Astro.props;
     <p class="contact-card__info">{contactInfo}</p>
   </div>
   <footer class="contact-card__buttons">
-    <slot />
+    {
+      sendButtonData && sendButtonData.href && (
+        <AnchorButton
+          type="primary"
+          href={sendButtonData.href}
+          ariaLabel={sendButtonData.ariaLabel}
+        >
+          <SendIcon />
+        </AnchorButton>
+      )
+    }
+
+    {
+      redirectButtonData && redirectButtonData.href && (
+        <AnchorButton
+          type="primary"
+          href={redirectButtonData.href}
+          ariaLabel={redirectButtonData.ariaLabel}
+        >
+          <OpenInNewIcon />
+        </AnchorButton>
+      )
+    }
   </footer>
 </article>
