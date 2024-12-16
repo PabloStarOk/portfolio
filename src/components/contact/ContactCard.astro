@@ -1,8 +1,10 @@
 ---
 import AnchorButton from "@/components/buttons/AnchorButton.astro";
+import CopyIcon from "@/icons/Copy.astro";
 import OpenInNewIcon from "@/icons/OpenInNew.astro";
 import SendIcon from "@/icons/Send.astro";
 import Image from "astro/components/Image.astro";
+import IconButton from "../buttons/IconButton.astro";
 
 type ButtonData = {
   href?: string;
@@ -26,6 +28,7 @@ const {
   contactInfo,
   sendButtonData = { ariaLabel: "" },
   redirectButtonData = { ariaLabel: "" },
+  copyButtonData,
 } = Astro.props;
 ---
 
@@ -61,6 +64,18 @@ const {
         >
           <OpenInNewIcon />
         </AnchorButton>
+      )
+    }
+
+    {
+      copyButtonData && (
+        <IconButton
+          buttonType="button-secondary"
+          className="contact-card__copy-button"
+          ariaLabel={copyButtonData.ariaLabel ?? ""}
+        >
+          <CopyIcon />
+        </IconButton>
       )
     }
   </footer>
