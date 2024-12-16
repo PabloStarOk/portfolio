@@ -1,4 +1,6 @@
 ---
+import DatabaseIcon from "@/icons/DbIcon.svg";
+import LanguageIcon from "@/icons/LanguageIcon.svg";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -6,17 +8,32 @@ interface Props {
   level: 1 | 2 | 3;
   iconSrc: ImageMetadata;
   iconAlt: string;
+  type: "lang" | "db";
 }
 
-const { title: title, level, iconSrc, iconAlt } = Astro.props;
+const { title, level, iconSrc, iconAlt, type: stackType } = Astro.props;
 
+let typeIcon: ImageMetadata;
+let typeAlt: string;
 let selfAssessedLevel: string;
+
+// Get skill type
+if (stackType === "lang") {
+  typeIcon = LanguageIcon;
+  typeAlt = "Database icon";
+} else {
+  typeIcon = DatabaseIcon;
+  typeAlt = "Language icon";
+}
+
+// Get level
 if (level === 3) selfAssessedLevel = "Avanzado";
 else if (level === 2) selfAssessedLevel = "Intermedio";
 else selfAssessedLevel = "Principiante";
 ---
 
 <article class="skill-card">
+  <Image class="skill-card__type" src={typeIcon} alt={typeAlt} />
   <Image class="skill-card__icon" src={iconSrc} alt={iconAlt} />
   <header class="skill-card__header">
     <h3 class="skill-card__title">{title}</h3>
@@ -47,6 +64,12 @@ else selfAssessedLevel = "Principiante";
 
     /* Animations */
     transition: border-color 0.3s ease-in-out;
+  }
+
+  .skill-card__type {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
 
   .skill-card__icon {
