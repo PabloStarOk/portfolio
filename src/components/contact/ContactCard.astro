@@ -181,3 +181,42 @@ const {
     }
   }
 </style>
+
+<script>
+  const copyButtons = document.querySelectorAll(
+    ".contact-card__copy-button"
+  ) as NodeListOf<HTMLButtonElement>;
+  const contactMap = new WeakMap<HTMLButtonElement>();
+
+  document.currentScript?.getAttribute("data-contact-info");
+
+  // Map all contact information related to each button
+  copyButtons.forEach((button) => {
+    const wrapper = button.closest(".contact-card");
+
+    if (!wrapper) return;
+
+    const info = wrapper.querySelector(
+      ".contact-card__info"
+    ) as HTMLParagraphElement;
+
+    contactMap.set(button, info.textContent as string);
+  });
+
+  async function copyToClipboard(button: HTMLButtonElement) {
+    const info = contactMap.get(button);
+
+    if (!info) return;
+
+    try {
+      await navigator.clipboard.writeText(info);
+      console.log("Content copied!");
+    } catch (err) {
+      console.log("Failed to copy!");
+    }
+  }
+
+  copyButtons.forEach((button) => {
+    button.addEventListener("click", async () => await copyToClipboard(button));
+  });
+</script>
