@@ -1,0 +1,268 @@
+---
+import AnchorButton from "@/components/buttons/AnchorButton.astro";
+import CopyIcon from "@/icons/Copy.astro";
+import OpenInNewIcon from "@/icons/OpenInNew.astro";
+import SendIcon from "@/icons/Send.astro";
+import Image from "astro/components/Image.astro";
+import IconButton from "../buttons/IconButton.astro";
+
+type ButtonData = {
+  href?: string;
+  ariaLabel: string;
+};
+
+interface Props {
+  title: string;
+  contactInfo: string;
+  iconSrc: ImageMetadata;
+  iconAlt: string;
+  sendButtonData?: ButtonData;
+  redirectButtonData?: ButtonData;
+  copyButtonData?: ButtonData;
+}
+
+const {
+  title,
+  iconSrc,
+  iconAlt,
+  contactInfo,
+  sendButtonData = { ariaLabel: "" },
+  redirectButtonData = { ariaLabel: "" },
+  copyButtonData,
+} = Astro.props;
+---
+
+<article class="contact-card">
+  <div class="contact-card__wrapper">
+    <header>
+      <h3 class="contact-card__title">
+        {title}
+      </h3>
+    </header>
+    <div class="contact-card__content">
+      <Image src={iconSrc} alt={iconAlt} />
+      <p class="contact-card__info">{contactInfo}</p>
+    </div>
+  </div>
+  <footer class="contact-card__buttons">
+    {
+      sendButtonData && sendButtonData.href && (
+        <AnchorButton
+          type="secondary"
+          href={sendButtonData.href}
+          ariaLabel={sendButtonData.ariaLabel}
+        >
+          <SendIcon style="stroke: url(#brandGradient)" />
+        </AnchorButton>
+      )
+    }
+
+    {
+      redirectButtonData && redirectButtonData.href && (
+        <AnchorButton
+          type="secondary"
+          href={redirectButtonData.href}
+          ariaLabel={redirectButtonData.ariaLabel}
+        >
+          <OpenInNewIcon style="stroke: url(#brandGradient)" />
+        </AnchorButton>
+      )
+    }
+
+    {
+      copyButtonData && (
+        <IconButton
+          buttonType="button-secondary"
+          className="contact-card__copy-button"
+          ariaLabel={copyButtonData.ariaLabel ?? ""}
+        >
+          <CopyIcon style="stroke: url(#brandGradient)" />
+        </IconButton>
+      )
+    }
+  </footer>
+</article>
+
+<style>
+  .contact-card {
+    /* Layout */
+    display: flex;
+    min-width: 12.5rem;
+    height: 8.125rem;
+    min-height: 8.125rem;
+    max-height: 8.125rem;
+    padding: var(--space-300) var(--space-400);
+    align-items: center;
+    gap: var(--space-300);
+    flex: 1 0 0;
+    box-sizing: border-box;
+
+    /* Style */
+    border-radius: var(--radius-100);
+    border: 1px solid var(--color-border-default-default);
+    background: var(--background-color);
+
+    /* Drop Shadow */
+    box-shadow: var(--size-depth-0) var(--size-depth-200) var(--size-depth-400)
+      var(--size-depth-negative-200) var(--color-black-300);
+  }
+
+  .contact-card__wrapper {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--space-200);
+    align-self: stretch;
+    flex-grow: 1;
+    overflow: hidden;
+    overflow-wrap: break-word;
+  }
+
+  .contact-card__title {
+    /* Typography */
+    font-size: var(--body-size-small);
+    font-style: normal;
+    font-weight: var(--body-font-weight-strong);
+
+    /* Style */
+    background: var(--primary-color-1000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .contact-card__content {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: var(--space-300);
+    align-self: stretch;
+    overflow: hidden;
+  }
+
+  .contact-card__info {
+    /* Layout */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    /* Typography */
+    overflow: hidden;
+    color: var(--color-text-default-default);
+    text-overflow: ellipsis;
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+  }
+
+  .contact-card__buttons {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-200);
+    align-self: stretch;
+  }
+
+  @media (min-width: 48em) {
+    .contact-card {
+      min-width: 18.75rem;
+      padding: var(--space-300) var(--space-600);
+    }
+  }
+
+  @media (min-width: 64em) {
+    .contact-card {
+      min-width: 25rem;
+      padding: var(--space-300) var(--space-600);
+    }
+  }
+</style>
+
+<script>
+  import tippy from "tippy.js";
+  import "tippy.js/animations/scale.css";
+  import "tippy.js/dist/tippy.css";
+
+  const copyButtons = document.querySelectorAll(
+    ".contact-card__copy-button"
+  ) as NodeListOf<HTMLButtonElement>;
+  const contactMap = new WeakMap<HTMLButtonElement>();
+  const tippyInstancesMap = new WeakMap<HTMLButtonElement>();
+  let clicked: boolean;
+
+  // Map all contact information related to each button
+  copyButtons.forEach((button) => {
+    const tooltip = tippy(button, {
+      content: "Copiar",
+      trigger: "manual",
+      hideOnClick: false,
+      animation: "scale",
+    });
+    tippyInstancesMap.set(button, tooltip);
+
+    const wrapper = button.closest(".contact-card");
+    if (!wrapper) return;
+
+    const info = wrapper.querySelector(
+      ".contact-card__info"
+    ) as HTMLParagraphElement;
+
+    contactMap.set(button, info.textContent as string);
+  });
+
+  function handleTooltip(
+    button: HTMLButtonElement,
+    show: boolean,
+    content?: string
+  ) {
+    const tooltip = tippyInstancesMap.get(button);
+
+    if (!tooltip) return;
+
+    if (content) tooltip.setContent(content);
+
+    if (show) tooltip.show();
+    else tooltip.hide();
+  }
+
+  async function copyToClipboard(button: HTMLButtonElement) {
+    clicked = true;
+
+    const info = contactMap.get(button);
+
+    if (!info) return;
+
+    try {
+      await navigator.clipboard.writeText(info);
+
+      handleTooltip(button, true, "Copiado");
+    } catch {
+      handleTooltip(button, true, "Error al Copiar");
+    } finally {
+      setTimeout(() => {
+        handleTooltip(button, false, "Copiar");
+        clicked = false;
+      }, 1500);
+    }
+  }
+
+  copyButtons.forEach((button) => {
+    button.addEventListener("click", async () => await copyToClipboard(button));
+    button.addEventListener("mouseover", () => {
+      if (!clicked) handleTooltip(button, true);
+    });
+    button.addEventListener("mouseleave", () => {
+      if (!clicked) handleTooltip(button, false);
+    });
+    button.addEventListener("focusin", () => {
+      if (!clicked) handleTooltip(button, true);
+    });
+    button.addEventListener("focusout", () => {
+      if (!clicked) handleTooltip(button, false);
+    });
+  });
+</script>
