@@ -48,11 +48,11 @@ const {
     {
       sendButtonData && sendButtonData.href && (
         <AnchorButton
-          type="primary"
+          type="secondary"
           href={sendButtonData.href}
           ariaLabel={sendButtonData.ariaLabel}
         >
-          <SendIcon />
+          <SendIcon style="stroke: url(#brandGradient)" />
         </AnchorButton>
       )
     }
@@ -60,11 +60,11 @@ const {
     {
       redirectButtonData && redirectButtonData.href && (
         <AnchorButton
-          type="primary"
+          type="secondary"
           href={redirectButtonData.href}
           ariaLabel={redirectButtonData.ariaLabel}
         >
-          <OpenInNewIcon />
+          <OpenInNewIcon style="stroke: url(#brandGradient)" />
         </AnchorButton>
       )
     }
