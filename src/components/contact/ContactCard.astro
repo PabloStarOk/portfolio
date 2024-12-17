@@ -183,17 +183,28 @@ const {
 </style>
 
 <script>
+  import tippy from "tippy.js";
+  import "tippy.js/animations/scale.css";
+  import "tippy.js/dist/tippy.css";
+
   const copyButtons = document.querySelectorAll(
     ".contact-card__copy-button"
   ) as NodeListOf<HTMLButtonElement>;
   const contactMap = new WeakMap<HTMLButtonElement>();
-
-  document.currentScript?.getAttribute("data-contact-info");
+  const tippyInstancesMap = new WeakMap<HTMLButtonElement>();
+  let clicked: boolean;
 
   // Map all contact information related to each button
   copyButtons.forEach((button) => {
-    const wrapper = button.closest(".contact-card");
+    const tooltip = tippy(button, {
+      content: "Copiar",
+      trigger: "manual",
+      hideOnClick: false,
+      animation: "scale",
+    });
+    tippyInstancesMap.set(button, tooltip);
 
+    const wrapper = button.closest(".contact-card");
     if (!wrapper) return;
 
     const info = wrapper.querySelector(
@@ -203,20 +214,55 @@ const {
     contactMap.set(button, info.textContent as string);
   });
 
+  function handleTooltip(
+    button: HTMLButtonElement,
+    show: boolean,
+    content?: string
+  ) {
+    const tooltip = tippyInstancesMap.get(button);
+
+    if (!tooltip) return;
+
+    if (content) tooltip.setContent(content);
+
+    if (show) tooltip.show();
+    else tooltip.hide();
+  }
+
   async function copyToClipboard(button: HTMLButtonElement) {
+    clicked = true;
+
     const info = contactMap.get(button);
 
     if (!info) return;
 
     try {
       await navigator.clipboard.writeText(info);
-      console.log("Content copied!");
-    } catch (err) {
-      console.log("Failed to copy!");
+
+      handleTooltip(button, true, "Copiado");
+    } catch {
+      handleTooltip(button, true, "Error al Copiar");
+    } finally {
+      setTimeout(() => {
+        handleTooltip(button, false, "Copiar");
+        clicked = false;
+      }, 1500);
     }
   }
 
   copyButtons.forEach((button) => {
     button.addEventListener("click", async () => await copyToClipboard(button));
+    button.addEventListener("mouseover", () => {
+      if (!clicked) handleTooltip(button, true);
+    });
+    button.addEventListener("mouseleave", () => {
+      if (!clicked) handleTooltip(button, false);
+    });
+    button.addEventListener("focusin", () => {
+      if (!clicked) handleTooltip(button, true);
+    });
+    button.addEventListener("focusout", () => {
+      if (!clicked) handleTooltip(button, false);
+    });
   });
 </script>
