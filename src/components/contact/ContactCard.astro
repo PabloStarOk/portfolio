@@ -33,14 +33,16 @@ const {
 ---
 
 <article class="contact-card">
-  <header class="contact-card__header">
-    <h3 class="contact-card__title">
-      {title}
-    </h3>
-  </header>
-  <div class="contact-card__content">
-    <Image class="contact-card__icon" src={iconSrc} alt={iconAlt} />
-    <p class="contact-card__info">{contactInfo}</p>
+  <div class="contact-card__wrapper">
+    <header>
+      <h3 class="contact-card__title">
+        {title}
+      </h3>
+    </header>
+    <div class="contact-card__content">
+      <Image src={iconSrc} alt={iconAlt} />
+      <p class="contact-card__info">{contactInfo}</p>
+    </div>
   </div>
   <footer class="contact-card__buttons">
     {
@@ -80,3 +82,101 @@ const {
     }
   </footer>
 </article>
+
+<style>
+  .contact-card {
+    /* Layout */
+    display: flex;
+    min-width: 12.5rem;
+    height: 8.125rem;
+    min-height: 8.125rem;
+    max-height: 8.125rem;
+    padding: var(--space-300) var(--space-400);
+    align-items: center;
+    gap: var(--space-300);
+    box-sizing: border-box;
+
+    /* Style */
+    border-radius: var(--radius-100);
+    border: 1px solid var(--color-border-default-default);
+    background: var(--background-color);
+
+    /* Drop Shadow */
+    box-shadow: var(--size-depth-0) var(--size-depth-200) var(--size-depth-400)
+      var(--size-depth-negative-200) var(--color-black-300);
+  }
+
+  .contact-card__wrapper {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--space-200);
+    align-self: stretch;
+    flex-grow: 1;
+    overflow: hidden;
+    overflow-wrap: break-word;
+  }
+
+  .contact-card__title {
+    /* Typography */
+    font-size: var(--body-size-small);
+    font-style: normal;
+    font-weight: var(--body-font-weight-strong);
+
+    /* Style */
+    background: var(--primary-color-1000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .contact-card__content {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: var(--space-300);
+    align-self: stretch;
+    overflow: hidden;
+  }
+
+  .contact-card__info {
+    /* Layout */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    /* Typography */
+    overflow: hidden;
+    color: var(--color-text-default-default);
+    text-overflow: ellipsis;
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+  }
+
+  .contact-card__buttons {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-200);
+    align-self: stretch;
+  }
+
+  @media (min-width: 48em) {
+    .contact-card {
+      min-width: 18.75rem;
+      padding: var(--space-300) var(--space-600);
+    }
+  }
+
+  @media (min-width: 64em) {
+    .contact-card {
+      min-width: 25rem;
+      padding: var(--space-300) var(--space-600);
+    }
+  }
+</style>
