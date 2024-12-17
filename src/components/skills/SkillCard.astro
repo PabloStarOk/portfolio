@@ -54,8 +54,8 @@ else selfAssessedLevel = "Principiante";
 ---
 
 <article class="skill-card">
-  <Image class="skill-card__type" src={typeIcon} alt={typeAlt} />
-  <Image class="skill-card__icon" src={iconSrc} alt={iconAlt} />
+  <Image class="skill-card__type" src={typeIcon} alt={typeAlt} loading="lazy" />
+  <Image class="skill-card__icon" src={iconSrc} alt={iconAlt} loading="lazy" />
   <header class="skill-card__header">
     <h3 class="skill-card__title">{title}</h3>
     <small class="skill-card__level">Nivel {selfAssessedLevel}</small>
