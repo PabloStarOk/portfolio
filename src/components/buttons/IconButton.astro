@@ -2,7 +2,7 @@
 import "@/styles/global.css";
 
 interface Props {
-  buttonType: "button-primary" | "button-secondary" | "button-tertiary";
+  buttonType: "primary" | "secondary" | "tertiary";
   id?: string;
   className?: string;
   onclick?: string;
@@ -12,27 +12,19 @@ interface Props {
 
 const { id, className, buttonType, onclick, ariaLabel, targetDevice } =
   Astro.props;
-
-const classes = ["button-icon", buttonType, className]
-  .filter(Boolean)
-  .join(" ");
 ---
 
 <button
   id={id}
-  class={classes}
+  class=`icon-button icon-button--${buttonType} ${className}`
   onclick={onclick}
   aria-label={ariaLabel}
   data-target-device={targetDevice}
 >
+  {(buttonType === "primary" || buttonType === "tertiary") && <slot />}
   {
-    (buttonType === "button-primary" || buttonType === "button-tertiary") && (
-      <slot />
-    )
-  }
-  {
-    buttonType === "button-secondary" && (
-      <div class="anchor-button-wrapper">
+    buttonType === "secondary" && (
+      <div class="icon-button-wrapper">
         <slot />
       </div>
     )
@@ -40,7 +32,7 @@ const classes = ["button-icon", buttonType, className]
 </button>
 
 <style>
-  .button-icon {
+  .icon-button {
     display: flex;
     min-width: 2.813rem;
     min-height: 2.813rem;
@@ -66,16 +58,16 @@ const classes = ["button-icon", buttonType, className]
       outline-offset 0.2s ease-in-out;
   }
 
-  .button-secondary {
+  .icon-button--secondary {
     position: relative;
     padding: var(--space-25);
   }
 
-  .button-tertiary {
+  .icon-button--tertiary {
     background: none;
   }
 
-  .anchor-button-wrapper {
+  .icon-button-wrapper {
     /* Layout */
     width: 100%;
     aspect-ratio: 1/1;
@@ -89,25 +81,25 @@ const classes = ["button-icon", buttonType, className]
     border-radius: calc(var(--space-25) + var(--radius-50));
   }
 
-  .button-icon:hover,
-  .button-icon:focus-visible {
+  .icon-button:hover,
+  ..icon-button:focus-visible {
     transform: scale(1.1);
   }
 
-  .button-icon:focus-visible {
+  ..icon-button:focus-visible {
     outline: var(--space-100) solid var(--right-color-1000);
     outline-width: 0.188rem;
     outline-offset: var(--space-50);
     border-radius: var(--radius-50);
   }
 
-  .button-icon:active {
+  ..icon-button:active {
     filter: brightness(0.8);
     animation: bounce 0.2s ease-in-out;
   }
 
   @media screen and (min-width: 64em) {
-    .button-icon[data-target-device="mobile"] {
+    .icon-button[data-target-device="mobile"] {
       display: none;
     }
   }
