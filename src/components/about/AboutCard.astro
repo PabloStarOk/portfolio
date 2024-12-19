@@ -1,0 +1,18 @@
+---
+import TitleBackground from "@/assets/about/TitleBackground.svg";
+
+interface Props {
+  title: string;
+  content: string;
+}
+
+const { title, content } = Astro.props;
+---
+
+<article class="about-card">
+  <header class="about-card__header">
+    <TitleBackground fill="url(#brandGradient)" />
+    <h2 class="about-card__title">{title}</h2>
+  </header>
+  <p class="about-card__content">{content}</p>
+</article>
