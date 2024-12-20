@@ -1,5 +1,5 @@
 ---
-import TitleBackground from "@/assets/about/TitleBackground.svg";
+import TitleBackground from "./TitleBackground.astro";
 
 interface Props {
   title: string;
@@ -11,10 +11,7 @@ const { title, content } = Astro.props;
 
 <article class="about-card">
   <header class="about-card__header">
-    <TitleBackground
-      class="about-card__header-background"
-      fill="url(#brandGradient)"
-    />
+    <TitleBackground />
     <h2 class="about-card__title">{title}</h2>
   </header>
   <p class="about-card__content">{content}</p>
@@ -45,14 +42,6 @@ const { title, content } = Astro.props;
     align-content: center;
     align-self: stretch;
     position: relative;
-  }
-
-  .about-card__header-background {
-    /* Layout */
-    align-self: stretch;
-    position: absolute;
-    left: var(--space-negative-800);
-    top: -20%;
   }
 
   .about-card__title {
