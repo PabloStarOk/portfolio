@@ -31,6 +31,7 @@ import CityPicture from "./about/CityPicture.astro";
     display: grid;
     grid-auto-rows: auto;
     gap: var(--space-800);
+    padding: var(--space-600) 0;
   }
 
   .about__right-side {
@@ -43,6 +44,7 @@ import CityPicture from "./about/CityPicture.astro";
   @media (min-width: 64em) {
     .about__container {
       grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+      padding: var(--space-800) 0;
     }
   }
 </style>
