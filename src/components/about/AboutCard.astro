@@ -11,8 +11,73 @@ const { title, content } = Astro.props;
 
 <article class="about-card">
   <header class="about-card__header">
-    <TitleBackground fill="url(#brandGradient)" />
+    <TitleBackground
+      class="about-card__header-background"
+      fill="url(#brandGradient)"
+    />
     <h2 class="about-card__title">{title}</h2>
   </header>
   <p class="about-card__content">{content}</p>
 </article>
+
+<style>
+  .about-card {
+    /* Layout */
+    display: flex;
+    padding: var(--space-600) var(--space-800);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-600);
+    align-self: stretch;
+    overflow: hidden;
+
+    /* Style */
+    border-radius: var(--radius-100);
+    border: 1px solid var(--color-border-default-default);
+    background: var(--background-color);
+    box-shadow: var(--size-depth-0) var(--size-depth-200) var(--size-depth-400)
+      var(--size-depth-negative-200) var(--color-black-300);
+  }
+
+  .about-card__header {
+    /* Layout */
+    display: flex;
+    align-content: center;
+    align-self: stretch;
+    position: relative;
+  }
+
+  .about-card__header-background {
+    /* Layout */
+    align-self: stretch;
+    position: absolute;
+    left: var(--space-negative-800);
+    top: -20%;
+  }
+
+  .about-card__title {
+    /* Layout */
+    align-self: stretch;
+    position: relative;
+
+    /* Style */
+    color: var(--color-text-neutral-onneutral);
+    font-size: var(--heading-size-base);
+    font-style: normal;
+    font-weight: var(--typography-heading-font-weight);
+    line-height: 120%;
+    letter-spacing: -0.03rem;
+  }
+
+  .about-card__content {
+    /* Layout */
+    align-self: stretch;
+
+    /* Style */
+    color: var(--color-text-default-default);
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+    line-height: 140%;
+  }
+</style>
