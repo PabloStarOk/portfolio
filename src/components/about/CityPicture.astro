@@ -1,10 +1,10 @@
 ---
-import Picture from "astro/components/Picture.astro";
+import { Image } from "astro:assets";
 import BogotaImage from "public/Bogota.webp";
 ---
 
 <div class="city-picture">
-  <Picture
+  <Image
     class="city-picture__img"
     src={BogotaImage}
     alt="Imagén panorámica de Bogotá"
