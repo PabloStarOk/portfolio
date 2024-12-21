@@ -7,12 +7,12 @@ const { targetDevice } = Astro.props;
 ---
 
 <nav class="menu-links" data-target-device={targetDevice}>
-  <a class="menu-links__link" href="#hero">Inicio</a>
-  <a class="menu-links__link" href="#experience">Experiencia</a>
-  <a class="menu-links__link" href="#projects">Proyectos</a>
-  <a class="menu-links__link" href="#skills">Habilidades</a>
-  <a class="menu-links__link" href="#contact">Contacto</a>
-  <a class="menu-links__link" href="/about">Sobre Mí</a>
+  <a class="menu-links__link" href="/#hero">Inicio</a>
+  <a class="menu-links__link" href="/#experience">Experiencia</a>
+  <a class="menu-links__link" href="/#projects">Proyectos</a>
+  <a class="menu-links__link" href="/#skills">Habilidades</a>
+  <a class="menu-links__link" href="/#contact">Contacto</a>
+  <a class="menu-links__link" href="/#about">Sobre Mí</a>
 </nav>
 
 <style>
@@ -122,8 +122,8 @@ const { targetDevice } = Astro.props;
 <script>
   const observerOptions: IntersectionObserverInit = {
     root: null,
-    rootMargin: "0px",
-    threshold: 0.745,
+    rootMargin: "50px 0% 0% 0%",
+    threshold: 0.6,
   };
   const linkClickedOpts: IntersectionObserverInit = {
     root: null,
@@ -153,10 +153,10 @@ const { targetDevice } = Astro.props;
   }
 
   // Updates style of the last and current active link.
-  function updateActiveLinks(links: HTMLLinkElement[]) {
+  function updateActiveLinks(newLinks: HTMLLinkElement[]) {
     lastLinksActive.forEach((link) => link.classList.remove("active"));
-    links.forEach((link) => link.classList.add("active"));
-    if (lastLinksActive != links) lastLinksActive = links;
+    newLinks.forEach((link) => link.classList.add("active"));
+    if (lastLinksActive != newLinks) lastLinksActive = newLinks;
   }
 
   const observerCallback = (entries: IntersectionObserverEntry[]): void => {

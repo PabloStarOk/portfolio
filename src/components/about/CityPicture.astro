@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+import BogotaImage from "public/Bogota.webp";
+---
+
+<div class="city-picture">
+  <Image
+    class="city-picture__img"
+    src={BogotaImage}
+    alt="Imagén panorámica de Bogotá"
+  />
+</div>
+
+<style>
+  .city-picture {
+    /* Layout */
+    display: flex;
+    align-self: stretch;
+    justify-content: center;
+    padding: var(--space-800);
+    box-sizing: border-box;
+    flex: 1 0 0;
+
+    /* Style */
+    border-radius: var(--radius-100);
+    border: 1px solid var(--color-border-default-default);
+    background: var(--background-color);
+    box-shadow: var(--size-depth-0) var(--size-depth-200) var(--size-depth-400)
+      var(--size-depth-negative-200) var(--color-black-300);
+  }
+
+  .city-picture__img {
+    /* Layout */
+    width: 100%;
+    object-fit: cover;
+
+    /* Style */
+    border-radius: var(--radius-100);
+  }
+</style>

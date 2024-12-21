@@ -20,7 +20,7 @@ const { id, title } = Astro.props;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 4rem;
   }
 
@@ -37,5 +37,11 @@ const { id, title } = Astro.props;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  @media (min-width: 48em) {
+    .section-layout {
+      min-height: 50.75rem;
+    }
   }
 </style>

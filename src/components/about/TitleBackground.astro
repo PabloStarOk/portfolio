@@ -1,0 +1,29 @@
+---
+interface Props {
+  style?: string;
+}
+
+const { style = "fill: url(#brandGradient)" } = Astro.props;
+---
+
+<svg
+  class="title-background"
+  width="260"
+  height="40"
+  viewBox="0 0 260 40"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  style={style}
+>
+  <path d="M0 0h260l-41.846 20L260 40H0V0Z"></path>
+</svg>
+
+<style>
+  .title-background {
+    /* Layout */
+    align-self: stretch;
+    position: absolute;
+    left: var(--space-negative-800);
+    top: -20%;
+  }
+</style>
