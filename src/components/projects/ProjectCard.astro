@@ -1,0 +1,26 @@
+---
+import ArrowRight from "@/icons/component-icons/ArrowRight.astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  name: string;
+  description: string;
+  thumbnailSrc: ImageMetadata;
+  thumbnailAlt: string;
+}
+
+const { name, description, thumbnailSrc, thumbnailAlt } = Astro.props;
+---
+
+<article>
+  <header>
+    <h3>{name}</h3>
+    <p>{description}</p>
+    <ArrowRight style="fill: url(#brandGradient);" />
+  </header>
+  {
+    thumbnailSrc && (
+      <Image src={thumbnailSrc} alt={thumbnailAlt} loading="lazy" />
+    )
+  }
+</article>

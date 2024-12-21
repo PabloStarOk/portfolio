@@ -1,0 +1,21 @@
+---
+interface Props {
+  style?: string;
+}
+
+const { style = "fill: #1E1E1E" } = Astro.props;
+---
+
+<svg
+  width="22"
+  height="21"
+  viewBox="0 0 22 21"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    fill-rule="evenodd"
+    d="M0 10.5c0-.7.528-1.27 1.179-1.27h16.716l-6.533-6.7a1.34 1.34 0 0 1-.033-1.794A1.12 1.12 0 0 1 12.995.7l8.643 8.884c.231.24.362.57.362.915 0 .345-.13.676-.362.915L12.995 20.3a1.12 1.12 0 0 1-1.666-.036 1.34 1.34 0 0 1 .033-1.794l6.533-6.7H1.18C.528 11.77 0 11.2 0 10.5Z"
+    clip-rule="evenodd"
+    style={style}></path>
+</svg>
