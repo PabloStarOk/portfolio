@@ -122,8 +122,8 @@ const { targetDevice } = Astro.props;
 <script>
   const observerOptions: IntersectionObserverInit = {
     root: null,
-    rootMargin: "0px",
-    threshold: 0.745,
+    rootMargin: "50px 0% 0% 0%",
+    threshold: 0.6,
   };
   const linkClickedOpts: IntersectionObserverInit = {
     root: null,
@@ -153,10 +153,10 @@ const { targetDevice } = Astro.props;
   }
 
   // Updates style of the last and current active link.
-  function updateActiveLinks(links: HTMLLinkElement[]) {
+  function updateActiveLinks(newLinks: HTMLLinkElement[]) {
     lastLinksActive.forEach((link) => link.classList.remove("active"));
-    links.forEach((link) => link.classList.add("active"));
-    if (lastLinksActive != links) lastLinksActive = links;
+    newLinks.forEach((link) => link.classList.add("active"));
+    if (lastLinksActive != newLinks) lastLinksActive = newLinks;
   }
 
   const observerCallback = (entries: IntersectionObserverEntry[]): void => {
