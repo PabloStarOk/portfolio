@@ -42,6 +42,7 @@ const { name, description, thumbnailSrc, thumbnailAlt } = Astro.props;
     gap: var(--space-600);
     align-self: stretch;
     overflow: hidden;
+    position: relative;
 
     /* Style */
     background: var(--color-background-default-secondary-500);
@@ -49,6 +50,9 @@ const { name, description, thumbnailSrc, thumbnailAlt } = Astro.props;
     border-radius: var(--radius-100);
     box-shadow: var(--size-depth-0) var(--size-depth-400) var(--size-depth-400)
       var(--size-depth-negative-200) var(--color-black-200);
+
+    /* Animations */
+    transition: transform 0.3s ease-in-out;
   }
 
   .project-card__header {
@@ -117,11 +121,55 @@ const { name, description, thumbnailSrc, thumbnailAlt } = Astro.props;
     height: auto;
     object-fit: contain;
     position: relative;
+    transform: scale(0.95);
 
     /* Style */
     border-radius: var(--radius-100);
     box-shadow: var(--size-depth-0) var(--size-depth-400) var(--size-depth-400)
       var(--size-depth-negative-200) var(--color-black-200);
+
+    /* Animations */
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .project-card:hover,
+  .project-card:focus-visible {
+    transform: scale(1.02);
+  }
+
+  .project-card:hover .project-card__thumbnail,
+  .project-card:focus-visible .project-card__thumbnail {
+    transform: scale(1);
+  }
+
+  .project-card:focus-visible {
+    outline-offset: 1rem;
+    outline: var(--space-100) solid var(--right-color-1000);
+    outline-width: 0.188rem;
+    outline-offset: var(--space-100);
+    border-radius: var(--radius-100);
+  }
+
+  .project-card::after {
+    /* Layout */
+    content: "";
+    position: absolute;
+    width: auto;
+    height: 30%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    /* Style */
+    opacity: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      var(--left-color-100)
+    );
+
+    /* Animations */
+    transition: opacity 0.3s ease-in-out;
   }
 
   /* Project Card Header Border */
@@ -145,6 +193,12 @@ const { name, description, thumbnailSrc, thumbnailAlt } = Astro.props;
     border-radius: inherit;
     z-index: 0;
     pointer-events: none;
+  }
+
+  .project-card:hover::after,
+  .project-card:focus-visible::after {
+    /* Style */
+    opacity: 1;
   }
 
   @media screen and (min-width: 48em) {
