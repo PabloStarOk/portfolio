@@ -1,5 +1,14 @@
 ---
+import TiempitoThumbnail from "@/assets/projects/tiempito-cli.webp";
+import ProjectCard from "@/components/projects/ProjectCard.astro";
 import SectionLayout from "@/layouts/SectionLayout.astro";
 ---
 
-<SectionLayout id="projects" title="Proyectos">Content</SectionLayout>
+<SectionLayout id="projects" title="Proyectos">
+  <ProjectCard
+    name="Tiempito"
+    description="Temporizador de concentración."
+    thumbnailSrc={TiempitoThumbnail}
+    thumbnailAlt="A una interfaz de línea de comandos mostrando un comando para iniciar un sesión de concentración."
+  />
+</SectionLayout>

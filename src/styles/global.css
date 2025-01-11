@@ -8,6 +8,7 @@
     --primary-color-top-1000: linear-gradient(to bottom, var(--left-color-1000), var(--right-color-1000)); /* Starts from top */
 
     /* Fixed Colors */
+    --color-black-200: rgba(12, 12, 13, 0.1);
     --color-black-300: rgba(12, 12, 13, 0.2);
 
     --space-0: 0;
@@ -78,6 +79,7 @@
     /* Background */
     --background-color: #1E1E1E;
     --background-color-500: rgba(30, 30, 30, 0.5);
+    --color-background-default-secondary-500: rgba(44, 44, 44, 0.5);
 
     /* Icon */
     --color-icon-neutral-onneutral: rgba(36, 36, 36, 1);
@@ -103,6 +105,7 @@
     /* Background */
     --background-color: #fff;
     --background-color-500: rgba(255, 255, 255, 0.5);
+    --color-background-default-secondary-500: rgba(245, 245, 245, 0.5);
 
     /* Icon Colors */
     --color-icon-neutral-onneutral: rgba(243, 243, 243, 1);
