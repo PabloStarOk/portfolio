@@ -1,0 +1,32 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { id: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { hero } = project.data;
+const { Content } = await render(project);
+---
+
+<Layout>
+  <h1>{hero.title}</h1>
+  <p>{hero.description}</p>
+  <img
+    src=`/src/assets/projects/${hero.thumbnail}`
+    alt="A una interfaz de línea de comandos mostrando un comando para iniciar un sesión de concentración."
+  />
+  {
+    hero.buttons.map((button) => {
+      if (button === "GitHub") return <button>GitHub</button>;
+      else if (button === "LiveDemo") return <button>LiveDemo</button>;
+    })
+  }
+  <Content />
+</Layout>

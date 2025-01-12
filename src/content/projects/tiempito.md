@@ -1,0 +1,67 @@
+---
+hero:
+  title: Tiempito
+  thumbnail: tiempito-cli.webp
+  description: Tiempito es una aplicación que permite gestionar sesiones de concentración mediante un ‘daemon’ y una interfaz de línea de comandos. Dentro de sus capacidades esta la creación de diferentes configuraciones de sesiones que tengan diferentes tiempos de concentración y descanso y en general sus capacidades se enfocan principalmente en la personalización.
+  buttons: [GitHub]
+techStack:
+  [
+    {
+      name: "Dotnet",
+      purpose: "Utilizado para la construcción del servicio, la CLI y una librería IPC.",
+    },
+    { name: "Csharp", purpose: "Lenguaje principal." },
+  ]
+features:
+  [
+    {
+      title: "Notificaciones",
+      description: "Funcionan como alarmas para notificar al usuario de una sesión o tiempo completado.",
+    },
+    {
+      title: "Personalización",
+      description: "Personalización de sesiones y notificaciones a través de archivos .conf.",
+    },
+    {
+      title: "Servicio (Daemon)",
+      description: "Servicio en segundo plano que ejecuta y gestiona las sesiones.",
+    },
+    {
+      title: "Interfaz de Línea de Comandos (CLI)",
+      description: "Herramienta del usuario para emitir comandos al servicio y administrar sus sesiones.",
+    },
+  ]
+supportedOs: [Linux, Windows 10, Windows 11]
+---
+
+## Objetivo
+
+Ofrecer una aplicación poco convencional para la gestión de sesiones de estudio, de trabajo u otras labores por medio de una interfaz de línea de comandos y un servicio desarrollados a través de las características ofrecidas por el framework .NET.
+
+## Arquitectura
+
+Esta aplicación esta constituida a partir de una arquitectura sencilla que se asemeja a la ‘clean architecture’ que se divide en ‘backend’ y ‘frontend’, permitiendo ser modular y acoplar nuevas sistemas en la capa de presentación.
+
+### Servicio o daemon (Worker Service)
+
+Es el nucleo de la aplicación y actua de forma independiente, implementa un servidor que gestiona las peticiones y respuestas a través de una ‘named pipe’ de .NET, de tal forma que permite recibir comandos desde cualquier otro proceso.
+
+### Interfaz de Línea de Comandos (Aplicación de Consola)
+
+Funciona como sistema de entrada del usuario para emitir los diferentes comando que requiera, la CLI esta soportada sobre la librería ‘System.CommandLine’.
+
+### Librería IPC (Biblioteca)
+
+Provee las clases e interfaces necesarias para estandarizar la comunicación fácilmente entre la CLI y el servicio facilitando el envío de peticiones y respuestas estructurados de forma báscia mejorando la conversión y seguridad de la misma aplicación.
+
+## Desafíos
+
+### Notificaciones
+
+#### Situación
+
+Las diferencias de gestión de las notificaciones en Linux y Windows represento mayormente la creación de un diseño que permitiese estructurar e inyectar las dependencias únicamente necesarias de acuerdo con el sistema operativo.
+
+#### Solución
+
+A través de las directivas de preprocesador y clases utilitarias ofrecidas por .NET se inyectaron dinamicamente las interfaces y clases para Windows o Linux.
