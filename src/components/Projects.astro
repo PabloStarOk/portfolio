@@ -1,14 +1,42 @@
 ---
-import TiempitoThumbnail from "@/assets/projects/tiempito-cli.webp";
-import ProjectCard from "@/components/projects/ProjectCard.astro";
 import SectionLayout from "@/layouts/SectionLayout.astro";
+import { getCollection } from "astro:content";
+import ProjectCard from "./projects/ProjectCard.astro";
+
+const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/projects/*.webp",
+  { eager: true }
+);
+
+const projectsCollection = await getCollection("projects");
+
+// Validate thumbnail paths
+projectsCollection.forEach((project) => {
+  const path = `/src/assets/projects/${project.data.thumbnail.fileName}`;
+  if (!thumbnailImports[path])
+    throw new Error(
+      `File name \"${project.data.thumbnail.fileName}\" given in \"${project.id}\" doesn't exist.`
+    );
+});
+
+// Display only featured projects
+const featuredProjects = projectsCollection.filter(
+  ({ data }) => data.featuredProject
+);
 ---
 
 <SectionLayout id="projects" title="Proyectos">
-  <ProjectCard
-    name="Tiempito"
-    description="Temporizador de concentración."
-    thumbnailSrc={TiempitoThumbnail}
-    thumbnailAlt="A una interfaz de línea de comandos mostrando un comando para iniciar un sesión de concentración."
-  />
+  {
+    featuredProjects.map(({ data }) => {
+      const path = `/src/assets/projects/${data.thumbnail.fileName}`;
+      return (
+        <ProjectCard
+          name={data.name}
+          description={data.shortDescription}
+          thumbnailSrc={thumbnailImports[path].default}
+          thumbnailAlt={data.thumbnail.alt}
+        />
+      );
+    })
+  }
 </SectionLayout>

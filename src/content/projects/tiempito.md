@@ -1,7 +1,11 @@
 ---
+name: Tiempito
+shortDescription: Temporizador de concentración.
+featuredProject: true
+thumbnail:
+  fileName: tiempito-cli.webp
+  alt: A una interfaz de línea de comandos mostrando un comando para iniciar un sesión de concentración.
 hero:
-  title: Tiempito
-  thumbnail: tiempito-cli.webp
   description: Tiempito es una aplicación que permite gestionar sesiones de concentración mediante un ‘daemon’ y una interfaz de línea de comandos. Dentro de sus capacidades esta la creación de diferentes configuraciones de sesiones que tengan diferentes tiempos de concentración y descanso y en general sus capacidades se enfocan principalmente en la personalización.
   buttons: [GitHub]
 techStack:

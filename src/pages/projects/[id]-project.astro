@@ -11,17 +11,14 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { hero } = project.data;
+const { name, thumbnail, hero } = project.data;
 const { Content } = await render(project);
 ---
 
 <Layout>
-  <h1>{hero.title}</h1>
+  <h1>{name}</h1>
   <p>{hero.description}</p>
-  <img
-    src=`/src/assets/projects/${hero.thumbnail}`
-    alt="A una interfaz de línea de comandos mostrando un comando para iniciar un sesión de concentración."
-  />
+  <img src=`/src/assets/projects/${thumbnail.fileName}` alt={thumbnail.alt} />
   {
     hero.buttons.map((button) => {
       if (button === "GitHub") return <button>GitHub</button>;

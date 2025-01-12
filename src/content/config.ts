@@ -6,10 +6,15 @@ const SupportedOs = z.enum(["Linux", "Windows 10", "Windows 11"])
 
 const projects = defineCollection({
     schema: z.object({
+        name: z.string().max(30),
+        shortDescription: z.string().max(50),
+        featuredProject: z.boolean().default(false).optional(), // If true, will be displayed at index.
+        thumbnail: z.object({
+            fileName: z.string(),
+            alt: z.string()
+        }),
         hero: z.object({
-            title: z.string().max(30),
             description: z.string().max(360),
-            thumbnail: z.string(),
             buttons: z.array(ButtonsEnum)
         }),
         techStack: z.array(z.object({
