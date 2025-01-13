@@ -1,5 +1,5 @@
 ---
-import ArrowRight from "@/icons/component-icons/ArrowRight.astro";
+import Arrow from "@/icons/component-icons/Arrow.astro";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -16,7 +16,7 @@ const { name, description, href, thumbnailSrc, thumbnailAlt } = Astro.props;
 <a
   class="project-card"
   href={href}
-  rel="noreferrer noopener"
+  rel="same-origin noopener"
   aria-label=`${name} project`
 >
   <header class="project-card__header">
@@ -24,7 +24,7 @@ const { name, description, href, thumbnailSrc, thumbnailAlt } = Astro.props;
       <h3 class="project-card__title">{name}</h3>
       <p class="project-card__description">{description}</p>
     </div>
-    <ArrowRight style="fill: url(#brandGradient);" />
+    <Arrow style="fill: url(#brandGradient);" />
   </header>
   {
     thumbnailSrc && (

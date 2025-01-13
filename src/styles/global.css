@@ -62,6 +62,7 @@
     --subtitle-size-base: 2rem;
 
     /* Body */
+    --body-size-large: 1.25rem;
     --body-size-medium: 1rem;
     --body-size-small: 0.875rem;
 }

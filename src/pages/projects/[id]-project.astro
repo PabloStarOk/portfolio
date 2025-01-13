@@ -15,7 +15,12 @@ const { name, thumbnail, hero } = project.data;
 const { Content } = await render(project);
 ---
 
-<Layout>
+<Layout
+  title=`Proyecto ${name} - Pedro Rodriguez`
+  displayNavLinks={false}
+  displayThemeToggle={false}
+  displayBackButton={true}
+>
   <h1>{name}</h1>
   <p>{hero.description}</p>
   <img src=`/src/assets/projects/${thumbnail.fileName}` alt={thumbnail.alt} />

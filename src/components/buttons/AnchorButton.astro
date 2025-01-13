@@ -2,15 +2,16 @@
 interface Props {
   href: string;
   ariaLabel: string;
+  id?: string;
   target?: string;
   rel?: string;
-  content?: string;
   type?: "primary" | "secondary" | "tertiary";
 }
 
 const {
   href,
   ariaLabel,
+  id = "",
   target = "_blank",
   rel = "",
   type = "primary",
@@ -24,6 +25,7 @@ const relation =
 ---
 
 <a
+  id={id}
   class=`anchor-button anchor-button--${type}`
   href={href}
   target={target}
@@ -87,7 +89,12 @@ const relation =
   }
 
   .anchor-button--tertiary {
+    /* Style */
     background: none;
+    background: var(--primary-color-1000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .anchor-button-wrapper {

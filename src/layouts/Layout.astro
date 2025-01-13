@@ -4,6 +4,20 @@ import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import ThemeManager from "@/components/themes/ThemeManager.astro";
 import Montserrat from "@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2?url";
+
+interface Props {
+  title: string;
+  displayNavLinks?: boolean;
+  displayThemeToggle?: boolean;
+  displayBackButton?: boolean;
+}
+
+const {
+  title,
+  displayNavLinks = true,
+  displayThemeToggle = true,
+  displayBackButton = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -20,13 +34,17 @@ import Montserrat from "@fontsource-variable/montserrat/files/montserrat-latin-w
       crossorigin="anonymous"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>Pedro Pablo Rodriguez</title>
+    <title>{title}</title>
     <SvgDefs />
 
     <ThemeManager defaultTheme="auto" />
   </head>
   <body>
-    <Header />
+    <Header
+      displayNavLinks={displayNavLinks}
+      displayThemeToggle={displayThemeToggle}
+      displayBackButton={displayBackButton}
+    />
     <main>
       <slot />
     </main>
