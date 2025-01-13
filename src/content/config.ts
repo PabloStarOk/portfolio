@@ -1,3 +1,4 @@
+import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
 const ButtonsEnum = z.enum(["LiveDemo", "GitHub"])
@@ -9,6 +10,7 @@ const ImageAsset = z.object({
 })
 
 const projects = defineCollection({
+    loader: glob({ pattern: "**/*.{mdx, md}", base: "src/content/projects" }),
     schema: z.object({
         name: z.string().max(30),
         shortDescription: z.string().max(50),

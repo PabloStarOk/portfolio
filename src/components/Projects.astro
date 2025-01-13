@@ -28,13 +28,13 @@ const featuredProjects = projectsCollection.filter(
 
 <SectionLayout id="projects" title="Proyectos">
   {
-    featuredProjects.map(({ slug, data }) => {
+    featuredProjects.map(({ id, data }) => {
       const path = projectsThumbnailsDir + data.assets.thumbnail.fileName;
       return (
         <ProjectCard
           name={data.name}
           description={data.shortDescription}
-          href={`/projects/${slug}-project`}
+          href={`/projects/${id}-project`}
           thumbnailSrc={thumbnailImports[path].default}
           thumbnailAlt={data.assets.thumbnail.alt}
         />
