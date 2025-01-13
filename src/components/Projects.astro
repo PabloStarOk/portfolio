@@ -11,11 +11,11 @@ const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
 const projectsCollection = await getCollection("projects");
 
 // Validate thumbnail paths
-projectsCollection.forEach((project) => {
-  const path = `/src/assets/projects/${project.data.thumbnail.fileName}`;
+projectsCollection.forEach(({ id, data }) => {
+  const path = `/src/assets/projects/${data.thumbnail.fileName}`;
   if (!thumbnailImports[path])
     throw new Error(
-      `File name \"${project.data.thumbnail.fileName}\" given in \"${project.id}\" doesn't exist.`
+      `File name \"${data.thumbnail.fileName}\" given in \"${id}\" doesn't exist.`
     );
 });
 
@@ -27,12 +27,13 @@ const featuredProjects = projectsCollection.filter(
 
 <SectionLayout id="projects" title="Proyectos">
   {
-    featuredProjects.map(({ data }) => {
+    featuredProjects.map(({ slug, data }) => {
       const path = `/src/assets/projects/${data.thumbnail.fileName}`;
       return (
         <ProjectCard
           name={data.name}
           description={data.shortDescription}
+          href={`/projects/${slug}-project`}
           thumbnailSrc={thumbnailImports[path].default}
           thumbnailAlt={data.thumbnail.alt}
         />
