@@ -4,18 +4,18 @@ import { getCollection } from "astro:content";
 import ProjectCard from "./projects/ProjectCard.astro";
 
 const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/projects/*.webp",
+  "/src/assets/projects/thumbnails/*.webp",
   { eager: true }
 );
 
 const projectsCollection = await getCollection("projects");
 
 // Validate thumbnail paths
-projectsCollection.forEach(({ id, data }) => {
-  const path = `/src/assets/projects/${data.thumbnail.fileName}`;
+projectsCollection.forEach(({ id, data: { assets } }) => {
+  const path = `/src/assets/projects/thumbnails/${assets.thumbnail.fileName}`;
   if (!thumbnailImports[path])
     throw new Error(
-      `File name \"${data.thumbnail.fileName}\" given in \"${id}\" doesn't exist.`
+      `File name \"${assets.thumbnail.fileName}\" given in \"${id}\" doesn't exist.`
     );
 });
 
@@ -28,14 +28,14 @@ const featuredProjects = projectsCollection.filter(
 <SectionLayout id="projects" title="Proyectos">
   {
     featuredProjects.map(({ slug, data }) => {
-      const path = `/src/assets/projects/${data.thumbnail.fileName}`;
+      const path = `/src/assets/projects/thumbnails/${data.assets.thumbnail.fileName}`;
       return (
         <ProjectCard
           name={data.name}
           description={data.shortDescription}
           href={`/projects/${slug}-project`}
           thumbnailSrc={thumbnailImports[path].default}
-          thumbnailAlt={data.thumbnail.alt}
+          thumbnailAlt={data.assets.thumbnail.alt}
         />
       );
     })

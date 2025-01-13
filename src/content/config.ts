@@ -3,15 +3,19 @@ import { defineCollection, z } from "astro:content";
 const ButtonsEnum = z.enum(["LiveDemo", "GitHub"])
 const TechStackEnum = z.enum(["Dotnet", "Csharp"])
 const SupportedOs = z.enum(["Linux", "Windows 10", "Windows 11"])
+const ImageAsset = z.object({
+    fileName: z.string(),
+    alt: z.string()
+})
 
 const projects = defineCollection({
     schema: z.object({
         name: z.string().max(30),
         shortDescription: z.string().max(50),
         featuredProject: z.boolean().default(false).optional(), // If true, will be displayed at index.
-        thumbnail: z.object({
-            fileName: z.string(),
-            alt: z.string()
+        assets: z.object({
+            thumbnail: ImageAsset,
+            icon: ImageAsset
         }),
         hero: z.object({
             description: z.string().max(360),
