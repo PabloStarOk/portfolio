@@ -1,4 +1,5 @@
 ---
+import { projectsThumbnailsDir } from "@/constants";
 import SectionLayout from "@/layouts/SectionLayout.astro";
 import { getCollection } from "astro:content";
 import ProjectCard from "./projects/ProjectCard.astro";
@@ -12,10 +13,10 @@ const projectsCollection = await getCollection("projects");
 
 // Validate thumbnail paths
 projectsCollection.forEach(({ id, data: { assets } }) => {
-  const path = `/src/assets/projects/thumbnails/${assets.thumbnail.fileName}`;
+  const path = projectsThumbnailsDir + assets.thumbnail.fileName;
   if (!thumbnailImports[path])
     throw new Error(
-      `File name \"${assets.thumbnail.fileName}\" given in \"${id}\" doesn't exist.`
+      `File name \"${assets.thumbnail.fileName}\" given in \"${id}\" doesn't exist at ${projectsThumbnailsDir}"`
     );
 });
 
@@ -28,7 +29,7 @@ const featuredProjects = projectsCollection.filter(
 <SectionLayout id="projects" title="Proyectos">
   {
     featuredProjects.map(({ slug, data }) => {
-      const path = `/src/assets/projects/thumbnails/${data.assets.thumbnail.fileName}`;
+      const path = projectsThumbnailsDir + data.assets.thumbnail.fileName;
       return (
         <ProjectCard
           name={data.name}

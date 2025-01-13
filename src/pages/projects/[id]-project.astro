@@ -1,5 +1,6 @@
 ---
 import ProjectTitle from "@/components/projects/content/ProjectTitle.astro";
+import { projectsIconsDir, projectsThumbnailsDir } from "@/constants";
 import Layout from "@/layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
 
@@ -11,6 +12,7 @@ export async function getStaticPaths() {
   }));
 }
 
+// Project data
 const { project } = Astro.props;
 const { name, assets, hero } = project.data;
 const { Content } = await render(project);
@@ -24,13 +26,12 @@ const { Content } = await render(project);
 >
   <ProjectTitle
     title={name}
-    iconSrc=`/src/assets/projects/icons/${assets.icon.fileName}`
+    iconSrc={projectsIconsDir + assets.icon.fileName}
     iconAlt={assets.icon.alt}
   />
-  <h1>{name}</h1>
   <p>{hero.description}</p>
   <img
-    src=`/src/assets/projects/thumbnails/${assets.thumbnail.fileName}`
+    src={projectsThumbnailsDir + assets.thumbnail.fileName}
     alt={assets.thumbnail.alt}
   />
   {
