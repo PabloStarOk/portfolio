@@ -1,0 +1,48 @@
+---
+import AnchorButton from "@/components/buttons/AnchorButton.astro";
+import GitHub from "@/icons/component-icons/GitHub.astro";
+import { Image } from "astro:assets";
+
+// TODO: Should this type moved to an specific file?
+export type ProjectButton = {
+  type: "LiveDemo" | "GitHub";
+  href: string;
+  ariaLabel: string;
+};
+
+interface Props {
+  thumbnailSrc: ImageMetadata;
+  thumbnailAlt: string;
+  description: string;
+  buttons: ProjectButton[];
+}
+
+const { thumbnailSrc, thumbnailAlt, description, buttons } = Astro.props;
+---
+
+<section class="project-hero" aria-label="Descripción e imagén del proyecto.">
+  <Image
+    class="project-hero__thumbnail"
+    src={thumbnailSrc}
+    alt={thumbnailAlt}
+  />
+  <p class="project-hero_description">{description}</p>
+  <footer class="project-hero__buttons">
+    {
+      buttons.map((button) => {
+        return (
+          <AnchorButton
+            href={button.href}
+            ariaLabel={button.ariaLabel}
+            type={button.type === "LiveDemo" ? "primary" : "secondary"}
+          >
+            {button.type === "GitHub" && (
+              <GitHub style="fill: url(#brandGradient);" />
+            )}
+            {button.type}
+          </AnchorButton>
+        );
+      })
+    }
+  </footer>
+</section>

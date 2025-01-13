@@ -1,4 +1,7 @@
 ---
+import ProjectHero, {
+  type ProjectButton,
+} from "@/components/projects/content/ProjectHero.astro";
 import ProjectTitle from "@/components/projects/content/ProjectTitle.astro";
 import { projectsIconsDir, projectsThumbnailsDir } from "@/constants";
 import Layout from "@/layouts/Layout.astro";
@@ -13,9 +16,27 @@ export async function getStaticPaths() {
 }
 
 // Project data
+const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/projects/thumbnails/*.webp",
+  { eager: true }
+);
 const { project } = Astro.props;
 const { name, assets, hero } = project.data;
 const { Content } = await render(project);
+
+// Hero buttons
+const buttonAriaLabels: ReadonlyMap<string, string> = new Map([
+  ["LiveDemo", "Demostración del proyecto."],
+  ["GitHub", "Repositorio de GitHub del proyecto."],
+]);
+const buttons: ProjectButton[] = [];
+hero.buttons.map((button) =>
+  buttons.push({
+    type: button.type,
+    href: button.url,
+    ariaLabel: buttonAriaLabels.get(button.type) as string,
+  })
+);
 ---
 
 <Layout
@@ -29,16 +50,13 @@ const { Content } = await render(project);
     iconSrc={projectsIconsDir + assets.icon.fileName}
     iconAlt={assets.icon.alt}
   />
-  <p>{hero.description}</p>
-  <img
-    src={projectsThumbnailsDir + assets.thumbnail.fileName}
-    alt={assets.thumbnail.alt}
+  <ProjectHero
+    thumbnailSrc={thumbnailImports[
+      projectsThumbnailsDir + assets.thumbnail.fileName
+    ].default}
+    thumbnailAlt={assets.thumbnail.alt}
+    description={hero.description}
+    buttons={buttons}
   />
-  {
-    hero.buttons.map((button) => {
-      if (button === "GitHub") return <button>GitHub</button>;
-      else if (button === "LiveDemo") return <button>LiveDemo</button>;
-    })
-  }
   <Content />
 </Layout>

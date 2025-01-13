@@ -1,7 +1,10 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
-const ButtonsEnum = z.enum(["LiveDemo", "GitHub"])
+const Button = z.object({
+    type: z.enum(["LiveDemo", "GitHub"]),
+    url: z.string().url()
+})
 const TechStackEnum = z.enum(["Dotnet", "Csharp"])
 const SupportedOs = z.enum(["Linux", "Windows 10", "Windows 11"])
 const ImageAsset = z.object({
@@ -21,7 +24,7 @@ const projects = defineCollection({
         }),
         hero: z.object({
             description: z.string().max(360),
-            buttons: z.array(ButtonsEnum)
+            buttons: z.array(Button).max(3)
         }),
         techStack: z.array(z.object({
             name: TechStackEnum,
