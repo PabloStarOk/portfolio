@@ -1,6 +1,7 @@
 ---
 import AnchorButton from "@/components/buttons/AnchorButton.astro";
 import GitHub from "@/icons/component-icons/GitHub.astro";
+import "@/styles/global.css";
 import { Image } from "astro:assets";
 
 // TODO: Should this type moved to an specific file?
@@ -18,6 +19,8 @@ interface Props {
 }
 
 const { thumbnailSrc, thumbnailAlt, description, buttons } = Astro.props;
+let buttonCount = 0;
+let buttonStyle: string;
 ---
 
 <section class="project-hero" aria-label="Descripción e imagén del proyecto.">
@@ -26,23 +29,115 @@ const { thumbnailSrc, thumbnailAlt, description, buttons } = Astro.props;
     src={thumbnailSrc}
     alt={thumbnailAlt}
   />
-  <p class="project-hero_description">{description}</p>
-  <footer class="project-hero__buttons">
-    {
-      buttons.map((button) => {
-        return (
-          <AnchorButton
-            href={button.href}
-            ariaLabel={button.ariaLabel}
-            type={button.type === "LiveDemo" ? "primary" : "secondary"}
-          >
-            {button.type === "GitHub" && (
-              <GitHub style="fill: url(#brandGradient);" />
-            )}
-            {button.type}
-          </AnchorButton>
-        );
-      })
-    }
-  </footer>
+  <div class="project-hero__info">
+    <p class="project-hero__description">{description}</p>
+    <footer class="project-hero__buttons">
+      {
+        buttons.map((button) => {
+          // First button rendered is the primary
+          buttonCount++;
+          buttonStyle =
+            buttonCount > 1
+              ? "fill: url(#brandGradient);"
+              : "fill: var(--color-icon-neutral-onneutral, red);";
+          return (
+            <AnchorButton
+              href={button.href}
+              ariaLabel={button.ariaLabel}
+              type={buttonCount > 1 ? "secondary" : "primary"}
+              class="project-hero__button"
+            >
+              {button.type === "GitHub" && <GitHub style={buttonStyle} />}
+              {button.type}
+            </AnchorButton>
+          );
+        })
+      }
+    </footer>
+  </div>
 </section>
+
+<style>
+  .project-hero {
+    /* Layout */
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-800);
+    align-self: stretch;
+  }
+
+  .project-hero__thumbnail {
+    /* Layout */
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .project-hero__info {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-400);
+    align-self: stretch;
+  }
+
+  .project-hero__description {
+    /* Layout */
+    align-self: stretch;
+
+    /* Styles */
+    color: var(--color-text-default-default);
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+    line-height: 140%;
+  }
+
+  .project-hero__buttons {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-400);
+    align-self: stretch;
+  }
+
+  .project-hero__button {
+    /* Layout */
+    align-self: stretch;
+  }
+
+  @media screen and (min-width: 26.875em) {
+    .project-hero__buttons {
+      /* Layout */
+      flex-direction: row;
+    }
+
+    .project-hero__button {
+      /* Layout */
+      align-self: auto;
+    }
+  }
+
+  @media (min-width: 64em) {
+    .project-hero {
+      /* Layout */
+      grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+      gap: var(--space-800);
+    }
+
+    .project-hero__info {
+      /* Layout */
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .project-hero__buttons {
+      /* Layout */
+      justify-content: flex-start;
+    }
+  }
+</style>

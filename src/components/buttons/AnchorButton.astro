@@ -6,15 +6,16 @@ interface Props {
   target?: string;
   rel?: string;
   type?: "primary" | "secondary" | "tertiary";
+  class?: string;
 }
 
 const {
-  href,
   ariaLabel,
   id = "",
   target = "_blank",
   rel = "",
   type = "primary",
+  class: className,
 } = Astro.props;
 
 // Add "noopener" and "noreferrer" for links that open in a new tab, while avoiding duplicates
@@ -26,11 +27,11 @@ const relation =
 
 <a
   id={id}
-  class=`anchor-button anchor-button--${type}`
-  href={href}
+  class=`anchor-button anchor-button--${type} ${className}`
   target={target}
   rel={relation}
   aria-label={ariaLabel}
+  {...Astro.props}
 >
   {(type === "primary" || type === "tertiary") && <slot />}
   {
