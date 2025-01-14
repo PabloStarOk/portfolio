@@ -1,4 +1,5 @@
 ---
+import ProjectFeatureCard from "@/components/projects/content/ProjectFeatureCard.astro";
 import ProjectHero, {
   type ProjectButton,
 } from "@/components/projects/content/ProjectHero.astro";
@@ -27,7 +28,7 @@ const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 const { project } = Astro.props;
-const { name, assets, hero, techStack } = project.data;
+const { name, assets, hero, techStack, features } = project.data;
 const { Content } = await render(project);
 
 // Hero buttons
@@ -73,7 +74,7 @@ techStack.map((stack) => {
       buttons={buttons}
     />
     <ProjectSectionLayout title="Tecnologías Usadas">
-      <div class="stack-card__grid">
+      <div class="card__grid">
         {
           techStack.map((stack) => {
             return (
@@ -88,73 +89,92 @@ techStack.map((stack) => {
         }
       </div>
     </ProjectSectionLayout>
-    <Content />
+    <ProjectSectionLayout title="Características">
+      <div class="card__grid">
+        {
+          features.map((feature) => {
+            return (
+              <ProjectFeatureCard
+                title={feature.title}
+                description={feature.description}
+              />
+            );
+          })
+        }
+
+        <ProjectFeatureCard
+          title="A large title which contains a lot of letter and should be clipped"
+          description="A large description which contains a lot of letter and should be clipped A large description which contains a lot of letter and should be clipped."
+        />
+      </div>
+      <Content />
+    </ProjectSectionLayout>
   </div>
+
+  <style>
+    .project-page {
+      /* Layout */
+      display: flex;
+      padding: var(--space-400) var(--space-0);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: var(--space-1200);
+      margin: var(--space-800) var(--space-0);
+
+      /* Style */
+      border-radius: var(--radius-100);
+      border: 1px solid var(--color-border-default-default);
+    }
+
+    .project-page__content {
+      /* Layout */
+      display: flex;
+      padding: var(--space-0) var(--space-300);
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-1200);
+      align-self: stretch;
+    }
+
+    .card__grid {
+      /* Layout */
+      display: grid;
+      align-self: stretch;
+      gap: var(--space-800);
+    }
+
+    @media screen and (min-width: 48em) {
+      .project-page {
+        /* Layout */
+        padding: var(--space-600) var(--space-0);
+        margin: var(--space-1200) var(--space-0);
+      }
+
+      .project-page__content {
+        /* Layout */
+        padding: var(--space-0) var(--space-800);
+        gap: var(--space-1600);
+      }
+    }
+
+    @media screen and (min-width: 64em) {
+      .project-page {
+        /* Layout */
+        padding: var(--space-800) var(--space-0);
+        margin: var(--space-1600) var(--space-0);
+      }
+
+      .project-page__content {
+        /* Layout */
+        padding: var(--space-0) var(--space-1200);
+        gap: var(--space-2400);
+      }
+
+      .card__grid {
+        /* Layout */
+        grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+      }
+    }
+  </style>
 </Layout>
-
-<style>
-  .project-page {
-    /* Layout */
-    display: flex;
-    padding: var(--space-400) var(--space-0);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--space-1200);
-    margin: var(--space-800) var(--space-0);
-
-    /* Style */
-    border-radius: var(--radius-100);
-    border: 1px solid var(--color-border-default-default);
-  }
-
-  .project-page__content {
-    /* Layout */
-    display: flex;
-    padding: var(--space-0) var(--space-300);
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-1200);
-    align-self: stretch;
-  }
-
-  .stack-card__grid {
-    /* Layout */
-    display: grid;
-    align-self: stretch;
-    gap: var(--space-800);
-  }
-
-  @media screen and (min-width: 48em) {
-    .project-page {
-      /* Layout */
-      padding: var(--space-600) var(--space-0);
-      margin: var(--space-1200) var(--space-0);
-    }
-
-    .project-page__content {
-      /* Layout */
-      padding: var(--space-0) var(--space-800);
-      gap: var(--space-1600);
-    }
-  }
-
-  @media screen and (min-width: 64em) {
-    .project-page {
-      /* Layout */
-      padding: var(--space-800) var(--space-0);
-      margin: var(--space-1600) var(--space-0);
-    }
-
-    .project-page__content {
-      /* Layout */
-      padding: var(--space-0) var(--space-1200);
-      gap: var(--space-2400);
-    }
-
-    .stack-card__grid {
-      /* Layout */
-      grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
-    }
-  }
-</style>
