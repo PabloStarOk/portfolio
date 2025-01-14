@@ -21,6 +21,9 @@ const { title, description } = Astro.props;
     align-items: flex-start;
     gap: var(--space-800);
     align-self: stretch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
   }
 
   .project-section__title {
@@ -30,6 +33,7 @@ const { title, description } = Astro.props;
     font-weight: var(--typography-heading-font-weight);
     line-height: 120%;
     letter-spacing: -0.03rem;
+    align-self: center;
 
     /* Style */
     background: var(--primary-color-1000);
@@ -50,5 +54,11 @@ const { title, description } = Astro.props;
 
     /* Style */
     color: var(--color-text-default-default);
+  }
+
+  @media screen and (min-width: 26.875em) {
+    .project-section__title {
+      align-self: flex-start;
+    }
   }
 </style>
