@@ -2,9 +2,15 @@
 import ProjectHero, {
   type ProjectButton,
 } from "@/components/projects/content/ProjectHero.astro";
+import ProjectStackCard from "@/components/projects/content/ProjectStackCard.astro";
 import ProjectTitle from "@/components/projects/content/ProjectTitle.astro";
-import { projectsIconsDir, projectsThumbnailsDir } from "@/constants";
+import {
+  projectsIconsDir,
+  projectsThumbnailsDir,
+  techStackIconsMap,
+} from "@/constants";
 import Layout from "@/layouts/Layout.astro";
+import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -21,7 +27,7 @@ const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 const { project } = Astro.props;
-const { name, assets, hero } = project.data;
+const { name, assets, hero, techStack } = project.data;
 const { Content } = await render(project);
 
 // Hero buttons
@@ -37,6 +43,12 @@ hero.buttons.map((button) =>
     ariaLabel: buttonAriaLabels.get(button.type) as string,
   })
 );
+
+// Validate tech stack icons.
+techStack.map((stack) => {
+  if (!techStackIconsMap.get(stack.name))
+    throw new Error("Tech stack doesn't exist at techStackIcons.json file.");
+});
 ---
 
 <Layout
@@ -60,6 +72,22 @@ hero.buttons.map((button) =>
       description={hero.description}
       buttons={buttons}
     />
+    <ProjectSectionLayout title="Tecnologías Usadas">
+      <div class="stack-card__grid">
+        {
+          techStack.map((stack) => {
+            return (
+              <ProjectStackCard
+                iconSrc={techStackIconsMap.get(stack.name)?.src as string}
+                iconAlt={techStackIconsMap.get(stack.name)?.alt as string}
+                name={stack.name + (stack.version ? " " + stack.version : "")}
+                purpose={stack.purpose}
+              />
+            );
+          })
+        }
+      </div>
+    </ProjectSectionLayout>
     <Content />
   </div>
 </Layout>
@@ -90,6 +118,13 @@ hero.buttons.map((button) =>
     align-self: stretch;
   }
 
+  .stack-card__grid {
+    /* Layout */
+    display: grid;
+    align-self: stretch;
+    gap: var(--space-800);
+  }
+
   @media screen and (min-width: 48em) {
     .project-page {
       /* Layout */
@@ -115,6 +150,11 @@ hero.buttons.map((button) =>
       /* Layout */
       padding: var(--space-0) var(--space-1200);
       gap: var(--space-2400);
+    }
+
+    .stack-card__grid {
+      /* Layout */
+      grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
     }
   }
 </style>

@@ -9,7 +9,7 @@ const { title, description } = Astro.props;
 
 <section class="project-section">
   <h2 class="project-section__title">{title}</h2>
-  <p class="project-section__description">{description}</p>
+  {description && <p class="project-section__description">{description}</p>}
   <slot />
 </section>
 
@@ -21,7 +21,6 @@ const { title, description } = Astro.props;
     align-items: flex-start;
     gap: var(--space-800);
     align-self: stretch;
-    overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-all;
   }

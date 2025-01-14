@@ -1,0 +1,10 @@
+{
+    ".NET" : {
+        "src": "/src/assets/skills/DotnetIcon.svg",
+        "alt": "Logo característico de Dotnet."
+    },
+    "C#": {
+      "src": "/src/assets/skills/CsharpIcon.svg",
+      "alt": "Logo característico de Csharp."
+    }
+}

@@ -1,15 +1,24 @@
-import { glob } from "astro/loaders";
+import { file, glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
 const Button = z.object({
     type: z.enum(["LiveDemo", "GitHub"]),
     url: z.string().url()
 })
-const TechStackEnum = z.enum(["Dotnet", "Csharp"])
+const TechStackEnum = z.enum([".NET", "C#"])
 const SupportedOs = z.enum(["Linux", "Windows 10", "Windows 11"])
 const ImageAsset = z.object({
     fileName: z.string(),
     alt: z.string()
+})
+
+// Collections
+const techStackIcons = defineCollection({
+    loader: file("src/content/techStackIcons.json"),
+    schema: z.object({
+        src: z.string(),
+        alt: z.string()
+    })
 })
 
 const projects = defineCollection({
@@ -28,6 +37,7 @@ const projects = defineCollection({
         }),
         techStack: z.array(z.object({
             name: TechStackEnum,
+            version: z.string().optional(),
             purpose: z.string().max(100).optional()
         })),
         features: z.array(z.object({
@@ -38,5 +48,5 @@ const projects = defineCollection({
     })
 })
 
-export const collections = { projects }
+export const collections = { projects, techStackIcons }
 
