@@ -4,6 +4,7 @@ import ProjectHero, {
   type ProjectButton,
 } from "@/components/projects/content/ProjectHero.astro";
 import ProjectStackCard from "@/components/projects/content/ProjectStackCard.astro";
+import ProjectSupportedOsCard from "@/components/projects/content/ProjectSupportedOsCard.astro";
 import ProjectTitle from "@/components/projects/content/ProjectTitle.astro";
 import {
   projectsIconsDir,
@@ -28,7 +29,7 @@ const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 const { project } = Astro.props;
-const { name, assets, hero, techStack, features } = project.data;
+const { name, assets, hero, techStack, features, supportedOs } = project.data;
 const { Content } = await render(project);
 
 // Hero buttons
@@ -73,8 +74,9 @@ techStack.map((stack) => {
       description={hero.description}
       buttons={buttons}
     />
+
     <ProjectSectionLayout title="Tecnologías Usadas">
-      <div class="card__grid">
+      <div class="project-page__card-grid">
         {
           techStack.map((stack) => {
             return (
@@ -89,8 +91,9 @@ techStack.map((stack) => {
         }
       </div>
     </ProjectSectionLayout>
+
     <ProjectSectionLayout title="Características">
-      <div class="card__grid">
+      <div class="project-page__card-grid">
         {
           features.map((feature) => {
             return (
@@ -101,14 +104,20 @@ techStack.map((stack) => {
             );
           })
         }
-
-        <ProjectFeatureCard
-          title="A large title which contains a lot of letter and should be clipped"
-          description="A large description which contains a lot of letter and should be clipped A large description which contains a lot of letter and should be clipped."
-        />
       </div>
-      <Content />
     </ProjectSectionLayout>
+
+    <ProjectSectionLayout title="Plataformas Soportadas">
+      <div class="project-page__supported-os">
+        {
+          supportedOs.map((os) => {
+            return <ProjectSupportedOsCard osName={os} />;
+          })
+        }
+      </div>
+    </ProjectSectionLayout>
+
+    <Content />
   </div>
 
   <style>
@@ -137,10 +146,20 @@ techStack.map((stack) => {
       align-self: stretch;
     }
 
-    .card__grid {
+    .project-page__card-grid {
       /* Layout */
       display: grid;
       align-self: stretch;
+      gap: var(--space-800);
+    }
+
+    .project-page__supported-os {
+      /* Layout */
+      display: flex;
+      align-self: stretch;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: var(--space-800);
     }
 
@@ -171,7 +190,7 @@ techStack.map((stack) => {
         gap: var(--space-2400);
       }
 
-      .card__grid {
+      .project-page__card-grid {
         /* Layout */
         grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
       }
