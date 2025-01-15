@@ -16,9 +16,11 @@ interface Props {
   thumbnailAlt: string;
   description: string;
   buttons: ProjectButton[];
+  projectName: string;
 }
 
-const { thumbnailSrc, thumbnailAlt, description, buttons } = Astro.props;
+const { thumbnailSrc, thumbnailAlt, description, buttons, projectName } =
+  Astro.props;
 let buttonCount = 0;
 let buttonStyle: string;
 ---
@@ -28,6 +30,7 @@ let buttonStyle: string;
     class="project-hero__thumbnail"
     src={thumbnailSrc}
     alt={thumbnailAlt}
+    transition:name={`img-${projectName}-transition`}
   />
   <div class="project-hero__info">
     <p class="project-hero__description">{description}</p>

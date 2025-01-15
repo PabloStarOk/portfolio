@@ -21,21 +21,23 @@ const { name, description, href, thumbnailSrc, thumbnailAlt } = Astro.props;
 >
   <header class="project-card__header">
     <div class="project-card__info">
-      <h3 class="project-card__title">{name}</h3>
+      <h3
+        class="project-card__title"
+        transition:name={`title-${name}-transition`}
+      >
+        {name}
+      </h3>
       <p class="project-card__description">{description}</p>
     </div>
     <Arrow style="fill: url(#brandGradient);" />
   </header>
-  {
-    thumbnailSrc && (
-      <Image
-        src={thumbnailSrc}
-        alt={thumbnailAlt}
-        class="project-card__thumbnail"
-        loading="lazy"
-      />
-    )
-  }
+  <Image
+    src={thumbnailSrc}
+    alt={thumbnailAlt}
+    class="project-card__thumbnail"
+    loading="lazy"
+    transition:name={`img-${name}-transition`}
+  />
 </a>
 
 <style>

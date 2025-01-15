@@ -9,7 +9,9 @@ const { title, iconSrc, iconAlt } = Astro.props;
 ---
 
 <div class="project__header">
-  <h1 class="project__title">{title}</h1>
+  <h1 class="project__title" transition:name={`title-${title}-transition`}>
+    {title}
+  </h1>
   <img class="project__icon" src={iconSrc} alt={iconAlt} />
 </div>
 
