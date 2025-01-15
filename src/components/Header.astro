@@ -22,7 +22,7 @@ const {
 ---
 
 <header class="nav-bar">
-  <FavIcon style="fill: url(#brandGradient);" size="42" />
+  <FavIcon class="header__icon" style="fill: url(#brandGradient);" size="42" />
   {displayNavLinks && <MenuLinks targetDevice="desktop" />}
   {displayThemeToggle && <ThemeToggle targetDevice="desktop" />}
   <!-- Menu button to open the menu in mobile and tablet-->
@@ -65,6 +65,15 @@ const {
     z-index: 999;
     backdrop-filter: blur(0.938rem);
     padding: var(--space-300) var(--space-600);
+  }
+
+  .header__icon {
+    /* Layout */
+    min-width: var(--size-icon-large);
+    width: var(--size-icon-large);
+    max-width: var(--size-icon-large);
+    height: auto;
+    max-height: var(--size-icon-large);
   }
 
   .nav-bar::after {

@@ -33,6 +33,9 @@
     --radius-50: 0.125rem;
     --radius-100: 0.25rem;
 
+    /* Size - Icon */
+    --size-icon-large: 2.5rem;
+
     /* Depth */
     --size-depth-0: 0;
     --size-depth-100: 0.25rem;
