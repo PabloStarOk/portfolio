@@ -7,7 +7,7 @@ export const projectsThumbnailsDir = projectsAssetsDir + "thumbnails/";
 
 // Tech stack icons
 const stackIconsCollection = await getCollection("techStackIcons")
-export const techStackIconsMap = new Map();
+export const techStackIconsMap = new Map<string, {src: string, alt: string}>();
 stackIconsCollection.map(({ id, data: { src, alt } }) => {
   techStackIconsMap.set(id, {
     src: src,

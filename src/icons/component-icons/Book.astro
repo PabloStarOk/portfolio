@@ -1,0 +1,21 @@
+---
+interface Props {
+  svgClass?: string;
+  style?: {
+    pathColor?: string;
+  };
+}
+
+const { style } = Astro.props;
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74 70" {...Astro.props}>
+  <path
+    stroke={style?.pathColor}
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="4"
+    d="M37 11.748a34.87 34.87 0 0 0-23.333-8.912c-4.091 0-8.018.701-11.667 1.991v55.417a34.945 34.945 0 0 1 11.667-1.992A34.87 34.87 0 0 1 37 67.165m0-55.417a34.87 34.87 0 0 1 23.333-8.912c4.091 0 8.018.701 11.667 1.991v55.417a34.945 34.945 0 0 0-11.667-1.992A34.87 34.87 0 0 0 37 67.165m0-55.417v55.417"
+  >
+  </path>
+</svg>

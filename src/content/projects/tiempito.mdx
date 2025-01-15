@@ -44,34 +44,45 @@ features:
 supportedOs: [Linux, Windows 10, Windows 11]
 ---
 
-## Objetivo
+import ProjectInfoCard from "@/components/projects/content/ProjectInfoCard.astro"
+import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro"
 
-Ofrecer una aplicación poco convencional para la gestión de sesiones de estudio, de trabajo u otras labores por medio de una interfaz de línea de comandos y un servicio desarrollados a través de las características ofrecidas por el framework .NET.
+<ProjectSectionLayout title="Objetivo">
+  <ProjectInfoCard
+        systemIconName="Target">
+    Ofrecer una aplicación poco convencional para la gestión de sesiones de estudio, de trabajo u otras labores por medio de una interfaz de línea de comandos y un servicio desarrollados a través de las características ofrecidas por el framework .NET.
+  </ProjectInfoCard>
+</ProjectSectionLayout>
 
-## Arquitectura
-
+<ProjectSectionLayout title="Arquitectura">
 Esta aplicación esta constituida a partir de una arquitectura sencilla que se asemeja a la ‘clean architecture’ que se divide en ‘backend’ y ‘frontend’, permitiendo ser modular y acoplar nuevas sistemas en la capa de presentación.
+  <ProjectInfoCard
+        title="Servicio o daemon (Worker Service)"
+        systemIconName="Server">
+    Es el nucleo de la aplicación y actua de forma independiente, implementa un servidor que gestiona las peticiones y respuestas a través de una ‘named pipe’ de .NET, de tal forma que permite recibir comandos desde cualquier otro proceso.
+  </ProjectInfoCard>
 
-### Servicio o daemon (Worker Service)
+  <ProjectInfoCard
+        title="Interfaz de Línea de Comandos (Aplicación de Consola)"
+        systemIconName="CommandLine">
+    Funciona como sistema de entrada del usuario para emitir los diferentes comando que requiera, la CLI esta soportada sobre la librería ‘System.CommandLine’.
+  </ProjectInfoCard>
 
-Es el nucleo de la aplicación y actua de forma independiente, implementa un servidor que gestiona las peticiones y respuestas a través de una ‘named pipe’ de .NET, de tal forma que permite recibir comandos desde cualquier otro proceso.
+  <ProjectInfoCard
+        title="Librería IPC (Biblioteca)"
+        systemIconName="Book">
+    Provee las clases e interfaces necesarias para estandarizar la comunicación fácilmente entre la CLI y el servicio facilitando el envío de peticiones y respuestas estructurados de forma báscia mejorando la conversión y seguridad de la misma aplicación.
+  </ProjectInfoCard>
+</ProjectSectionLayout>
 
-### Interfaz de Línea de Comandos (Aplicación de Consola)
+<ProjectSectionLayout title="Desafíos">
+  ### Notificaciones
 
-Funciona como sistema de entrada del usuario para emitir los diferentes comando que requiera, la CLI esta soportada sobre la librería ‘System.CommandLine’.
+  #### Situación
 
-### Librería IPC (Biblioteca)
+  Las diferencias de gestión de las notificaciones en Linux y Windows represento mayormente la creación de un diseño que permitiese estructurar e inyectar las dependencias únicamente necesarias de acuerdo con el sistema operativo.
 
-Provee las clases e interfaces necesarias para estandarizar la comunicación fácilmente entre la CLI y el servicio facilitando el envío de peticiones y respuestas estructurados de forma báscia mejorando la conversión y seguridad de la misma aplicación.
+  #### Solución
 
-## Desafíos
-
-### Notificaciones
-
-#### Situación
-
-Las diferencias de gestión de las notificaciones en Linux y Windows represento mayormente la creación de un diseño que permitiese estructurar e inyectar las dependencias únicamente necesarias de acuerdo con el sistema operativo.
-
-#### Solución
-
-A través de las directivas de preprocesador y clases utilitarias ofrecidas por .NET se inyectaron dinamicamente las interfaces y clases para Windows o Linux.
+  A través de las directivas de preprocesador y clases utilitarias ofrecidas por .NET se inyectaron dinamicamente las interfaces y clases para Windows o Linux.
+</ProjectSectionLayout>
