@@ -84,8 +84,11 @@
     --background-color: #1E1E1E;
     --background-color-500: rgba(30, 30, 30, 0.5);
     --color-background-default-secondary-500: rgba(44, 44, 44, 0.5);
+    --color-background-danger-tertiary: #4D0B0A;
+    --color-background-positive-tertiary: #024023;
 
     /* Icon */
+    --color-icon-default-default: #FFFFFF;
     --color-icon-neutral-onneutral: rgba(36, 36, 36, 1);
 
     /* Border */
@@ -95,6 +98,8 @@
     --color-text-default-default: #fff;
     --color-text-default-secondary: rgba(255, 255, 255, 0.7);
     --color-text-neutral-onneutral: rgba(36, 36, 36, 1);
+    --color-text-danger-tertiary: #EC221F;
+    --color-text-positive-tertiary: #009951;
 }
 
 :root[data-theme="light"] {
@@ -110,8 +115,11 @@
     --background-color: #fff;
     --background-color-500: rgba(255, 255, 255, 0.5);
     --color-background-default-secondary-500: rgba(245, 245, 245, 0.5);
+    --color-background-danger-tertiary: #FEE9E7;
+    --color-background-positive-tertiary: #EBFFEE;
 
     /* Icon Colors */
+    --color-icon-default-default: #1E1E1E;
     --color-icon-neutral-onneutral: rgba(243, 243, 243, 1);
 
     /* Border */
@@ -121,6 +129,8 @@
     --color-text-default-default: #1E1E1E;
     --color-text-default-secondary: rgba(117, 117, 117, 1);
     --color-text-neutral-onneutral: rgba(243, 243, 243, 1);
+    --color-text-danger-tertiary: #EC221F;
+    --color-text-positive-tertiary: #14AE5C;
 }
 
 * {

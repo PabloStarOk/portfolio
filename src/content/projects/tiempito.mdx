@@ -46,6 +46,7 @@ supportedOs: [Linux, Windows 10, Windows 11]
 
 import ProjectInfoCard from "@/components/projects/content/ProjectInfoCard.astro"
 import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro"
+import ProjectChallengeDetail from "@/components/projects/content/ProjectChallengeDetail.astro"
 
 <ProjectSectionLayout title="Objetivo">
   <ProjectInfoCard
@@ -76,13 +77,8 @@ Esta aplicación esta constituida a partir de una arquitectura sencilla que se a
 </ProjectSectionLayout>
 
 <ProjectSectionLayout title="Desafíos">
-  ### Notificaciones
-
-  #### Situación
-
-  Las diferencias de gestión de las notificaciones en Linux y Windows represento mayormente la creación de un diseño que permitiese estructurar e inyectar las dependencias únicamente necesarias de acuerdo con el sistema operativo.
-
-  #### Solución
-
-  A través de las directivas de preprocesador y clases utilitarias ofrecidas por .NET se inyectaron dinamicamente las interfaces y clases para Windows o Linux.
+  <ProjectChallengeDetail title="Notificaciones">
+  <p slot="situation">Las diferencias de gestión de las notificaciones en Linux y Windows represento mayormente la creación de un diseño que permitiese estructurar e inyectar las dependencias únicamente necesarias de acuerdo con el sistema operativo.</p>
+  <p slot="solution">A través de las directivas de preprocesador y clases utilitarias ofrecidas por .NET se inyectaron dinamicamente las interfaces y clases para Windows o Linux.</p>
+  </ProjectChallengeDetail>
 </ProjectSectionLayout>
