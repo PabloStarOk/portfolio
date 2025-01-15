@@ -1,0 +1,18 @@
+---
+interface Props {
+  iconName: string;
+  class?: string;
+  style?: {
+    pathColor?: string;
+  };
+}
+
+const { iconName } = Astro.props;
+
+const icon = await import(`./component-icons/${iconName}.astro`);
+if (!icon) throw new Error(`System icon with name "${iconName}" doesn't exist`);
+
+const IconComponent = icon.default;
+---
+
+<IconComponent {...Astro.props} />

@@ -1,0 +1,228 @@
+---
+import Arrow from "@/icons/component-icons/Arrow.astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  name: string;
+  description: string;
+  href: string;
+  thumbnailSrc: ImageMetadata;
+  thumbnailAlt: string;
+}
+
+const { name, description, href, thumbnailSrc, thumbnailAlt } = Astro.props;
+---
+
+<a
+  class="project-card"
+  href={href}
+  rel="same-origin noopener"
+  aria-label=`${name} project`
+>
+  <header class="project-card__header">
+    <div class="project-card__info">
+      <h3 class="project-card__title">{name}</h3>
+      <p class="project-card__description">{description}</p>
+    </div>
+    <Arrow style="fill: url(#brandGradient);" />
+  </header>
+  {
+    thumbnailSrc && (
+      <Image
+        src={thumbnailSrc}
+        alt={thumbnailAlt}
+        class="project-card__thumbnail"
+        loading="lazy"
+      />
+    )
+  }
+</a>
+
+<style>
+  .project-card {
+    /* Layout */
+    display: flex;
+    padding: var(--space-300) var(--space-0);
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-600);
+    align-self: stretch;
+    overflow: hidden;
+    position: relative;
+
+    /* Style */
+    background: var(--color-background-default-secondary-500);
+    border: 1px solid var(--color-border-default-default);
+    border-radius: var(--radius-100);
+    box-shadow: var(--size-depth-0) var(--size-depth-400) var(--size-depth-400)
+      var(--size-depth-negative-200) var(--color-black-200);
+    text-decoration: none;
+
+    /* Animations */
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .project-card__header {
+    /* Layout */
+    display: flex;
+    height: 6.5625rem;
+    min-height: 6.5625rem;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-200);
+    align-self: stretch;
+    padding: 0 var(--space-400);
+    position: relative;
+
+    /* Style */
+    background: var(--primary-color-100);
+    box-shadow: var(--size-depth-0) var(--size-depth-400) var(--size-depth-400)
+      var(--size-depth-negative-200) var(--color-black-200);
+  }
+
+  .project-card__info {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-100);
+    flex: 1 0 0;
+    overflow: hidden;
+    overflow-wrap: break-word;
+  }
+
+  .project-card__title {
+    /* Typography */
+    font-size: var(--heading-size-base);
+    font-style: normal;
+    font-weight: var(--typography-heading-font-weight);
+    line-height: 120%;
+    letter-spacing: -0.03rem;
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    /* Style */
+    background: var(--primary-color-1000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .project-card__description {
+    /* Layout */
+    align-self: stretch;
+
+    /* Style */
+    color: var(--color-text-default-default);
+    font-size: var(--body-size-small);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+    line-height: 140%;
+  }
+
+  .project-card__thumbnail {
+    /* Layout */
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    transform: scale(0.95);
+
+    /* Style */
+    border-radius: var(--radius-100);
+    box-shadow: var(--size-depth-0) var(--size-depth-400) var(--size-depth-400)
+      var(--size-depth-negative-200) var(--color-black-200);
+
+    /* Animations */
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .project-card:hover,
+  .project-card:focus-visible {
+    transform: scale(1.02);
+  }
+
+  .project-card:hover .project-card__thumbnail,
+  .project-card:focus-visible .project-card__thumbnail {
+    transform: scale(1);
+  }
+
+  .project-card:focus-visible {
+    outline-offset: 1rem;
+    outline: var(--space-100) solid var(--right-color-1000);
+    outline-width: 0.188rem;
+    outline-offset: var(--space-100);
+    border-radius: var(--radius-100);
+  }
+
+  .project-card::after {
+    /* Layout */
+    content: "";
+    position: absolute;
+    width: auto;
+    height: 30%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    /* Style */
+    opacity: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      var(--left-color-100)
+    );
+
+    /* Animations */
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Project Card Header Border */
+  .project-card__header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    background: var(--primary-color-1000);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+
+    border-radius: inherit;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .project-card:hover::after,
+  .project-card:focus-visible::after {
+    /* Style */
+    opacity: 1;
+  }
+
+  @media screen and (min-width: 48em) {
+    .project-card {
+      /* Layout */
+      padding: var(--space-600) var(--space-0);
+      justify-content: space-between;
+    }
+
+    .project-card__header {
+      /* Layout */
+      padding: 0 var(--space-1200);
+    }
+
+    .project-card__description {
+      /* Style */
+      font-size: var(--body-size-medium);
+    }
+  }
+</style>

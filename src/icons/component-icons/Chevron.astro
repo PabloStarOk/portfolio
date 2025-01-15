@@ -1,0 +1,20 @@
+---
+interface Props {
+  svgClass?: string;
+  style?: {
+    pathColor?: string;
+  };
+}
+
+const { style } = Astro.props;
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 13" {...Astro.props}>
+  <path
+    fill={style?.pathColor}
+    fill-rule="evenodd"
+    d="M11.707 12.566a1 1 0 0 1-1.414 0l-10-10a1 1 0 1 1 1.414-1.414L11 10.445l9.293-9.293a1 1 0 1 1 1.414 1.414l-10 10Z"
+    clip-rule="evenodd"
+  >
+  </path>
+</svg>

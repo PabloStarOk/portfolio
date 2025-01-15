@@ -1,0 +1,70 @@
+---
+import { techStackIconsMap } from "@/constants";
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  osName: string;
+}
+
+const { osName } = Astro.props;
+
+const stackIconImports = import.meta.glob<{ default: ImageMetadata }>(
+  "src/assets/stack/*.{png,jpg,webp,svg}",
+  { eager: true }
+);
+const osIcon = techStackIconsMap.get(osName);
+if (!osIcon)
+  throw new Error(
+    "Given supported operating system name wasn't found in the techStackIcons.json file."
+  );
+
+const osIconMetadata = stackIconImports[osIcon.src].default;
+---
+
+<article class="project-os">
+  <Image class="project-os__icon" src={osIconMetadata} alt={osIcon.alt} />
+  <h3 class="project-os__name">{osName}</h3>
+</article>
+
+<style>
+  .project-os {
+    /* Layout */
+    display: inline-flex;
+    min-width: 12.5rem;
+    max-width: 12.5rem;
+    padding: var(--space-600);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-300);
+
+    /* Style */
+    border-radius: var(--radius-100);
+    border: 1px solid var(--color-border-default-default);
+    background: var(--background-color);
+    box-shadow: var(--size-depth-0) var(--size-depth-100) var(--size-depth-200)
+      var(--size-depth-negative-100) var(--color-black-200);
+  }
+
+  .project-os__icon {
+    /* Layout */
+    height: 5rem;
+    min-height: 5rem;
+    max-height: 5rem;
+    object-fit: contain;
+  }
+
+  .project-os__name {
+    /* Layout */
+    align-self: stretch;
+
+    /* Style */
+    color: var(--color-text-default-default);
+    text-align: center;
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-strong);
+    line-height: 140%;
+  }
+</style>

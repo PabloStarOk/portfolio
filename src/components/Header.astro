@@ -6,22 +6,39 @@ import Hamburger from "@/icons/component-icons/Hamburger.astro";
 import "@/styles/global.css";
 import IconButton from "@/components/buttons/IconButton.astro";
 import MenuLinks from "@/components/header/MenuLinks.astro";
+import BackButton from "./header/BackButton.astro";
+
+interface Props {
+  displayNavLinks?: boolean;
+  displayThemeToggle?: boolean;
+  displayBackButton?: boolean;
+}
+
+const {
+  displayNavLinks = true,
+  displayThemeToggle = true,
+  displayBackButton = false,
+} = Astro.props;
 ---
 
 <header class="nav-bar">
   <FavIcon style="fill: url(#brandGradient);" size="42" />
-  <MenuLinks targetDevice="desktop" />
-  <ThemeToggle targetDevice="desktop" />
-
+  {displayNavLinks && <MenuLinks targetDevice="desktop" />}
+  {displayThemeToggle && <ThemeToggle targetDevice="desktop" />}
   <!-- Menu button to open the menu in mobile and tablet-->
-  <IconButton
-    id="openMenuButton"
-    buttonType="tertiary"
-    ariaLabel="Navigation Menu"
-    targetDevice="mobile"
-  >
-    <Hamburger style="fill: url(#brandGradient);" />
-  </IconButton>
+  {
+    displayNavLinks && (
+      <IconButton
+        id="openMenuButton"
+        buttonType="tertiary"
+        ariaLabel="Navigation Menu"
+        targetDevice="mobile"
+      >
+        <Hamburger style="fill: url(#brandGradient);" />
+      </IconButton>
+    )
+  }
+  {displayBackButton && <BackButton />}
 </header>
 <Menu id="navMenu" />
 
@@ -99,5 +116,5 @@ import MenuLinks from "@/components/header/MenuLinks.astro";
     document.body.style.overflow = "hidden";
   }
 
-  openMenuButton.addEventListener("click", openMenu);
+  if (openMenuButton) openMenuButton.addEventListener("click", openMenu);
 </script>

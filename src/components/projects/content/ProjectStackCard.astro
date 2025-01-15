@@ -1,0 +1,113 @@
+---
+interface Props {
+  iconSrc: string;
+  iconAlt: string;
+  name: string;
+  purpose?: string;
+}
+
+const { iconSrc, iconAlt, name, purpose } = Astro.props;
+---
+
+<article class="stack-card">
+  <img class="stack-card__icon" src={iconSrc} alt={iconAlt} />
+  <div class="stack-card__info">
+    <h3 class="stack-card__name">{name}</h3>
+    <p class="stack-card__purpose">{purpose}</p>
+  </div>
+</article>
+
+<style>
+  .stack-card {
+    /* Layout */
+    display: flex;
+    padding: var(--space-400);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-400);
+    align-self: stretch;
+
+    /* Style */
+    border-radius: var(--radius-100);
+    border: 1px solid var(--color-border-default-default);
+    box-shadow: var(--size-depth-0) var(--size-depth-100) var(--size-depth-200)
+      var(--size-depth-negative-100) var(--color-black-200);
+  }
+
+  .stack-card__icon {
+    /* Layout */
+    object-fit: contain;
+    width: 5rem;
+    min-width: 5rem;
+    max-width: 5rem;
+    height: 5rem;
+    min-height: 5rem;
+    max-height: 5rem;
+
+    /* Style */
+    border-radius: 0.25rem;
+  }
+
+  .stack-card__info {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--space-100);
+    align-self: stretch;
+    flex: 1 0 0;
+    word-break: break-all;
+  }
+
+  .stack-card__name,
+  .stack-card__purpose {
+    /* Layout */
+    align-self: stretch;
+
+    /* Typography */
+    color: var(--color-text-default-default);
+
+    /* Body Strong */
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-strong);
+    line-height: 140%;
+  }
+
+  .stack-card__purpose {
+    /* Typography */
+    font-size: var(--body-size-small);
+    font-weight: var(--body-font-weight-regular);
+  }
+
+  @media screen and (min-width: 48em) {
+    .stack-card {
+      flex-direction: row;
+      height: 8.125rem;
+      min-height: 8.125rem;
+      max-height: 8.125rem;
+      padding: var(--space-600);
+    }
+
+    .stack-card__info {
+      /* Text Limit */
+      overflow: hidden;
+    }
+
+    .stack-card__name {
+      /* Text Limit */
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+    }
+
+    .stack-card__purpose {
+      /* Text Limit */
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+    }
+  }
+</style>
