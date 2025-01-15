@@ -1,0 +1,63 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<section class="project-section">
+  <h2 class="project-section__title">{title}</h2>
+  {description && <p class="project-section__description">{description}</p>}
+  <slot />
+</section>
+
+<style>
+  .project-section {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-800);
+    align-self: stretch;
+    text-overflow: ellipsis;
+    word-break: break-all;
+  }
+
+  .project-section__title {
+    /* Typography */
+    font-size: var(--heading-size-base);
+    font-style: normal;
+    font-weight: var(--typography-heading-font-weight);
+    line-height: 120%;
+    letter-spacing: -0.03rem;
+    align-self: center;
+
+    /* Style */
+    background: var(--primary-color-1000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .project-section__description {
+    /* Layout */
+    align-self: stretch;
+
+    /* Typography */
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+    line-height: 140%;
+
+    /* Style */
+    color: var(--color-text-default-default);
+  }
+
+  @media screen and (min-width: 26.875em) {
+    .project-section__title {
+      align-self: flex-start;
+    }
+  }
+</style>

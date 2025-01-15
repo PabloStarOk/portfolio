@@ -8,6 +8,7 @@
     --primary-color-top-1000: linear-gradient(to bottom, var(--left-color-1000), var(--right-color-1000)); /* Starts from top */
 
     /* Fixed Colors */
+    --color-black-200: rgba(12, 12, 13, 0.1);
     --color-black-300: rgba(12, 12, 13, 0.2);
 
     --space-0: 0;
@@ -22,6 +23,7 @@
     --space-600: 1.50rem;
     --space-800: 2rem;
     --space-1200: 3rem;
+    --space-1600: 4rem;
     --space-2400: 6rem;
     --space-negative-800: -2rem;
 
@@ -31,10 +33,15 @@
     --radius-50: 0.125rem;
     --radius-100: 0.25rem;
 
+    /* Size - Icon */
+    --size-icon-large: 2.5rem;
+
     /* Depth */
     --size-depth-0: 0;
+    --size-depth-100: 0.25rem;
     --size-depth-200: 0.5rem;
     --size-depth-400: 1rem;
+    --size-depth-negative-100: -0.25rem;
     --size-depth-negative-200: -0.5rem;
 
     /* Typography */
@@ -61,6 +68,7 @@
     --subtitle-size-base: 2rem;
 
     /* Body */
+    --body-size-large: 1.25rem;
     --body-size-medium: 1rem;
     --body-size-small: 0.875rem;
 }
@@ -78,8 +86,12 @@
     /* Background */
     --background-color: #1E1E1E;
     --background-color-500: rgba(30, 30, 30, 0.5);
+    --color-background-default-secondary-500: rgba(44, 44, 44, 0.5);
+    --color-background-danger-tertiary: #4D0B0A;
+    --color-background-positive-tertiary: #024023;
 
     /* Icon */
+    --color-icon-default-default: #FFFFFF;
     --color-icon-neutral-onneutral: rgba(36, 36, 36, 1);
 
     /* Border */
@@ -89,6 +101,8 @@
     --color-text-default-default: #fff;
     --color-text-default-secondary: rgba(255, 255, 255, 0.7);
     --color-text-neutral-onneutral: rgba(36, 36, 36, 1);
+    --color-text-danger-tertiary: #EC221F;
+    --color-text-positive-tertiary: #009951;
 }
 
 :root[data-theme="light"] {
@@ -103,8 +117,12 @@
     /* Background */
     --background-color: #fff;
     --background-color-500: rgba(255, 255, 255, 0.5);
+    --color-background-default-secondary-500: rgba(245, 245, 245, 0.5);
+    --color-background-danger-tertiary: #FEE9E7;
+    --color-background-positive-tertiary: #EBFFEE;
 
     /* Icon Colors */
+    --color-icon-default-default: #1E1E1E;
     --color-icon-neutral-onneutral: rgba(243, 243, 243, 1);
 
     /* Border */
@@ -114,6 +132,8 @@
     --color-text-default-default: #1E1E1E;
     --color-text-default-secondary: rgba(117, 117, 117, 1);
     --color-text-neutral-onneutral: rgba(243, 243, 243, 1);
+    --color-text-danger-tertiary: #EC221F;
+    --color-text-positive-tertiary: #14AE5C;
 }
 
 * {

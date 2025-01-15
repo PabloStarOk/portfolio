@@ -1,0 +1,84 @@
+---
+name: Tiempito
+shortDescription: Temporizador de concentración.
+featuredProject: true
+assets:
+  thumbnail:
+    fileName: Tiempito.webp
+    alt: A una interfaz de línea de comandos mostrando un comando para iniciar un sesión de concentración.
+  icon:
+    fileName: Tiempito.svg
+    alt: Icono de un reloj.
+hero:
+  description: Tiempito es una aplicación que permite gestionar sesiones de concentración mediante un ‘daemon’ y una interfaz de línea de comandos. Dentro de sus capacidades está la creación de diferentes configuraciones de sesiones que tengan diferentes tiempos de concentración y descanso y en general sus capacidades se enfocan principalmente en la personalización.
+  buttons:
+    - { type: "GitHub", url: "https://github.com/PabloStarOk/tiempito" }
+techStack:
+  [
+    {
+      name: ".NET",
+      version: "8.0",
+      purpose: "Utilizado para la construcción del servicio, la CLI y una librería IPC.",
+    },
+    { name: "C#", purpose: "Lenguaje principal." },
+  ]
+features:
+  [
+    {
+      title: "Notificaciones",
+      description: "Funcionan como alarmas para notificar al usuario de una sesión o tiempo completado.",
+    },
+    {
+      title: "Personalización",
+      description: "Personalización de sesiones y notificaciones a través de archivos .conf.",
+    },
+    {
+      title: "Servicio (Daemon)",
+      description: "Servicio en segundo plano que ejecuta y gestiona las sesiones.",
+    },
+    {
+      title: "Interfaz de Línea de Comandos (CLI)",
+      description: "Herramienta del usuario para emitir comandos al servicio y administrar sus sesiones.",
+    },
+  ]
+supportedOs: [Linux, Windows 10, Windows 11]
+---
+
+import ProjectInfoCard from "@/components/projects/content/ProjectInfoCard.astro"
+import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro"
+import ProjectChallengeDetail from "@/components/projects/content/ProjectChallengeDetail.astro"
+
+<ProjectSectionLayout title="Objetivo">
+  <ProjectInfoCard
+        systemIconName="Target">
+    Ofrecer una aplicación poco convencional para la gestión de sesiones de estudio, de trabajo u otras labores por medio de una interfaz de línea de comandos y un servicio desarrollados a través de las características ofrecidas por el framework .NET.
+  </ProjectInfoCard>
+</ProjectSectionLayout>
+
+<ProjectSectionLayout title="Arquitectura">
+Esta aplicación está constituida a partir de una arquitectura sencilla que se asemeja a la ‘clean architecture’ que se divide en ‘backend’ y ‘frontend’, permitiendo ser modular y acoplar nuevas sistemas en la capa de presentación.
+  <ProjectInfoCard
+        title="Servicio o daemon (Worker Service)"
+        systemIconName="Server">
+    Es el núcleo de la aplicación y actúa de forma independiente, implementa un servidor que gestiona las peticiones y respuestas a través de una ‘named pipe’ de .NET, de tal forma que permite recibir comandos desde cualquier otro proceso.
+  </ProjectInfoCard>
+
+  <ProjectInfoCard
+        title="Interfaz de Línea de Comandos (Aplicación de Consola)"
+        systemIconName="CommandLine">
+    Funciona como sistema de entrada del usuario para emitir los diferentes comando que requiera, la CLI está soportada sobre la librería ‘System.CommandLine’.
+  </ProjectInfoCard>
+
+  <ProjectInfoCard
+        title="Librería IPC (Biblioteca)"
+        systemIconName="Book">
+    Provee las clases e interfaces necesarias para estandarizar la comunicación fácilmente entre la CLI y el servicio facilitando el envío de peticiones y respuestas estructurados de forma básica mejorando la conversión y seguridad de la misma aplicación.
+  </ProjectInfoCard>
+</ProjectSectionLayout>
+
+<ProjectSectionLayout title="Desafíos">
+  <ProjectChallengeDetail title="Notificaciones">
+  <p slot="situation">Las diferencias de gestión de las notificaciones en Linux y Windows representó mayormente la creación de un diseño que permitiese estructurar e inyectar las dependencias únicamente necesarias de acuerdo con el sistema operativo.</p>
+  <p slot="solution">A través de las directivas de preprocesador y clases utilitarias ofrecidas por .NET se inyectaron dinámicamente las interfaces y clases para Windows o Linux.</p>
+  </ProjectChallengeDetail>
+</ProjectSectionLayout>

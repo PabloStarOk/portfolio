@@ -3,7 +3,7 @@ import FavIcon from "@/icons/component-icons/FavIcon.astro";
 ---
 
 <footer class="footer">
-  <FavIcon style="fill: url(#brandGradient);" size="51" />
+  <FavIcon class="footer__icon" style="fill: url(#brandGradient);" size="51" />
   <p class="footer__text">©️ Pablo Rodriguez</p>
 </footer>
 
@@ -19,7 +19,7 @@ import FavIcon from "@/icons/component-icons/FavIcon.astro";
     width: 100%;
     padding: var(--space-800);
 
-    background-image: url("src/assets/FooterBackground.svg");
+    background-image: url("/src/assets/FooterBackground.svg");
     background-size: cover;
     background-repeat: no-repeat;
     background-clip: padding-box;
@@ -29,6 +29,13 @@ import FavIcon from "@/icons/component-icons/FavIcon.astro";
     border-style: solid none none none;
     border-width: 1px;
     border-image: var(--primary-color-1000) 1;
+  }
+  .footer__icon {
+    /* Layout */
+    min-width: var(--size-icon-large);
+    width: var(--size-icon-large);
+    max-width: var(--size-icon-large);
+    height: auto;
   }
 
   .footer__text {

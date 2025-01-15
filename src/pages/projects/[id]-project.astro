@@ -1,0 +1,200 @@
+---
+import ProjectFeatureCard from "@/components/projects/content/ProjectFeatureCard.astro";
+import ProjectHero, {
+  type ProjectButton,
+} from "@/components/projects/content/ProjectHero.astro";
+import ProjectStackCard from "@/components/projects/content/ProjectStackCard.astro";
+import ProjectSupportedOsCard from "@/components/projects/content/ProjectSupportedOsCard.astro";
+import ProjectTitle from "@/components/projects/content/ProjectTitle.astro";
+import {
+  projectsIconsDir,
+  projectsThumbnailsDir,
+  techStackIconsMap,
+} from "@/constants";
+import Layout from "@/layouts/Layout.astro";
+import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+// Project data
+const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/projects/thumbnails/*.webp",
+  { eager: true }
+);
+const { project } = Astro.props;
+const { name, assets, hero, techStack, features, supportedOs } = project.data;
+const { Content } = await render(project);
+
+// Hero buttons
+const buttonAriaLabels: ReadonlyMap<string, string> = new Map([
+  ["LiveDemo", "Demostración del proyecto."],
+  ["GitHub", "Repositorio de GitHub del proyecto."],
+]);
+const buttons: ProjectButton[] = [];
+hero.buttons.map((button) =>
+  buttons.push({
+    type: button.type,
+    href: button.url,
+    ariaLabel: buttonAriaLabels.get(button.type) as string,
+  })
+);
+
+// Validate tech stack icons.
+techStack.map((stack) => {
+  if (!techStackIconsMap.get(stack.name))
+    throw new Error("Tech stack doesn't exist at techStackIcons.json file.");
+});
+---
+
+<Layout
+  title=`Proyecto ${name} - Pedro Rodriguez`
+  mainClass="project-page"
+  displayNavLinks={false}
+  displayThemeToggle={false}
+  displayBackButton={true}
+>
+  <ProjectTitle
+    title={name}
+    iconSrc={projectsIconsDir + assets.icon.fileName}
+    iconAlt={assets.icon.alt}
+  />
+  <div class="project-page__content">
+    <ProjectHero
+      thumbnailSrc={thumbnailImports[
+        projectsThumbnailsDir + assets.thumbnail.fileName
+      ].default}
+      thumbnailAlt={assets.thumbnail.alt}
+      description={hero.description}
+      buttons={buttons}
+      projectName={name}
+    />
+
+    <ProjectSectionLayout title="Tecnologías Usadas">
+      <div class="project-page__card-grid">
+        {
+          techStack.map((stack) => {
+            return (
+              <ProjectStackCard
+                iconSrc={techStackIconsMap.get(stack.name)?.src as string}
+                iconAlt={techStackIconsMap.get(stack.name)?.alt as string}
+                name={stack.name + (stack.version ? " " + stack.version : "")}
+                purpose={stack.purpose}
+              />
+            );
+          })
+        }
+      </div>
+    </ProjectSectionLayout>
+
+    <ProjectSectionLayout title="Características">
+      <div class="project-page__card-grid">
+        {
+          features.map((feature) => {
+            return (
+              <ProjectFeatureCard
+                title={feature.title}
+                description={feature.description}
+              />
+            );
+          })
+        }
+      </div>
+    </ProjectSectionLayout>
+
+    <ProjectSectionLayout title="Plataformas Soportadas">
+      <div class="project-page__supported-os">
+        {
+          supportedOs.map((os) => {
+            return <ProjectSupportedOsCard osName={os} />;
+          })
+        }
+      </div>
+    </ProjectSectionLayout>
+
+    <Content />
+  </div>
+
+  <style>
+    .project-page {
+      /* Layout */
+      display: flex;
+      padding: var(--space-400) var(--space-0);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: var(--space-1200);
+      margin: var(--space-800) var(--space-0);
+
+      /* Style */
+      border-radius: var(--radius-100);
+      border: 1px solid var(--color-border-default-default);
+    }
+
+    .project-page__content {
+      /* Layout */
+      display: flex;
+      padding: var(--space-0) var(--space-300);
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-1200);
+      align-self: stretch;
+    }
+
+    .project-page__card-grid {
+      /* Layout */
+      display: grid;
+      align-self: stretch;
+      gap: var(--space-800);
+    }
+
+    .project-page__supported-os {
+      /* Layout */
+      display: flex;
+      align-self: stretch;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: var(--space-800);
+    }
+
+    @media screen and (min-width: 48em) {
+      .project-page {
+        /* Layout */
+        padding: var(--space-600) var(--space-0);
+        margin: var(--space-1200) var(--space-0);
+      }
+
+      .project-page__content {
+        /* Layout */
+        padding: var(--space-0) var(--space-800);
+        gap: var(--space-1600);
+      }
+    }
+
+    @media screen and (min-width: 64em) {
+      .project-page {
+        /* Layout */
+        padding: var(--space-800) var(--space-0);
+        margin: var(--space-1600) var(--space-0);
+      }
+
+      .project-page__content {
+        /* Layout */
+        padding: var(--space-0) var(--space-1200);
+        gap: var(--space-2400);
+      }
+
+      .project-page__card-grid {
+        /* Layout */
+        grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+      }
+    }
+  </style>
+</Layout>

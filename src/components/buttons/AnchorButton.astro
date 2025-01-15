@@ -2,18 +2,20 @@
 interface Props {
   href: string;
   ariaLabel: string;
+  id?: string;
   target?: string;
   rel?: string;
-  content?: string;
   type?: "primary" | "secondary" | "tertiary";
+  class?: string;
 }
 
 const {
-  href,
   ariaLabel,
+  id = "",
   target = "_blank",
   rel = "",
   type = "primary",
+  class: className,
 } = Astro.props;
 
 // Add "noopener" and "noreferrer" for links that open in a new tab, while avoiding duplicates
@@ -24,11 +26,12 @@ const relation =
 ---
 
 <a
-  class=`anchor-button anchor-button--${type}`
-  href={href}
+  id={id}
+  class=`anchor-button anchor-button--${type} ${className}`
   target={target}
   rel={relation}
   aria-label={ariaLabel}
+  {...Astro.props}
 >
   {(type === "primary" || type === "tertiary") && <slot />}
   {
@@ -87,7 +90,12 @@ const relation =
   }
 
   .anchor-button--tertiary {
+    /* Style */
     background: none;
+    background: var(--primary-color-1000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .anchor-button-wrapper {
