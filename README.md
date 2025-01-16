@@ -36,6 +36,8 @@ Not hosted yet.
 
 - The [theme toggle manager component](src/components/themes/ThemeManager.astro) was adapted from a **[post](https://astro-tips.dev/recipes/dark-mode/)** on the [Astro Tips](https://astro-tips.dev/) website. (Thanks a lot!, it looks very clean)
 
+- The accordion class in [project card component](src/components/projects/ProjectCard.astro) was adapted from another **[post](https://css-tricks.com/how-to-animate-the-details-element-using-waapi/)** on the [CSS-TRICKS](https://css-tricks.com/) website.
+
 ## License
 
 This project is open-source and available under the [MIT License](LICENSE.md).
