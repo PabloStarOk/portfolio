@@ -176,27 +176,27 @@ const { title } = Astro.props;
   }
 </style>
 
-<script>
+<script is:inline>
   class Accordion {
-    readonly details: HTMLDetailsElement;
-    readonly summary: HTMLElement;
-    readonly chevron: HTMLElement;
-    readonly content: HTMLElement;
+    details;
+    summary;
+    chevron;
+    content;
 
-    readonly speedMs: number;
-    readonly easing: string;
-    readonly closedHeight: number;
-    readonly remValue: number;
+    speedMs;
+    easing;
+    closedHeight;
+    remValue;
 
-    heightAnimation: Animation | null;
-    opacityAnimation: Animation | null;
-    chevronAnimation: Animation | null;
-    contentOpacity: number = 0;
+    heightAnimation;
+    opacityAnimation;
+    chevronAnimation;
+    contentOpacity = 0;
 
-    isClosing: boolean;
-    isExpanding: boolean;
+    isClosing;
+    isExpanding;
 
-    constructor(details: HTMLDetailsElement, easing: string, speedMs: number) {
+    constructor(details, easing, speedMs) {
       this.details = details;
       this.remValue = parseFloat(
         window.getComputedStyle(this.details).fontSize
@@ -209,13 +209,11 @@ const { title } = Astro.props;
       this.closedHeight = details.offsetHeight;
 
       // Get data
-      this.summary = details.querySelector("summary") as HTMLElement;
+      this.summary = details.querySelector("summary");
       this.chevron = this.summary.querySelector(
         ".project-challenge__summary__chevron"
-      ) as HTMLElement;
-      this.content = details.querySelector(
-        ".project-challenge__info"
-      ) as HTMLElement;
+      );
+      this.content = details.querySelector(".project-challenge__info");
 
       // Accordion data
       this.heightAnimation = null;
@@ -223,25 +221,23 @@ const { title } = Astro.props;
       this.chevronAnimation = null;
       this.isClosing = false;
       this.isExpanding = false;
-      this.summary.addEventListener("click", (event: Event) =>
-        this.onClick(event)
-      );
+      this.summary.addEventListener("click", (event) => this.onClick(event));
     }
 
-    private onClick(event: Event) {
+    onClick(event) {
       event?.preventDefault();
       this.details.style.overflow = "hidden";
       if (this.isClosing || !this.details.open) this.open();
       else if (this.isExpanding || this.details.open) this.shrink();
     }
 
-    private open() {
+    open() {
       this.details.style.height = `${this.details.offsetHeight / this.remValue}rem`;
       this.details.open = true;
       window.requestAnimationFrame(() => this.expand());
     }
 
-    private shrink() {
+    shrink() {
       this.isClosing = true;
 
       const startHeight = `${this.details.offsetHeight / this.remValue}rem`;
@@ -256,7 +252,7 @@ const { title } = Astro.props;
       this.heightAnimation.oncancel = () => (this.isClosing = false);
     }
 
-    private expand() {
+    expand() {
       this.isExpanding = true;
       const padding = parseInt(window.getComputedStyle(this.details).padding);
       const gap = parseInt(window.getComputedStyle(this.content).gap);
@@ -272,7 +268,7 @@ const { title } = Astro.props;
       this.heightAnimation.oncancel = () => (this.isExpanding = false);
     }
 
-    private onAnimationFinish(open: boolean) {
+    onAnimationFinish(open) {
       this.details.open = open;
       this.heightAnimation = null;
       this.opacityAnimation = null;
@@ -282,12 +278,7 @@ const { title } = Astro.props;
       this.details.style.height = this.details.style.overflow = "";
     }
 
-    private animate(
-      startHeight: string,
-      endHeight: string,
-      endOpacity: number,
-      endRotation: number
-    ): Animation {
+    animate(startHeight, endHeight, endOpacity, endRotation) {
       const options = {
         duration: this.speedMs,
         easing: this.easing,
@@ -303,11 +294,7 @@ const { title } = Astro.props;
       return heightAnimation;
     }
 
-    private animateHeight(
-      startHeight: string,
-      endHeight: string,
-      animationOptions: object
-    ): Animation {
+    animateHeight(startHeight, endHeight, animationOptions) {
       return this.details.animate(
         {
           height: [startHeight, endHeight],
@@ -316,7 +303,7 @@ const { title } = Astro.props;
       );
     }
 
-    private animateContent(endOpacity: number, animationOptions: object) {
+    animateContent(endOpacity, animationOptions) {
       this.opacityAnimation = this.content.animate(
         {
           opacity: [this.contentOpacity, endOpacity],
@@ -324,12 +311,10 @@ const { title } = Astro.props;
         animationOptions
       );
       this.opacityAnimation.onfinish = this.opacityAnimation.oncancel = () =>
-        (this.contentOpacity = parseFloat(
-          window.getComputedStyle(this.content).opacity
-        ));
+        (this.contentOpacity = endOpacity);
     }
 
-    private animateChevron(endRotation: number, animationOptions: object) {
+    animateChevron(endRotation, animationOptions) {
       this.chevronAnimation = this.chevron.animate(
         {
           transform: "rotate(180deg)",
