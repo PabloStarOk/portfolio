@@ -1,18 +1,33 @@
 ---
+import { projectIconsImports, projectsIconsDir } from "@/constants";
+import { Image } from "astro:assets";
+
 interface Props {
   title: string;
-  iconSrc: string;
+  iconName: string;
   iconAlt: string;
 }
 
-const { title, iconSrc, iconAlt } = Astro.props;
+const { title, iconName, iconAlt } = Astro.props;
+
+const iconPath = projectsIconsDir + iconName;
+
+if (!projectIconsImports[iconPath])
+  throw new Error(`Icon with path ${iconPath} wasn't found.`);
+
+const iconMetadata = projectIconsImports[iconPath].default;
 ---
 
 <div class="project__header">
   <h1 class="project__title" transition:name={`title-${title}-transition`}>
     {title}
   </h1>
-  <img class="project__icon" src={iconSrc} alt={iconAlt} />
+  <Image
+    class="project__icon"
+    src={iconMetadata}
+    alt={iconAlt}
+    loading="eager"
+  />
 </div>
 
 <style>
@@ -52,6 +67,8 @@ const { title, iconSrc, iconAlt } = Astro.props;
   .project__icon {
     /* Layout */
     display: none;
+    width: auto;
+    height: 3rem;
   }
 
   .project__header::after {
