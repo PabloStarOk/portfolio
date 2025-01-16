@@ -114,16 +114,18 @@ const {
 </style>
 
 <script>
-  const openMenuButton = document.getElementById(
-    "openMenuButton"
-  ) as HTMLButtonElement;
-  const navMenu = document.getElementById("navMenu") as HTMLElement;
+  document.addEventListener("astro:page-load", () => {
+    const openMenuButton = document.getElementById(
+      "openMenuButton"
+    ) as HTMLButtonElement;
+    const navMenu = document.getElementById("navMenu") as HTMLElement;
 
-  function openMenu() {
-    navMenu.dataset.visible = "true";
-    navMenu.style.visibility = "visible";
-    document.body.style.overflow = "hidden";
-  }
+    function openMenu() {
+      navMenu.dataset.visible = "true";
+      navMenu.style.visibility = "visible";
+      document.body.style.overflow = "hidden";
+    }
 
-  if (openMenuButton) openMenuButton.addEventListener("click", openMenu);
+    if (openMenuButton) openMenuButton.addEventListener("click", openMenu);
+  });
 </script>

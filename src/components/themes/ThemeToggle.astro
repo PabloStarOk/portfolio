@@ -243,122 +243,124 @@ const { targetDevice } = Astro.props;
 </script>
 
 <script>
-  // Types
-  type ToggleElements = {
-    container: HTMLDivElement;
-    icon: HTMLImageElement;
-    content: HTMLParagraphElement;
-  };
+  document.addEventListener("astro:page-load", () => {
+    // Types
+    type ToggleElements = {
+      container: HTMLDivElement;
+      icon: HTMLImageElement;
+      content: HTMLParagraphElement;
+    };
 
-  type ToggleState = {
-    content: string;
-    width: string;
-    alignment: string;
-    hasTimeout: boolean;
-    timeout?: number;
-  };
+    type ToggleState = {
+      content: string;
+      width: string;
+      alignment: string;
+      hasTimeout: boolean;
+      timeout?: number;
+    };
 
-  // Global constants
-  const toggles = document.querySelectorAll(
-    ".theme-toggle__button"
-  ) as NodeListOf<HTMLButtonElement>;
-  const containersMap = new WeakMap<HTMLButtonElement, ToggleElements>();
-  const timeoutPool: WeakMap<HTMLButtonElement, { timeout: NodeJS.Timeout }> =
-    new WeakMap();
+    // Global constants
+    const toggles = document.querySelectorAll(
+      ".theme-toggle__button"
+    ) as NodeListOf<HTMLButtonElement>;
+    const containersMap = new WeakMap<HTMLButtonElement, ToggleElements>();
+    const timeoutPool: WeakMap<HTMLButtonElement, { timeout: NodeJS.Timeout }> =
+      new WeakMap();
 
-  const defaultState: ToggleState = {
-    content: "Auto",
-    width: "100%",
-    alignment: "flex-start",
-    hasTimeout: false,
-    timeout: 0,
-  };
-  const toggleStates: Map<string, ToggleState> = new Map([
-    ["auto", defaultState],
-    [
-      "dark",
-      {
-        content: "",
-        width: "2rem",
-        alignment: "flex-start",
-        hasTimeout: true,
-        timeout: 150,
-      },
-    ],
-    [
-      "light",
-      {
-        content: "",
-        width: "2rem",
-        alignment: "flex-end",
-        hasTimeout: false,
-        timeout: 0,
-      },
-    ],
-  ]);
+    const defaultState: ToggleState = {
+      content: "Auto",
+      width: "100%",
+      alignment: "flex-start",
+      hasTimeout: false,
+      timeout: 0,
+    };
+    const toggleStates: Map<string, ToggleState> = new Map([
+      ["auto", defaultState],
+      [
+        "dark",
+        {
+          content: "",
+          width: "2rem",
+          alignment: "flex-start",
+          hasTimeout: true,
+          timeout: 150,
+        },
+      ],
+      [
+        "light",
+        {
+          content: "",
+          width: "2rem",
+          alignment: "flex-end",
+          hasTimeout: false,
+          timeout: 0,
+        },
+      ],
+    ]);
 
-  // Map related elements (container <div>, icon <svg> and content <p>) of each toggle.
-  for (const toggle of toggles) {
-    let icon: HTMLImageElement | any;
-    let content: HTMLParagraphElement | any;
+    // Map related elements (container <div>, icon <svg> and content <p>) of each toggle.
+    for (const toggle of toggles) {
+      let icon: HTMLImageElement | any;
+      let content: HTMLParagraphElement | any;
 
-    const container = toggle.closest(".theme-toggle") as HTMLDivElement;
+      const container = toggle.closest(".theme-toggle") as HTMLDivElement;
 
-    for (const child of toggle.children) {
-      switch (child.tagName) {
-        case "IMG":
-          icon = child as HTMLImageElement;
-        case "P":
-          content = child as HTMLParagraphElement;
+      for (const child of toggle.children) {
+        switch (child.tagName) {
+          case "IMG":
+            icon = child as HTMLImageElement;
+          case "P":
+            content = child as HTMLParagraphElement;
+        }
+      }
+
+      const elements: ToggleElements = {
+        container,
+        icon,
+        content,
+      };
+      containersMap.set(toggle, elements);
+    }
+
+    // Set the state of the toggle
+    function setToggleState(toggle: HTMLButtonElement, targetTheme: string) {
+      if (toggle.dataset.state === targetTheme) return;
+
+      clearTimeout(timeoutPool.get(toggle)?.timeout);
+
+      const state = toggleStates.get(targetTheme) || defaultState;
+      const elements = containersMap.get(toggle);
+
+      if (state && elements) {
+        elements.content.textContent = state.content;
+        // Fill the container to simulate an translation animation.
+        // (Specially used to move from light theme (right side) to dark theme (left side) mode)
+        if (state.hasTimeout) toggle.style.width = "100%";
+        let timeout = setTimeout(() => {
+          toggle.style.width = state.width;
+          elements.container.dataset.state = targetTheme;
+          toggle.dataset.state = targetTheme;
+        }, state.timeout);
+
+        timeoutPool.set(toggle, { timeout });
       }
     }
 
-    const elements: ToggleElements = {
-      container,
-      icon,
-      content,
-    };
-    containersMap.set(toggle, elements);
-  }
-
-  // Set the state of the toggle
-  function setToggleState(toggle: HTMLButtonElement, targetTheme: string) {
-    if (toggle.dataset.state === targetTheme) return;
-
-    clearTimeout(timeoutPool.get(toggle)?.timeout);
-
-    const state = toggleStates.get(targetTheme) || defaultState;
-    const elements = containersMap.get(toggle);
-
-    if (state && elements) {
-      elements.content.textContent = state.content;
-      // Fill the container to simulate an translation animation.
-      // (Specially used to move from light theme (right side) to dark theme (left side) mode)
-      if (state.hasTimeout) toggle.style.width = "100%";
-      let timeout = setTimeout(() => {
-        toggle.style.width = state.width;
-        elements.container.dataset.state = targetTheme;
-        toggle.dataset.state = targetTheme;
-      }, state.timeout);
-
-      timeoutPool.set(toggle, { timeout });
+    // Change the current theme of the portfolio
+    function changeTheme(toggle: HTMLButtonElement) {
+      const stateCycle = ["dark", "auto", "light"];
+      const currentState = toggle.dataset.state || "dark";
+      const nextTheme =
+        stateCycle[(stateCycle.indexOf(currentState) + 1) % stateCycle.length];
+      window.theme.setTheme(nextTheme as "auto" | "dark" | "light");
     }
-  }
 
-  // Change the current theme of the portfolio
-  function changeTheme(toggle: HTMLButtonElement) {
-    const stateCycle = ["dark", "auto", "light"];
-    const currentState = toggle.dataset.state || "dark";
-    const nextTheme =
-      stateCycle[(stateCycle.indexOf(currentState) + 1) % stateCycle.length];
-    window.theme.setTheme(nextTheme as "auto" | "dark" | "light");
-  }
-
-  toggles.forEach((s) => s.addEventListener("click", () => changeTheme(s)));
-  document.addEventListener("theme-changed", (event: Event) => {
-    const themeChangedEvent = event as CustomEvent<ThemeChangedDetail>;
-    for (const toggle of toggles) {
-      setToggleState(toggle, themeChangedEvent.detail.theme);
-    }
+    toggles.forEach((s) => s.addEventListener("click", () => changeTheme(s)));
+    document.addEventListener("theme-changed", (event: Event) => {
+      const themeChangedEvent = event as CustomEvent<ThemeChangedDetail>;
+      for (const toggle of toggles) {
+        setToggleState(toggle, themeChangedEvent.detail.theme);
+      }
+    });
   });
 </script>
