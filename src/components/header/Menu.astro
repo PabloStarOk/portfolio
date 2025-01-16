@@ -91,40 +91,42 @@ const { id } = Astro.props;
 </style>
 
 <script>
-  let menuHideTimeout: NodeJS.Timeout;
+  document.addEventListener("astro:page-load", () => {
+    let menuHideTimeout: NodeJS.Timeout;
 
-  function findMenuElement(event: Event): HTMLDivElement {
-    const targetElement = event.target as HTMLElement;
-    return targetElement.closest(".menu") as HTMLDivElement;
-  }
-
-  function hideMenu(menuElement: HTMLDivElement) {
-    if (menuHideTimeout) clearTimeout(menuHideTimeout);
-    menuHideTimeout = setTimeout(() => {
-      menuElement.style.visibility = "hidden";
-    }, 300);
-  }
-
-  function closeMenu(event: Event) {
-    const menuElement = findMenuElement(event);
-    if (menuElement) {
-      menuElement.dataset.visible = "false";
-      document.body.style.overflow = "visible";
-      hideMenu(menuElement);
+    function findMenuElement(event: Event): HTMLDivElement {
+      const targetElement = event.target as HTMLElement;
+      return targetElement.closest(".menu") as HTMLDivElement;
     }
-  }
 
-  const closeButton = document.getElementById(
-    "menuCloseButton"
-  ) as HTMLButtonElement;
-  const sectionLinksCollection = document.getElementsByClassName(
-    "menu-links__link"
-  ) as HTMLCollectionOf<HTMLAnchorElement>;
+    function hideMenu(menuElement: HTMLDivElement) {
+      if (menuHideTimeout) clearTimeout(menuHideTimeout);
+      menuHideTimeout = setTimeout(() => {
+        menuElement.style.visibility = "hidden";
+      }, 300);
+    }
 
-  closeButton.addEventListener("click", closeMenu);
-  const sectionLinks = [...sectionLinksCollection];
+    function closeMenu(event: Event) {
+      const menuElement = findMenuElement(event);
+      if (menuElement) {
+        menuElement.dataset.visible = "false";
+        document.body.style.overflow = "visible";
+        hideMenu(menuElement);
+      }
+    }
 
-  sectionLinks.forEach((link: HTMLAnchorElement) =>
-    link.addEventListener("click", closeMenu)
-  );
+    const closeButton = document.getElementById(
+      "menuCloseButton"
+    ) as HTMLButtonElement;
+    const sectionLinksCollection = document.getElementsByClassName(
+      "menu-links__link"
+    ) as HTMLCollectionOf<HTMLAnchorElement>;
+
+    closeButton.addEventListener("click", closeMenu);
+    const sectionLinks = [...sectionLinksCollection];
+
+    sectionLinks.forEach((link: HTMLAnchorElement) =>
+      link.addEventListener("click", closeMenu)
+    );
+  });
 </script>

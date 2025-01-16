@@ -82,18 +82,18 @@ const { id, className, buttonType, onclick, ariaLabel, targetDevice } =
   }
 
   .icon-button:hover,
-  ..icon-button:focus-visible {
+  .icon-button:focus-visible {
     transform: scale(1.1);
   }
 
-  ..icon-button:focus-visible {
+  .icon-button:focus-visible {
     outline: var(--space-100) solid var(--right-color-1000);
     outline-width: 0.188rem;
     outline-offset: var(--space-50);
     border-radius: var(--radius-50);
   }
 
-  ..icon-button:active {
+  .icon-button:active {
     filter: brightness(0.8);
     animation: bounce 0.2s ease-in-out;
   }
