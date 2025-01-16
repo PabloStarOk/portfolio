@@ -1,7 +1,19 @@
 {
-  "name": "celestial-comet",
+  "name": "pablostarok-portfolio",
+  "description": "Just my personal portfolio website, not a package.",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Pedro Pablo Rodriguez Carranza",
+    "email": "pedropablorodriguezcarranza@gmail.com",
+    "url": "https://pablostarok.vercel.app/"
+  },
+  "homepage": "https://pablostarok.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PabloStarOk/portfolio"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
