@@ -82,9 +82,8 @@ techStack.map((stack) => {
           techStack.map((stack) => {
             return (
               <ProjectStackCard
-                iconSrc={techStackIconsMap.get(stack.name)?.src as string}
-                iconAlt={techStackIconsMap.get(stack.name)?.alt as string}
-                name={stack.name + (stack.version ? " " + stack.version : "")}
+                stackName={stack.name}
+                version={stack.version}
                 purpose={stack.purpose}
               />
             );

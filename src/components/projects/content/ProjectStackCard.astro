@@ -1,18 +1,29 @@
 ---
+import { stackIconImports, techStackIconsMap } from "@/constants";
+import { Image } from "astro:assets";
+
 interface Props {
-  iconSrc: string;
-  iconAlt: string;
-  name: string;
+  stackName: string;
+  version?: string;
   purpose?: string;
 }
 
-const { iconSrc, iconAlt, name, purpose } = Astro.props;
+const { stackName, version, purpose } = Astro.props;
+
+const stackIcon = techStackIconsMap.get(stackName);
+if (!stackIcon)
+  throw new Error(
+    `Given stack name \"${stackName}\" name wasn't found in the techStackIcons.json file.`
+  );
+
+const formattedName = stackName + (version ? " " + version : "");
+const stackIconMetadata = stackIconImports[stackIcon.src].default;
 ---
 
 <article class="stack-card">
-  <img class="stack-card__icon" src={iconSrc} alt={iconAlt} />
+  <Image class="stack-card__icon" src={stackIconMetadata} alt={stackIcon.alt} />
   <div class="stack-card__info">
-    <h3 class="stack-card__name">{name}</h3>
+    <h3 class="stack-card__name">{formattedName}</h3>
     <p class="stack-card__purpose">{purpose}</p>
   </div>
 </article>

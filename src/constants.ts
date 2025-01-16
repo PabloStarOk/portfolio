@@ -14,3 +14,9 @@ stackIconsCollection.map(({ id, data: { src, alt } }) => {
     alt: alt
   });
 });
+
+// Tech stack icons imports
+export const stackIconImports = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/*/*.svg",
+  { eager: true }
+);
