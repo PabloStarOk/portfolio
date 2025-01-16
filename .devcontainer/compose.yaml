@@ -1,4 +1,4 @@
-version: '1.0'
+version: "1.0"
 
 name: ${COMPOSE_NAME}
 
@@ -17,11 +17,13 @@ services:
       NODE_ENV: ${NODE_ENV}
       CI: ${CI_ENV}
     volumes:
-     - type: ${WORKSPACE_MOUNT_TYPE}
-       source: ${WORKSPACE_SOURCE}
-       target: ${WORKSPACE_TARGET}
+      - type: ${WORKSPACE_MOUNT_TYPE}
+        source: ${WORKSPACE_SOURCE}
+        target: ${WORKSPACE_TARGET}
     networks:
       - AstroDevNetwork
+    port:
+      - 4321:4321
     # If needed, uncomment the following lines to set resource limits
     # deploy:
     #   resources:
