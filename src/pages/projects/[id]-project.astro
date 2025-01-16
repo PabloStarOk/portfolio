@@ -6,11 +6,7 @@ import ProjectHero, {
 import ProjectStackCard from "@/components/projects/content/ProjectStackCard.astro";
 import ProjectSupportedOsCard from "@/components/projects/content/ProjectSupportedOsCard.astro";
 import ProjectTitle from "@/components/projects/content/ProjectTitle.astro";
-import {
-  projectsIconsDir,
-  projectsThumbnailsDir,
-  techStackIconsMap,
-} from "@/constants";
+import { projectsThumbnailsDir, techStackIconsMap } from "@/constants";
 import Layout from "@/layouts/Layout.astro";
 import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro";
 import { getCollection, render } from "astro:content";
@@ -62,7 +58,7 @@ techStack.map((stack) => {
 >
   <ProjectTitle
     title={name}
-    iconSrc={projectsIconsDir + assets.icon.fileName}
+    iconName={assets.icon.fileName}
     iconAlt={assets.icon.alt}
   />
   <div class="project-page__content">
@@ -82,9 +78,8 @@ techStack.map((stack) => {
           techStack.map((stack) => {
             return (
               <ProjectStackCard
-                iconSrc={techStackIconsMap.get(stack.name)?.src as string}
-                iconAlt={techStackIconsMap.get(stack.name)?.alt as string}
-                name={stack.name + (stack.version ? " " + stack.version : "")}
+                stackName={stack.name}
+                version={stack.version}
                 purpose={stack.purpose}
               />
             );

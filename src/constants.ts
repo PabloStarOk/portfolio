@@ -14,3 +14,12 @@ stackIconsCollection.map(({ id, data: { src, alt } }) => {
     alt: alt
   });
 });
+
+// Tech stack icons imports
+export const stackIconImports = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/*/*.svg",
+  { eager: true }
+);
+
+// Project icons imports
+export const projectIconsImports = import.meta.glob<{default: ImageMetadata}>("/src/assets/projects/icons/*.svg", {eager: true});
