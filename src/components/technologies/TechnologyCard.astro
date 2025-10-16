@@ -19,7 +19,7 @@ let typeIcon: ImageMetadata;
 let typeAlt: string;
 let selfAssessedLevel: string;
 
-// Get skill type
+// Get technology type
 switch (stackType) {
   case "lang":
     typeIcon = LanguageIcon;
@@ -53,17 +53,17 @@ else if (level === 2) selfAssessedLevel = "Intermedio";
 else selfAssessedLevel = "Principiante";
 ---
 
-<article class="skill-card">
-  <Image class="skill-card__type" src={typeIcon} alt={typeAlt} loading="lazy" />
-  <Image class="skill-card__icon" src={iconSrc} alt={iconAlt} loading="lazy" />
-  <header class="skill-card__header">
-    <h3 class="skill-card__title">{title}</h3>
-    <small class="skill-card__level">Nivel {selfAssessedLevel}</small>
+<article class="technology-card">
+  <Image class="technology-card__type" src={typeIcon} alt={typeAlt} loading="lazy" />
+  <Image class="technology-card__icon" src={iconSrc} alt={iconAlt} loading="lazy" />
+  <header class="technology-card__header">
+    <h3 class="technology-card__title">{title}</h3>
+    <small class="technology-card__level">Nivel {selfAssessedLevel}</small>
   </header>
 </article>
 
 <style>
-  .skill-card {
+  .technology-card {
     /* Layout */
     position: relative;
     display: inline-flex;
@@ -87,7 +87,7 @@ else selfAssessedLevel = "Principiante";
     transition: border-color 0.3s ease-in-out;
   }
 
-  .skill-card__type {
+  .technology-card__type {
     /* Layout */
     position: absolute;
     width: auto;
@@ -98,14 +98,14 @@ else selfAssessedLevel = "Principiante";
     right: 5%;
   }
 
-  .skill-card__icon {
+  .technology-card__icon {
     /* Layout */
     max-height: 3.5rem;
     width: auto;
     object-fit: contain;
   }
 
-  .skill-card__header {
+  .technology-card__header {
     /* Layout */
     display: flex;
     padding: var(--space-0);
@@ -115,7 +115,7 @@ else selfAssessedLevel = "Principiante";
     gap: var(--space-50);
   }
 
-  .skill-card__title {
+  .technology-card__title {
     /* Layout */
     align-self: stretch;
 
@@ -128,7 +128,7 @@ else selfAssessedLevel = "Principiante";
     line-height: 120%;
   }
 
-  .skill-card__level {
+  .technology-card__level {
     /* Typography */
     color: var(--color-text-default-secondary);
     text-align: center;
@@ -138,12 +138,12 @@ else selfAssessedLevel = "Principiante";
     line-height: 120%;
   }
 
-  .skill-card:hover {
+  .technology-card:hover {
     /* Style */
     border-color: var(--right-color-1000);
   }
 
-  .skill-card:hover .skill-card__title {
+  .technology-card:hover .technology-card__title {
     /* Style */
     background: var(--primary-color-1000);
     background-clip: text;
@@ -151,7 +151,7 @@ else selfAssessedLevel = "Principiante";
     -webkit-text-fill-color: transparent;
   }
 
-  .skill-card::before {
+  .technology-card::before {
     /* Layout */
     position: absolute;
     content: "";
@@ -169,26 +169,26 @@ else selfAssessedLevel = "Principiante";
     transition: opacity 0.3s linear;
   }
 
-  .skill-card:hover::before {
+  .technology-card:hover::before {
     /* Style */
     opacity: 1;
   }
 
   @media (max-width: 22.313em) {
-    .skill-card {
+    .technology-card {
       /* Layout */
       min-width: 8.125rem;
       max-width: 8.125rem;
     }
 
-    .skill-card__icon {
+    .technology-card__icon {
       /* Layout */
       max-height: 2.25rem;
     }
   }
 
   @media (min-width: 48em) {
-    .skill-card {
+    .technology-card {
       /* Layout */
       min-width: 18.75rem;
       max-width: 18.75rem;
@@ -197,16 +197,16 @@ else selfAssessedLevel = "Principiante";
       padding: var(--space-400) var(--space-200);
     }
 
-    .skill-card__icon {
+    .technology-card__icon {
       /* Layout */
       max-height: 5.25rem;
     }
 
-    .skill-card__title {
+    .technology-card__title {
       font-size: var(--subheading-size-medium);
     }
 
-    .skill-card__level {
+    .technology-card__level {
       /* Typography */
       font-size: var(--body-size-base);
     }

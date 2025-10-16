@@ -1,22 +1,22 @@
 {
-    ".NET" : {
-        "src": "/src/assets/skills/DotnetIcon.svg",
-        "alt": "Logo característico de Dotnet."
-    },
-    "C#": {
-      "src": "/src/assets/skills/CsharpIcon.svg",
-      "alt": "Logo característico de Csharp."
-    },
-    "Linux": {
-      "src": "/src/assets/stack/LinuxIcon.svg",
-      "alt": "Mascota oficial del sistema operativo Linux llamada Tux."
-    },
-    "Windows 10": {
-      "src": "/src/assets/stack/WindowsIcon.svg",
-      "alt": "Logo característico del sistema operativo Windows."
-    },
-    "Windows 11": {
-      "src": "/src/assets/stack/WindowsIcon.svg",
-      "alt": "Logo característico del sistema operativo Windows"
-    }
+  ".NET": {
+    "src": "/src/assets/technologies/DotnetIcon.svg",
+    "alt": "Logo característico de Dotnet."
+  },
+  "C#": {
+    "src": "/src/assets/technologies/CsharpIcon.svg",
+    "alt": "Logo característico de Csharp."
+  },
+  "Linux": {
+    "src": "/src/assets/stack/LinuxIcon.svg",
+    "alt": "Mascota oficial del sistema operativo Linux llamada Tux."
+  },
+  "Windows 10": {
+    "src": "/src/assets/stack/WindowsIcon.svg",
+    "alt": "Logo característico del sistema operativo Windows."
+  },
+  "Windows 11": {
+    "src": "/src/assets/stack/WindowsIcon.svg",
+    "alt": "Logo característico del sistema operativo Windows"
+  }
 }
