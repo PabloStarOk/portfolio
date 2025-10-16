@@ -1,12 +1,12 @@
 ---
 import ProjectFeatureCard from "@/components/projects/content/ProjectFeatureCard.astro";
 import ProjectHero, {
-  type ProjectButton,
+type ProjectButton,
 } from "@/components/projects/content/ProjectHero.astro";
 import ProjectStackCard from "@/components/projects/content/ProjectStackCard.astro";
 import ProjectSupportedOsCard from "@/components/projects/content/ProjectSupportedOsCard.astro";
 import ProjectTitle from "@/components/projects/content/ProjectTitle.astro";
-import { projectsThumbnailsDir, techStackIconsMap } from "@/constants";
+import { projectsThumbnailsDir, techIconsMap } from "@/constants";
 import Layout from "@/layouts/Layout.astro";
 import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro";
 import { getCollection, render } from "astro:content";
@@ -44,7 +44,7 @@ hero.buttons.map((button) =>
 
 // Validate tech stack icons.
 techStack.map((stack) => {
-  if (!techStackIconsMap.get(stack.name))
+  if (!techIconsMap.get(stack.name))
     throw new Error("Tech stack doesn't exist at techStackIcons.json file.");
 });
 ---

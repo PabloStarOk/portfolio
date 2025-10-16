@@ -1,5 +1,5 @@
 ---
-import { stackIconImports, techStackIconsMap } from "@/constants";
+import { techIconImports, techIconsMap } from "@/constants";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -10,14 +10,14 @@ interface Props {
 
 const { stackName, version, purpose } = Astro.props;
 
-const stackIcon = techStackIconsMap.get(stackName);
+const stackIcon = techIconsMap.get(stackName);
 if (!stackIcon)
   throw new Error(
     `Given stack name \"${stackName}\" name wasn't found in the techStackIcons.json file.`
   );
 
 const formattedName = stackName + (version ? " " + version : "");
-const stackIconMetadata = stackIconImports[stackIcon.src].default;
+const stackIconMetadata = techIconImports[stackIcon.src].default;
 ---
 
 <article class="stack-card">

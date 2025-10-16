@@ -13,8 +13,8 @@ const ImageAsset = z.object({
 })
 
 // Collections
-const techStackIcons = defineCollection({
-    loader: file("src/content/techStackIcons.json"),
+const technologyIcons = defineCollection({
+    loader: file("src/content/technologyIcons.json"),
     schema: z.object({
         src: z.string().min(1),
         alt: z.string().min(1)
@@ -48,4 +48,4 @@ const projects = defineCollection({
     })
 })
 
-export const collections = { projects, techStackIcons }
+export const collections = { projects, technologyIcons }

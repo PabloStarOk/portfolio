@@ -8,15 +8,15 @@
     "alt": "Logo característico de Csharp."
   },
   "Linux": {
-    "src": "/src/assets/stack/LinuxIcon.svg",
+    "src": "/src/assets/technologies/LinuxIcon.svg",
     "alt": "Mascota oficial del sistema operativo Linux llamada Tux."
   },
   "Windows 10": {
-    "src": "/src/assets/stack/WindowsIcon.svg",
+    "src": "/src/assets/technologies/WindowsIcon.svg",
     "alt": "Logo característico del sistema operativo Windows."
   },
   "Windows 11": {
-    "src": "/src/assets/stack/WindowsIcon.svg",
+    "src": "/src/assets/technologies/WindowsIcon.svg",
     "alt": "Logo característico del sistema operativo Windows"
   }
 }
