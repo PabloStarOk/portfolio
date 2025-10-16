@@ -7,17 +7,15 @@ import { Image } from "astro:assets";
 
 interface Props {
   title: string;
-  level: 1 | 2 | 3;
-  iconSrc: ImageMetadata;
+    iconSrc: ImageMetadata;
   iconAlt: string;
   type: "lang" | "db" | "framework" | "tool";
 }
 
-const { title, level, iconSrc, iconAlt, type: stackType } = Astro.props;
+const { title, iconSrc, iconAlt, type: stackType } = Astro.props;
 
 let typeIcon: ImageMetadata;
 let typeAlt: string;
-let selfAssessedLevel: string;
 
 // Get technology type
 switch (stackType) {
@@ -46,19 +44,13 @@ switch (stackType) {
     typeAlt = "Language icon";
     break;
 }
-
-// Get level
-if (level === 3) selfAssessedLevel = "Avanzado";
-else if (level === 2) selfAssessedLevel = "Intermedio";
-else selfAssessedLevel = "Principiante";
 ---
 
 <article class="technology-card">
   <Image class="technology-card__type" src={typeIcon} alt={typeAlt} loading="lazy" />
   <Image class="technology-card__icon" src={iconSrc} alt={iconAlt} loading="lazy" />
   <header class="technology-card__header">
-    <h3 class="technology-card__title">{title}</h3>
-    <small class="technology-card__level">Nivel {selfAssessedLevel}</small>
+    <p class="technology-card__title">{title}</p>
   </header>
 </article>
 
@@ -67,14 +59,15 @@ else selfAssessedLevel = "Principiante";
     /* Layout */
     position: relative;
     display: inline-flex;
-    min-width: 9.25rem;
-    max-width: 9.25rem;
+    min-width: 8.125rem;
+    max-width: 8.125rem;
     aspect-ratio: 1/1;
     padding: var(--space-200);
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    gap: var(--space-200);
 
     /* Style */
     border-radius: var(--radius-100);
@@ -100,7 +93,8 @@ else selfAssessedLevel = "Principiante";
 
   .technology-card__icon {
     /* Layout */
-    max-height: 3.5rem;
+    height: 3.125rem;
+    max-height: 3.125rem;
     width: auto;
     object-fit: contain;
   }
@@ -122,19 +116,9 @@ else selfAssessedLevel = "Principiante";
     /* Typography */
     color: var(--color-text-default-default);
     text-align: center;
-    font-size: var(--subheading-size-base);
+    font-size: var(--body-size-medium);
     font-style: normal;
-    font-weight: var(--subheading-font-weight-strong);
-    line-height: 120%;
-  }
-
-  .technology-card__level {
-    /* Typography */
-    color: var(--color-text-default-secondary);
-    text-align: center;
-    font-size: var(--body-size-small);
-    font-style: normal;
-    font-weight: var(--body-font-weight-regular);
+    font-weight: var(--body-font-weight-strong);
     line-height: 120%;
   }
 
@@ -174,41 +158,20 @@ else selfAssessedLevel = "Principiante";
     opacity: 1;
   }
 
-  @media (max-width: 22.313em) {
-    .technology-card {
-      /* Layout */
-      min-width: 8.125rem;
-      max-width: 8.125rem;
-    }
-
-    .technology-card__icon {
-      /* Layout */
-      max-height: 2.25rem;
-    }
-  }
-
   @media (min-width: 48em) {
     .technology-card {
       /* Layout */
-      min-width: 18.75rem;
-      max-width: 18.75rem;
-      min-height: 12.5rem;
-      max-height: 12.5rem;
-      padding: var(--space-400) var(--space-200);
+      min-width: 12.1875rem;
+      max-width: 12.1875rem;
+      min-height: 10.25rem;
+      max-height: 10.25rem;
+      padding: var(--space-200);
     }
 
     .technology-card__icon {
       /* Layout */
-      max-height: 5.25rem;
-    }
-
-    .technology-card__title {
-      font-size: var(--subheading-size-medium);
-    }
-
-    .technology-card__level {
-      /* Typography */
-      font-size: var(--body-size-base);
+      height: 5rem;
+      max-height: 5rem;
     }
   }
 </style>
