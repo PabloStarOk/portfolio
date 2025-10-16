@@ -14,72 +14,148 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
 ---
 
 <SectionLayout id="technologies" title="Tecnologías">
-  <div class="technology-cards-container">
-    <TechnologyCard
-      title=".NET"
-      iconSrc={DotnetIcon}
-      iconAlt="Logo de .NET"
-      type="framework"
-    />
-    <TechnologyCard
-      title="Astro"
-      iconSrc={AstroIcon}
-      iconAlt="Logo de Astro framework"
-      type="framework"
-    />
-    <TechnologyCard
-      title="C#"
-      iconSrc={CsharpIcon}
-      iconAlt="Logo de CSharp"
-      type="lang"
-    />
-    <TechnologyCard
-      title="JavaScript"
-      iconSrc={JavascriptIcon}
-      iconAlt="Logo de JavaScript"
-      type="lang"
-    />
-    <TechnologyCard
-      title="TypeScript"
-      iconSrc={TypescriptIcon}
-      iconAlt="Logo de TypeScript"
-      type="lang"
-    />
-    <TechnologyCard
-      title="HTML"
-      iconSrc={HtmlIcon}
-      iconAlt="Logo de HTML"
-      type="lang"
-    />
-    <TechnologyCard
-      title="CSS"
-      iconSrc={CssIcon}
-      iconAlt="Logo de CSS"
-      type="lang"
-    />
-    <TechnologyCard
-      title="MySQL"
-      iconSrc={MysqlIcon}
-      iconAlt="Logo de MySQL"
-      type="db"
-    />
-    <TechnologyCard
-      title="Figma"
-      iconSrc={FigmaIcon}
-      iconAlt="Logo de Figma"
-      type="tool"
-    />
-    <TechnologyCard
-      title="Docker"
-      iconSrc={DockerIcon}
-      iconAlt="Logo de Docker"
-      type="tool"
-    />
-  </div>
+  <section class="tech-section">
+    <div class="tech-section__header">
+      <h3 class="tech-section__title">Principales</h3>
+      <p class="tech-section__description">Mi stack de desarrollo principal, centrado en la creación de aplicaciones backend.</p>
+    </div>
+    <ul class="tech-section__list">
+      <li>
+        <TechnologyCard
+          title=".NET"
+          iconSrc={DotnetIcon}
+          iconAlt="Logo de .NET"
+          type="framework"/>
+      </li>
+      <li>
+        <TechnologyCard
+          title="C#"
+          iconSrc={CsharpIcon}
+          iconAlt="Logo de CSharp"
+          type="lang"/>
+      </li>
+      <li>
+        <TechnologyCard
+          title="MySQL"
+          iconSrc={MysqlIcon}
+          iconAlt="Logo de MySQL"
+          type="db"/>
+      </li>
+      <li>
+        <TechnologyCard
+          title="Docker"
+          iconSrc={DockerIcon}
+          iconAlt="Logo de Docker"
+          type="tool"/>
+      </li>
+    </ul>
+  </section>
+
+  <section class="tech-section">
+    <div class="tech-section__header">
+      <h3 class="tech-section__title">Secundarias</h3>
+      <p class="tech-section__description">Experiencia práctica desarrollando proyectos full-stack y web para complementar mi enfoque backend.</p>
+    </div>
+    <ul class="tech-section__list">
+      <li>
+        <TechnologyCard
+          title="Astro"
+          iconSrc={AstroIcon}
+          iconAlt="Logo de Astro framework"
+          type="framework"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="JavaScript"
+          iconSrc={JavascriptIcon}
+          iconAlt="Logo de JavaScript"
+          type="lang"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="TypeScript"
+          iconSrc={TypescriptIcon}
+          iconAlt="Logo de TypeScript"
+          type="lang"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="HTML"
+          iconSrc={HtmlIcon}
+          iconAlt="Logo de HTML"
+          type="lang"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="CSS"
+          iconSrc={CssIcon}
+          iconAlt="Logo de CSS"
+          type="lang"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="Figma"
+          iconSrc={FigmaIcon}
+          iconAlt="Logo de Figma"
+          type="tool"
+        />
+      </li>
+    </ul>
+  </section>
 </SectionLayout>
 
 <style>
-  .technology-cards-container {
+  .tech-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-600)
+  }
+
+  .tech-section__header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-150);
+      align-self: stretch;
+  }
+
+  .tech-section__title {
+    /* Typography */
+    text-align: center;
+    font-size: var(--subheading-size-medium);
+    font-style: normal;
+    font-weight: var(--subheading-font-weight-strong, 600);
+    line-height: normal;
+
+    /* Style */
+    width: fit-content;
+    background: var(--primary-color-1000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .tech-section__description {
+    /* Typography */
+    text-align: center;
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+    line-height: 140%;
+
+    /* Style */
+    color: var(--color-text-default-secondary);
+    width: fit-content;
+  }
+
+  .tech-section__list {
+    padding: 0;
+    list-style: none;
     align-self: stretch;
     display: flex;
     flex-wrap: wrap;
@@ -89,8 +165,8 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
   }
 
   @media (min-width: 768px) {
-    .technology-cards-container {
-      gap: var(--space-1200);
+    .tech-section__list {
+      gap: var(--space-600);
     }
   }
 </style>
