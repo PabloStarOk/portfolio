@@ -1,61 +1,74 @@
 ---
 import Arrow from "@/icons/component-icons/Arrow.astro";
 import { Image } from "astro:assets";
+import ProjectTechBadge from "./ProjectTechBadge.astro";
 
 interface Props {
   name: string;
   description: string;
+  stackBadges: StackBadge[];
   href: string;
   thumbnailSrc: ImageMetadata;
   thumbnailAlt: string;
 }
 
-const { name, description, href, thumbnailSrc, thumbnailAlt } = Astro.props;
+type StackBadge = {
+  label: string;
+  iconSrc: ImageMetadata;
+}
+
+const { name, description, stackBadges, href, thumbnailSrc, thumbnailAlt } = Astro.props;
 ---
 
 <a
   class="project-card"
   href={href}
-  rel="same-origin noopener"
+  rel="noopener"
   aria-label=`${name} project`
 >
   <header class="project-card__header">
-    <div class="project-card__info">
+    <div class="project-card__text">
+      <Arrow style="fill: url(#brandGradient);" />
       <h3
-        class="project-card__title"
-        transition:name={`title-${name}-transition`}
-      >
-        {name}
+          class="project-card__title"
+          transition:name={`title-${name}-transition`}>
+          {name}
       </h3>
       <p class="project-card__description">{description}</p>
     </div>
-    <Arrow style="fill: url(#brandGradient);" />
+
+    <ul class="project-card__stack">
+      {stackBadges.map((badge) => (
+        <li>
+          <ProjectTechBadge iconSrc={badge.iconSrc} label={badge.label} />
+        </li>
+      ))}
+    </ul>
   </header>
-  <Image
-    src={thumbnailSrc}
-    alt={thumbnailAlt}
-    class="project-card__thumbnail"
-    loading="lazy"
-    transition:name={`img-${name}-transition`}
-  />
+
+  <div class="project-card__thumbnail-container">
+    <Image
+      src={thumbnailSrc}
+      alt={thumbnailAlt}
+      class="project-card__thumbnail"
+      loading="lazy"
+      transition:name={`img-${name}-transition`}
+    />
+  </div>
 </a>
 
 <style>
   .project-card {
     /* Layout */
     display: flex;
-    padding: var(--space-300) var(--space-0);
     flex-direction: column;
     align-items: center;
-    gap: var(--space-600);
     align-self: stretch;
     overflow: hidden;
-    position: relative;
 
     /* Style */
-    background: var(--color-background-default-secondary-500);
     border: 1px solid var(--color-border-default-default);
-    border-radius: var(--radius-100);
+    border-radius: var(--radius-200);
     box-shadow: var(--size-depth-0) var(--size-depth-400) var(--size-depth-400)
       var(--size-depth-negative-200) var(--color-black-200);
     text-decoration: none;
@@ -67,30 +80,36 @@ const { name, description, href, thumbnailSrc, thumbnailAlt } = Astro.props;
   .project-card__header {
     /* Layout */
     display: flex;
-    height: 6.5625rem;
-    min-height: 6.5625rem;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-200);
+    gap: var(--space-600);
     align-self: stretch;
-    padding: 0 var(--space-400);
-    position: relative;
+    padding: var(--space-600) var(--space-400);
 
     /* Style */
-    background: var(--primary-color-100);
-    box-shadow: var(--size-depth-0) var(--size-depth-400) var(--size-depth-400)
-      var(--size-depth-negative-200) var(--color-black-200);
+    background: var(--background-color);
+    border-bottom: 1px solid var(--color-border-default-default);
   }
 
-  .project-card__info {
+  .project-card__text {
     /* Layout */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-100);
-    flex: 1 0 0;
-    overflow: hidden;
-    overflow-wrap: break-word;
+    align-items: center;
+    gap: var(--space-200);
+  }
+
+  .project-card__stack {
+    /* Layout */
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: var(--space-300);
+    align-self: stretch;
+    flex-wrap: wrap;
   }
 
   .project-card__title {
@@ -117,23 +136,36 @@ const { name, description, href, thumbnailSrc, thumbnailAlt } = Astro.props;
     align-self: stretch;
 
     /* Style */
+    text-align: center;
     color: var(--color-text-default-default);
-    font-size: var(--body-size-small);
+    font-size: var(--body-size-medium);
     font-style: normal;
     font-weight: var(--body-font-weight-regular);
     line-height: 140%;
   }
 
+  .project-card__thumbnail-container {
+    /* Layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    align-self: stretch;
+    padding: var(--space-600);
+    position: relative;
+
+    /* Style */
+    background: var(--color-background-default-secondary);
+  }
+
   .project-card__thumbnail {
     /* Layout */
-    width: 80%;
+    width: 100%;
     height: auto;
     object-fit: contain;
-    position: relative;
     transform: scale(0.95);
 
     /* Style */
-    border-radius: var(--radius-100);
     box-shadow: var(--size-depth-0) var(--size-depth-400) var(--size-depth-400)
       var(--size-depth-negative-200) var(--color-black-200);
 
@@ -156,15 +188,16 @@ const { name, description, href, thumbnailSrc, thumbnailAlt } = Astro.props;
     outline: var(--space-100) solid var(--right-color-1000);
     outline-width: 0.188rem;
     outline-offset: var(--space-100);
-    border-radius: var(--radius-100);
+    border-radius: var(--radius-200);
   }
 
-  .project-card::after {
+  /* Overlay effect */
+  .project-card__thumbnail-container::after {
     /* Layout */
     content: "";
     position: absolute;
-    width: auto;
-    height: 30%;
+    width: 100%;
+    height: 50%;
     left: 0;
     right: 0;
     bottom: 0;
@@ -181,50 +214,54 @@ const { name, description, href, thumbnailSrc, thumbnailAlt } = Astro.props;
     transition: opacity 0.3s ease-in-out;
   }
 
-  /* Project Card Header Border */
-  .project-card__header::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    border-top: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    background: var(--primary-color-1000);
-    mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    -webkit-mask-composite: destination-out;
-
-    border-radius: inherit;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .project-card:hover::after,
-  .project-card:focus-visible::after {
+  .project-card:hover .project-card__thumbnail-container::after,
+  .project-card:focus-visible .project-card__thumbnail-container::after {
     /* Style */
     opacity: 1;
   }
 
-  @media screen and (min-width: 48em) {
+  @media screen and (min-width: 42.5em) {
     .project-card {
       /* Layout */
-      padding: var(--space-600) var(--space-0);
-      justify-content: space-between;
+      flex-direction: row;
     }
 
     .project-card__header {
       /* Layout */
-      padding: 0 var(--space-1200);
+      gap: var(--space-800);
+      padding: var(--space-600);
+      flex: 1 0 0;
+
+      /* Style */
+      border-right: 1px solid var(--color-border-default-default);
+      border-bottom: none;
     }
 
-    .project-card__description {
-      /* Style */
-      font-size: var(--body-size-medium);
+    .project-card__thumbnail-container {
+      width: 50%;
+    }
+  }
+
+  @media screen and (min-width: 64em) {
+    .project-card {
+      /* Layout */
+      height: 24.375rem;
+    }
+
+    .project-card__header {
+      /* Layout */
+      padding: var(--space-800);
+      flex: 1 0 0;
+      max-width: 23.75rem;
+    }
+
+    .project-card__thumbnail-container {
+      flex: 1 0 0;
+    }
+
+    .project-card__thumbnail {
+      /* Layout */
+      transform: scale(0.9);
     }
   }
 </style>
