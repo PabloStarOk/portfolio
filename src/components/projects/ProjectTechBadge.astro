@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+    iconSrc: ImageMetadata;
+    label: string;
+}
+
+const { iconSrc, label } = Astro.props;
+---
+
+<span class="project-tech-badge">
+    <Image class="project-tech-badge__icon" src={iconSrc} alt="" aria-hidden="true"/>
+    <span class="project-tech-badge__label">{label}</span>
+</span>
+
+<style>
+    .project-tech-badge {
+        /* Layout */
+        display: inline-flex;
+        padding: var(--space-150);
+        justify-content: center;
+        align-items: center;
+        gap: var(--space-150);
+
+        /* Style */
+        border-radius: var(--radius-100);
+        background: var(--color-background-default-secondary);
+    }
+
+    .project-tech-badge__icon {
+        width: auto;
+        height: auto;
+        max-width: 0.9375rem;
+        max-height: 0.9375rem;
+    }
+
+    .project-tech-badge__label {
+        /* Typography */
+        color: var(--color-text-default-default);
+        text-align: center;
+        font-size: var(--body-size-small);
+        font-style: normal;
+        font-weight: var(--body-font-weight-regular);
+        line-height: normal;
+    }
+</style>
