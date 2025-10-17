@@ -1,4 +1,6 @@
 ---
+import CsharpIcon from "@/assets/technologies/CsharpIcon.svg";
+import DotnetIcon from "@/assets/technologies/DotnetIcon.svg";
 import { projectsThumbnailsDir } from "@/constants";
 import SectionLayout from "@/layouts/SectionLayout.astro";
 import { getCollection } from "astro:content";
@@ -34,6 +36,16 @@ const featuredProjects = projectsCollection.filter(
         <ProjectCard
           name={data.name}
           description={data.shortDescription}
+          stackBadges={[
+            {
+              iconSrc: DotnetIcon,
+              label: ".NET"
+            },
+            {
+              iconSrc: CsharpIcon,
+              label: "C#"
+            }
+          ]}
           href={`/projects/${id}-project`}
           thumbnailSrc={thumbnailImports[path].default}
           thumbnailAlt={data.assets.thumbnail.alt}
