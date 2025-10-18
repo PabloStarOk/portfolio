@@ -15,34 +15,33 @@ interface Props {
 type StackBadge = {
   label: string;
   iconSrc: ImageMetadata;
-}
+};
 
-const { name, description, stackBadges, href, thumbnailSrc, thumbnailAlt } = Astro.props;
+const { name, description, stackBadges, href, thumbnailSrc, thumbnailAlt } =
+  Astro.props;
 ---
 
-<a
-  class="project-card"
-  href={href}
-  rel="noopener"
-  aria-label=`${name} project`
->
+<a class="project-card" href={href} rel="noopener" aria-label=`${name} project`>
   <header class="project-card__header">
     <div class="project-card__text">
       <Arrow style="fill: url(#brandGradient);" />
       <h3
-          class="project-card__title"
-          transition:name={`title-${name}-transition`}>
-          {name}
+        class="project-card__title"
+        transition:name={`title-${name}-transition`}
+      >
+        {name}
       </h3>
       <p class="project-card__description">{description}</p>
     </div>
 
     <ul class="project-card__stack">
-      {stackBadges.map((badge) => (
-        <li>
-          <ProjectTechBadge iconSrc={badge.iconSrc} label={badge.label} />
-        </li>
-      ))}
+      {
+        stackBadges.map((badge) => (
+          <li>
+            <ProjectTechBadge iconSrc={badge.iconSrc} label={badge.label} />
+          </li>
+        ))
+      }
     </ul>
   </header>
 
@@ -164,10 +163,6 @@ const { name, description, stackBadges, href, thumbnailSrc, thumbnailAlt } = Ast
     height: auto;
     object-fit: contain;
     transform: scale(0.95);
-
-    /* Style */
-    box-shadow: var(--size-depth-0) var(--size-depth-400) var(--size-depth-400)
-      var(--size-depth-negative-200) var(--color-black-200);
 
     /* Animations */
     transition: transform 0.3s ease-in-out;
