@@ -1,7 +1,7 @@
 ---
 import ProjectFeatureCard from "@/components/projects/content/ProjectFeatureCard.astro";
 import ProjectHero, {
-type ProjectButton,
+  type ProjectButton,
 } from "@/components/projects/content/ProjectHero.astro";
 import ProjectStackCard from "@/components/projects/content/ProjectStackCard.astro";
 import ProjectSupportedOsCard from "@/components/projects/content/ProjectSupportedOsCard.astro";
@@ -113,7 +113,9 @@ techStack.map((stack) => {
       </div>
     </ProjectSectionLayout>
 
-    <Content />
+    <div class="project-page__md-content">
+      <Content />
+    </div>
   </div>
 
   <style>
@@ -159,6 +161,51 @@ techStack.map((stack) => {
       gap: var(--space-800);
     }
 
+    .project-page__md-content {
+      /* Layout */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-1200);
+    }
+
+    .project-page__md-content :global(h3) {
+      /* Layout */
+      align-self: flex-start;
+
+      /* Typography */
+      font-size: var(--subheading-size-medium);
+      font-style: normal;
+      font-weight: var(--subheading-font-weight-strong);
+      line-height: normal;
+
+      /* Style */
+      background: var(--primary-color-1000);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .project-page__md-content :global(p) {
+      /* Layout */
+      word-break: keep-all;
+
+      /* Typography */
+      color: var(--color-text-default-default);
+      font-size: var(--body-size-medium);
+      font-style: normal;
+      font-weight: var(--body-font-weight-regular);
+      line-height: 140%;
+    }
+
+    .project-page__md-content :global(img) {
+      /* Layout */
+      align-self: center;
+      width: 100%;
+      height: auto;
+    }
+
     @media screen and (min-width: 48em) {
       .project-page {
         /* Layout */
@@ -169,6 +216,11 @@ techStack.map((stack) => {
       .project-page__content {
         /* Layout */
         padding: var(--space-0) var(--space-800);
+        gap: var(--space-1600);
+      }
+
+      .project-page__md-content {
+        /* Layout */
         gap: var(--space-1600);
       }
     }
@@ -189,6 +241,16 @@ techStack.map((stack) => {
       .project-page__card-grid {
         /* Layout */
         grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+      }
+
+      .project-page__md-content {
+        /* Layout */
+        gap: var(--space-2400);
+      }
+
+      .project-page__md-content :global(img) {
+        /* Layout */
+        width: 80%;
       }
     }
   </style>
