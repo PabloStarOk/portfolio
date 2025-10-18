@@ -7,6 +7,18 @@
     "src": "/src/assets/technologies/CsharpIcon.svg",
     "alt": "Logo característico de Csharp."
   },
+  "Jetpack Compose": {
+    "src": "/src/assets/technologies/JetpackComposeIcon.svg",
+    "alt": "Logo característico de Jetpack Compose."
+  },
+  "Kotlin": {
+    "src": "/src/assets/technologies/KotlinIcon.svg",
+    "alt": "Logo característico de Kotlin."
+  },
+  "PostgreSQL": {
+    "src": "/src/assets/technologies/PostgreSqlIcon.svg",
+    "alt": "Logo característico del sistema de base de datos PostgreSQL."
+  },
   "Linux": {
     "src": "/src/assets/technologies/LinuxIcon.svg",
     "alt": "Mascota oficial del sistema operativo Linux llamada Tux."
@@ -18,5 +30,9 @@
   "Windows 11": {
     "src": "/src/assets/technologies/WindowsIcon.svg",
     "alt": "Logo característico del sistema operativo Windows"
+  },
+  "Android": {
+    "src": "/src/assets/technologies/AndroidIcon.svg",
+    "alt": "Logo característico del sistema operativo Android."
   }
 }

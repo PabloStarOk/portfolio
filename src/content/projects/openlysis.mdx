@@ -1,0 +1,125 @@
+---
+name: Openlysis
+shortDescription: Sistema full-stack para la detección de phishing y malware en Android.
+featuredProject: true
+assets:
+  thumbnail:
+    fileName: Openlysis.webp
+    alt: Tres pantallas de una aplicación de Android mostrando las herramientas y resultados de análisis de Openlysis.
+  icon:
+    fileName: Openlysis.svg
+    alt: Icono de un escáner.
+hero:
+  description: Openlysis es un sistema integral diseñado para analizar archivos, URLs, mensajes SMS y correos electrónicos utilizando servicios externos como VirusTotal, HybridAnalysis, Filescan y Urlquery. Centrado en combatir el phishing y el smishing, democratiza el acceso a la seguridad digital mediante una app para Android (API 24, Android 7.0 Nougat).
+  buttons:
+    - { type: "GitHub", url: "https://github.com/PabloStarOk/openlysis-android" }
+techStack:
+  [
+    {
+      name: ".NET",
+      version: "8",
+      purpose: "Framework utilizado para construir el sistema back-end."
+    },
+    {
+      name: "C#",
+      purpose: "Lenguaje de desarrollo utilizado en el sistema back-end."
+    },
+    {
+      name: "PostgreSQL",
+      version: "17",
+      purpose: "Sistema de base de datos utilizado para el back end."
+    },
+    {
+      name: "Jetpack Compose",
+      purpose: "Framework utilizado para construir la aplicación de Android."
+    },
+    {
+      name: "Kotlin",
+      purpose: "Lenguaje de desarrollo utilizado en la aplicación de Android."
+    }
+  ]
+features:
+  [
+    {
+      title: "Análisis de Mensajes",
+      description: "Recibe SMS y correos, extrae las URLs y las analiza junto con los archivos adjuntos."
+    },
+    {
+      title: "Análisis de Archivos",
+      description: "Analiza archivos individuales en cualquier formato."
+    },
+    {
+      title: "Análisis de URLs",
+      description: "Analiza URLs, especialmente aquellas que redireccionan a sitios web."
+    },
+    {
+      title: "Detección de Mensajes SMS",
+      description: "Detecta SMS entrantes al dispositivo Android y notifica al usuario para analizarlos."
+    },
+    {
+      title: "Visualización de Resultados de Análisis",
+      description: "Representa de forma simple e intuitiva el veredicto y otros resultados del análisis."
+    },
+    {
+      title: "Actualizaciones en Tiempo Real",
+      description: "Comunica actualizaciones de los resultados de análisis en tiempo real utilizando SignalR."
+    },
+    {
+      title: "Autenticación con JWTs",
+      description: "Autenticación básica con JSON Web Tokens."
+    }
+  ]
+supportedOs: [Android]
+---
+
+import BackendArchitectureImg from "@/assets/projects/openlysis/backend-architecture.webp"
+import FrontendArchitectureImg from "@/assets/projects/openlysis/frontend-architecture.webp"
+import GlobalArchitectureImg from "@/assets/projects/openlysis/global-architecture.webp"
+import { Image } from "astro:assets"
+import OrchestratorArchitectureImg from "@/assets/projects/openlysis/orchestrator-architecture.webp"
+import ProjectChallengeDetail from "@/components/projects/content/ProjectChallengeDetail.astro"
+import ProjectInfoCard from "@/components/projects/content/ProjectInfoCard.astro"
+import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro"
+
+<ProjectSectionLayout title="Objetivo">
+  <ProjectInfoCard systemIconName="Target">
+    Proponer un sistema capaz de ofrecer indicadores claros de confiabilidad y amenaza sobre datos digitales, soportado en servicios de análisis externos y enfocado en los usuarios no técnicos con dispositivos móviles Android en la versión 7.0 o superiores.
+  </ProjectInfoCard>
+</ProjectSectionLayout>
+
+<ProjectSectionLayout title="Arquitectura">
+### Global
+
+Entendiendo las limitaciones de recursos que tienen los dispositivos móviles, en especial la batería, el sistema se divide en una parte back-end y otra front-end, orientadas a la extensibilidad y rendimiento.
+
+<Image class="project__img" src={GlobalArchitectureImg} alt="Arquitectura global mostrando un sistema back-end interactuando con servicios externos y un sistema front-end utilizado por un usuario." />
+
+### Sistema Back-end
+
+El sistema consiste de tres servicios internos: orquestador de análisis, API de análisis y la API de autenticación. Además, emplea otros tres servicios para la comunicación y almacenamiento robusto: RabbitMQ, Google Cloud Storage y PostgreSQL.
+
+<Image class="project__img" src={BackendArchitectureImg} alt="Arquitectura del sistema back-end mostrando una API de análisis, una API de autenticación, un orquestador de análisis, un intermediario de mensajería, una base de datos y un almacenamiento de archivos temporales." />
+
+El orquestador de análisis es modular, lo que le permite acoplar y desacoplar servicios de análisis externos fácilmente.
+
+<Image class="project__img" src={OrchestratorArchitectureImg} alt="Arquitectura del orquestador de análisis mostrando su modularidad y capacidad de integración con servicios externos." />
+
+### Sistema Front-end
+
+La aplicación de Android está basada en una arquitectura de capas, en las que se aplican patrones como el **flujo de datos unidireccional (Unidirectional Data Flow)** y la filosofía **Offline-First**.
+
+<Image class="project__img" src={FrontendArchitectureImg} alt="Arquitectura del sistema front-end mostrando una capa de presentación hecha con Jetpack Compose y una capa de datos con interacción al sistema back-end y al almacenamiento local del dispositivo Android." />
+
+</ProjectSectionLayout>
+
+<ProjectSectionLayout title="Desafíos">
+  <ProjectChallengeDetail title="Gestión de Archivos - Sistema Back-end">
+    <p slot="situation">Utilizar el mecanismo por defecto del sistema back-end, que alojaba los archivos en memoria de forma temporal, representaba un problema potencial, en especial con archivos de gran tamaño, ya que esto podría consumir toda la memoria del servidor o el espacio disponible del disco, particularmente si es un contenedor.</p>
+    <p slot="solution">El desarrollo de un mecanismo personalizado para retransmitir los archivos entrantes a un servicio especializado como Google Cloud Storage mitigó los riesgos de consumo de memoria y disco e incrementó la escalabilidad y flexibilidad del sistema back-end.</p>
+  </ProjectChallengeDetail>
+
+  <ProjectChallengeDetail title="Orquestación de Análisis - Sistema Back-end">
+    <p slot="situation">Coordinar los análisis utilizando servicios de análisis externos requirió un proceso robusto y resiliente, capaz de gestionar errores durante la inicialización de los análisis y la actualización de sus resultados.</p>
+    <p slot="solution">La librería MassTransit fue una gran herramienta para dar la resiliencia requerida. La implementación de consumidores de trabajos (JobConsumer) ayudó a mantener y guardar el proceso de orquestación ante errores y realizar reintentos. Además, facilitó la aplicación de un tiempo de espera para aquellos análisis con duraciones excesivamente largas.</p>
+  </ProjectChallengeDetail>
+</ProjectSectionLayout>

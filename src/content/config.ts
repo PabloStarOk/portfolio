@@ -5,8 +5,8 @@ const Button = z.object({
     type: z.enum(["LiveDemo", "GitHub"]),
     url: z.string().url()
 })
-const TechStackEnum = z.enum([".NET", "C#"])
-const SupportedOs = z.enum(["Linux", "Windows 10", "Windows 11"])
+const TechStackEnum = z.enum([".NET", "C#", "Jetpack Compose", "Kotlin", "PostgreSQL"])
+const SupportedOs = z.enum(["Linux", "Windows 10", "Windows 11", "Android"])
 const ImageAsset = z.object({
     fileName: z.string(),
     alt: z.string()
@@ -25,7 +25,7 @@ const projects = defineCollection({
     loader: glob({ pattern: "**/*.{mdx, md}", base: "src/content/projects" }),
     schema: z.object({
         name: z.string().max(30),
-        shortDescription: z.string().max(50),
+        shortDescription: z.string().max(90),
         featuredProject: z.boolean().default(false).optional(), // If true, will be displayed at index.
         assets: z.object({
             thumbnail: ImageAsset,
