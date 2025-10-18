@@ -6,18 +6,13 @@ import ProjectTechBadge from "./ProjectTechBadge.astro";
 interface Props {
   name: string;
   description: string;
-  stackBadges: StackBadge[];
+  techStack: string[];
   href: string;
   thumbnailSrc: ImageMetadata;
   thumbnailAlt: string;
 }
 
-type StackBadge = {
-  label: string;
-  iconSrc: ImageMetadata;
-};
-
-const { name, description, stackBadges, href, thumbnailSrc, thumbnailAlt } =
+const { name, description, techStack, href, thumbnailSrc, thumbnailAlt } =
   Astro.props;
 ---
 
@@ -36,9 +31,9 @@ const { name, description, stackBadges, href, thumbnailSrc, thumbnailAlt } =
 
     <ul class="project-card__stack">
       {
-        stackBadges.map((badge) => (
+        techStack.map((technology) => (
           <li>
-            <ProjectTechBadge iconSrc={badge.iconSrc} label={badge.label} />
+            <ProjectTechBadge technology={technology} />
           </li>
         ))
       }
