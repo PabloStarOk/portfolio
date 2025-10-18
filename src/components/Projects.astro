@@ -27,19 +27,51 @@ const featuredProjects = projectsCollection.filter(
 ---
 
 <SectionLayout id="projects" title="Proyectos">
+  <ul class="projects">
   {
     featuredProjects.map(({ id, data }) => {
       const path = projectsThumbnailsDir + data.assets.thumbnail.fileName;
       return (
-        <ProjectCard
-          name={data.name}
-          description={data.shortDescription}
-          techStack={data.techStack.map((technology) => technology.name)},
-          href={`/projects/${id}-project`}
-          thumbnailSrc={thumbnailImports[path].default}
-          thumbnailAlt={data.assets.thumbnail.alt}
-        />
+        <li>
+          <ProjectCard
+            name={data.name}
+            description={data.shortDescription}
+            techStack={data.techStack.map((technology) => technology.name)},
+            href={`/projects/${id}-project`}
+            thumbnailSrc={thumbnailImports[path].default}
+            thumbnailAlt={data.assets.thumbnail.alt}
+          />
+        </li>
       );
     })
   }
+  </ul>
 </SectionLayout>
+
+<style>
+  .projects {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+    gap: var(--space-1200);
+
+    /* Style */
+    list-style: none;
+  }
+
+  @media screen and (min-width: 48em) {
+    .projects {
+      /* Layout */
+      gap: var(--space-1600);
+    }
+  }
+
+  @media screen and (min-width: 64em) {
+    .projects {
+      /* Layout */
+      gap: var(--space-2400);
+    }
+  }
+</style>
