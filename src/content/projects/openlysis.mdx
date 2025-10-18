@@ -92,23 +92,23 @@ import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro"
 
 Entendiendo las limitaciones de recursos que tienen los dispositivos móviles, en especial la batería, el sistema se divide en una parte back-end y otra front-end, orientadas a la extensibilidad y rendimiento.
 
-<Image class="project__img" src={GlobalArchitectureImg} alt="Arquitectura global mostrando un sistema back-end interactuando con servicios externos y un sistema front-end utilizado por un usuario." />
+<Image src={GlobalArchitectureImg} alt="Arquitectura global mostrando un sistema back-end interactuando con servicios externos y un sistema front-end utilizado por un usuario." />
 
 ### Sistema Back-end
 
 El sistema consiste de tres servicios internos: orquestador de análisis, API de análisis y la API de autenticación. Además, emplea otros tres servicios para la comunicación y almacenamiento robusto: RabbitMQ, Google Cloud Storage y PostgreSQL.
 
-<Image class="project__img" src={BackendArchitectureImg} alt="Arquitectura del sistema back-end mostrando una API de análisis, una API de autenticación, un orquestador de análisis, un intermediario de mensajería, una base de datos y un almacenamiento de archivos temporales." />
+<Image src={BackendArchitectureImg} alt="Arquitectura del sistema back-end mostrando una API de análisis, una API de autenticación, un orquestador de análisis, un intermediario de mensajería, una base de datos y un almacenamiento de archivos temporales." />
 
 El orquestador de análisis es modular, lo que le permite acoplar y desacoplar servicios de análisis externos fácilmente.
 
-<Image class="project__img" src={OrchestratorArchitectureImg} alt="Arquitectura del orquestador de análisis mostrando su modularidad y capacidad de integración con servicios externos." />
+<Image src={OrchestratorArchitectureImg} alt="Arquitectura del orquestador de análisis mostrando su modularidad y capacidad de integración con servicios externos." />
 
 ### Sistema Front-end
 
 La aplicación de Android está basada en una arquitectura de capas, en las que se aplican patrones como el **flujo de datos unidireccional (Unidirectional Data Flow)** y la filosofía **Offline-First**.
 
-<Image class="project__img" src={FrontendArchitectureImg} alt="Arquitectura del sistema front-end mostrando una capa de presentación hecha con Jetpack Compose y una capa de datos con interacción al sistema back-end y al almacenamiento local del dispositivo Android." />
+<Image src={FrontendArchitectureImg} alt="Arquitectura del sistema front-end mostrando una capa de presentación hecha con Jetpack Compose y una capa de datos con interacción al sistema back-end y al almacenamiento local del dispositivo Android." />
 
 </ProjectSectionLayout>
 
