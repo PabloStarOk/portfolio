@@ -24,7 +24,9 @@ const { title } = Astro.props;
       >
         Situación
       </h4>
-      <slot class="project-challenge__description" name="situation" />
+      <div class="project-challenge__description">
+        <slot name="situation" />
+      </div>
     </div>
     <div class="project-challenge__card project-challenge__card--solution">
       <h4
@@ -32,7 +34,9 @@ const { title } = Astro.props;
       >
         Solución
       </h4>
-      <slot class="project-challenge__description" name="solution" />
+      <div class="project-challenge__description">
+        <slot name="solution" />
+      </div>
     </div>
   </div>
 </details>

@@ -1,8 +1,10 @@
 ---
+import ProjectChallengeDetail from "@/components/projects/content/ProjectChallengeDetail.astro";
 import ProjectFeatureCard from "@/components/projects/content/ProjectFeatureCard.astro";
 import ProjectHero, {
   type ProjectButton,
 } from "@/components/projects/content/ProjectHero.astro";
+import ProjectInfoCard from "@/components/projects/content/ProjectInfoCard.astro";
 import ProjectStackCard from "@/components/projects/content/ProjectStackCard.astro";
 import ProjectSupportedOsCard from "@/components/projects/content/ProjectSupportedOsCard.astro";
 import ProjectTitle from "@/components/projects/content/ProjectTitle.astro";
@@ -25,7 +27,16 @@ const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 const { project } = Astro.props;
-const { name, assets, hero, techStack, features, supportedOs } = project.data;
+const {
+  name,
+  assets,
+  hero,
+  techStack,
+  features,
+  supportedOs,
+  objective,
+  challenges,
+} = project.data;
 const { Content } = await render(project);
 
 // Hero buttons
@@ -113,9 +124,28 @@ techStack.map((stack) => {
       </div>
     </ProjectSectionLayout>
 
+    <ProjectSectionLayout title="Objetivo">
+      <ProjectInfoCard systemIconName="Target">{objective}</ProjectInfoCard>
+    </ProjectSectionLayout>
+
     <div class="project-page__md-content">
       <Content />
     </div>
+
+    {
+      challenges.length > 0 && (
+        <ProjectSectionLayout title="Desafíos">
+          {challenges.map((challenge) => {
+            return (
+              <ProjectChallengeDetail title={challenge.title}>
+                <p slot="situation">{challenge.situation}</p>
+                <p slot="solution">{challenge.solution}</p>
+              </ProjectChallengeDetail>
+            );
+          })}
+        </ProjectSectionLayout>
+      )
+    }
   </div>
 
   <style>

@@ -70,6 +70,20 @@ features:
     }
   ]
 supportedOs: [Android]
+objective: "Proponer un sistema capaz de ofrecer indicadores claros de confiabilidad y amenaza sobre datos digitales, soportado en servicios de análisis externos y enfocado en los usuarios no técnicos con dispositivos móviles Android en la versión 7.0 o superiores."
+challenges:
+  [
+    {
+      title: "Gestión de Archivos - Sistema Back-end",
+      situation: "Utilizar el mecanismo por defecto del sistema back-end, que alojaba los archivos en memoria de forma temporal, representaba un problema potencial, en especial con archivos de gran tamaño, ya que esto podría consumir toda la memoria del servidor o el espacio disponible del disco, particularmente si es un contenedor.",
+      solution: "El desarrollo de un mecanismo personalizado para retransmitir los archivos entrantes a un servicio especializado como Google Cloud Storage mitigó los riesgos de consumo de memoria y disco e incrementó la escalabilidad y flexibilidad del sistema back-end."
+    },
+    {
+      title: "Orquestación de Análisis - Sistema Back-end",
+      situation: "Coordinar los análisis utilizando servicios de análisis externos requirió un proceso robusto y resiliente, capaz de gestionar errores durante la inicialización de los análisis y la actualización de sus resultados.",
+      solution: "La librería MassTransit fue una gran herramienta para dar la resiliencia requerida. La implementación de consumidores de trabajos (JobConsumer) ayudó a mantener y guardar el proceso de orquestación ante errores y realizar reintentos. Además, facilitó la aplicación de un tiempo de espera para aquellos análisis con duraciones excesivamente largas."
+    }
+  ]
 ---
 
 import BackendArchitectureImg from "@/assets/projects/openlysis/backend-architecture.webp"
@@ -77,15 +91,7 @@ import FrontendArchitectureImg from "@/assets/projects/openlysis/frontend-archit
 import GlobalArchitectureImg from "@/assets/projects/openlysis/global-architecture.webp"
 import { Image } from "astro:assets"
 import OrchestratorArchitectureImg from "@/assets/projects/openlysis/orchestrator-architecture.webp"
-import ProjectChallengeDetail from "@/components/projects/content/ProjectChallengeDetail.astro"
-import ProjectInfoCard from "@/components/projects/content/ProjectInfoCard.astro"
 import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro"
-
-<ProjectSectionLayout title="Objetivo">
-  <ProjectInfoCard systemIconName="Target">
-    Proponer un sistema capaz de ofrecer indicadores claros de confiabilidad y amenaza sobre datos digitales, soportado en servicios de análisis externos y enfocado en los usuarios no técnicos con dispositivos móviles Android en la versión 7.0 o superiores.
-  </ProjectInfoCard>
-</ProjectSectionLayout>
 
 <ProjectSectionLayout title="Arquitectura">
 ### Global
@@ -110,16 +116,4 @@ La aplicación de Android está basada en una arquitectura de capas, en las que 
 
 <Image src={FrontendArchitectureImg} alt="Arquitectura del sistema front-end mostrando una capa de presentación hecha con Jetpack Compose y una capa de datos con interacción al sistema back-end y al almacenamiento local del dispositivo Android." />
 
-</ProjectSectionLayout>
-
-<ProjectSectionLayout title="Desafíos">
-  <ProjectChallengeDetail title="Gestión de Archivos - Sistema Back-end">
-    <p slot="situation">Utilizar el mecanismo por defecto del sistema back-end, que alojaba los archivos en memoria de forma temporal, representaba un problema potencial, en especial con archivos de gran tamaño, ya que esto podría consumir toda la memoria del servidor o el espacio disponible del disco, particularmente si es un contenedor.</p>
-    <p slot="solution">El desarrollo de un mecanismo personalizado para retransmitir los archivos entrantes a un servicio especializado como Google Cloud Storage mitigó los riesgos de consumo de memoria y disco e incrementó la escalabilidad y flexibilidad del sistema back-end.</p>
-  </ProjectChallengeDetail>
-
-  <ProjectChallengeDetail title="Orquestación de Análisis - Sistema Back-end">
-    <p slot="situation">Coordinar los análisis utilizando servicios de análisis externos requirió un proceso robusto y resiliente, capaz de gestionar errores durante la inicialización de los análisis y la actualización de sus resultados.</p>
-    <p slot="solution">La librería MassTransit fue una gran herramienta para dar la resiliencia requerida. La implementación de consumidores de trabajos (JobConsumer) ayudó a mantener y guardar el proceso de orquestación ante errores y realizar reintentos. Además, facilitó la aplicación de un tiempo de espera para aquellos análisis con duraciones excesivamente largas.</p>
-  </ProjectChallengeDetail>
 </ProjectSectionLayout>

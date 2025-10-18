@@ -45,6 +45,12 @@ const projects = defineCollection({
             description: z.string().max(100)
         })),
         supportedOs: z.array(SupportedOs),
+        objective: z.string(),
+        challenges: z.array(z.object({
+            title: z.string().max(70),
+            situation: z.string().max(350),
+            solution: z.string().max(350)
+        }))
     })
 })
 
