@@ -10,7 +10,7 @@ import JavascriptIcon from "@/assets/technologies/JavascriptIcon.svg";
 import JetpackComposeIcon from "@/assets/technologies/JetpackComposeIcon.svg";
 import KotlinIcon from "@/assets/technologies/KotlinIcon.svg";
 import PostgreSqlIcon from "@/assets/technologies/PostgreSqlIcon.svg";
-import TechnologyCard from "@/components/technologies/TechnologyCard.astro";
+import TechnologyCard from "@/components/index/technologies/TechnologyCard.astro";
 import SectionLayout from "@/layouts/SectionLayout.astro";
 ---
 
@@ -18,7 +18,10 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
   <section class="tech-section">
     <div class="tech-section__header">
       <h3 class="tech-section__title">Principales</h3>
-      <p class="tech-section__description">Mi stack de desarrollo principal, centrado en la creación de aplicaciones backend.</p>
+      <p class="tech-section__description">
+        Mi stack de desarrollo principal, centrado en la creación de
+        aplicaciones backend.
+      </p>
     </div>
     <ul class="tech-section__list">
       <li>
@@ -26,28 +29,32 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
           title=".NET"
           iconSrc={DotnetIcon}
           iconAlt="Logo de .NET"
-          type="framework"/>
+          type="framework"
+        />
       </li>
       <li>
         <TechnologyCard
           title="C#"
           iconSrc={CsharpIcon}
           iconAlt="Logo de CSharp"
-          type="lang"/>
+          type="lang"
+        />
       </li>
       <li>
         <TechnologyCard
           title="PostgreSQL"
           iconSrc={PostgreSqlIcon}
           iconAlt="Logo de PostgreSQL"
-          type="db"/>
+          type="db"
+        />
       </li>
       <li>
         <TechnologyCard
           title="Docker"
           iconSrc={DockerIcon}
           iconAlt="Logo de Docker"
-          type="tool"/>
+          type="tool"
+        />
       </li>
     </ul>
   </section>
@@ -55,7 +62,10 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
   <section class="tech-section">
     <div class="tech-section__header">
       <h3 class="tech-section__title">Secundarias</h3>
-      <p class="tech-section__description">Experiencia práctica desarrollando proyectos full-stack y web para complementar mi enfoque backend.</p>
+      <p class="tech-section__description">
+        Experiencia práctica desarrollando proyectos full-stack y web para
+        complementar mi enfoque backend.
+      </p>
     </div>
     <ul class="tech-section__list">
       <li>
@@ -122,15 +132,15 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
   .tech-section {
     display: flex;
     flex-direction: column;
-    gap: var(--space-600)
+    gap: var(--space-600);
   }
 
   .tech-section__header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-150);
-      align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-150);
+    align-self: stretch;
   }
 
   .tech-section__title {
