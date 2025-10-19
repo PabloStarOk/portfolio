@@ -3,8 +3,8 @@ import ChallengeDetail from "@/components/projects/ChallengeDetail.astro";
 import FeatureCard from "@/components/projects/FeatureCard.astro";
 import Hero, { type ProjectButton } from "@/components/projects/Hero.astro";
 import InfoCard from "@/components/projects/InfoCard.astro";
-import StackCard from "@/components/projects/StackCard.astro";
 import SupportedOsCard from "@/components/projects/SupportedOsCard.astro";
+import TechnologyCard from "@/components/projects/TechnologyCard.astro";
 import Title from "@/components/projects/Title.astro";
 import { projectsThumbnailsDir, techIconsMap } from "@/constants";
 import Layout from "@/layouts/Layout.astro";
@@ -52,9 +52,9 @@ hero.buttons.map((button) =>
 );
 
 // Validate tech stack icons.
-techStack.map((stack) => {
-  if (!techIconsMap.get(stack.name))
-    throw new Error("Tech stack doesn't exist at techStackIcons.json file.");
+techStack.map((technology) => {
+  if (!techIconsMap.get(technology.name))
+    throw new Error("Technology doesn't exist at techStackIcons.json file.");
 });
 ---
 
@@ -84,13 +84,13 @@ techStack.map((stack) => {
     <ProjectSectionLayout title="Tecnologías Usadas">
       <ul class="project-page__card-grid">
         {
-          techStack.map((stack) => {
+          techStack.map((technology) => {
             return (
               <li>
-                <StackCard
-                  stackName={stack.name}
-                  version={stack.version}
-                  purpose={stack.purpose}
+                <TechnologyCard
+                  technologyName={technology.name}
+                  version={technology.version}
+                  purpose={technology.purpose}
                 />
               </li>
             );

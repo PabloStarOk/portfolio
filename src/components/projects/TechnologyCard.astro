@@ -3,33 +3,37 @@ import { techIconImports, techIconsMap } from "@/constants";
 import { Image } from "astro:assets";
 
 interface Props {
-  stackName: string;
+  technologyName: string;
   version?: string;
   purpose?: string;
 }
 
-const { stackName, version, purpose } = Astro.props;
+const { technologyName, version, purpose } = Astro.props;
 
-const stackIcon = techIconsMap.get(stackName);
-if (!stackIcon)
+const techIcon = techIconsMap.get(technologyName);
+if (!techIcon)
   throw new Error(
-    `Given stack name \"${stackName}\" name wasn't found in the techStackIcons.json file.`
+    `Given technology name \"${technologyName}\" wasn't found in the techStackIcons.json file.`
   );
 
-const formattedName = stackName + (version ? " " + version : "");
-const stackIconMetadata = techIconImports[stackIcon.src].default;
+const formattedName = technologyName + (version ? " " + version : "");
+const techIconMetadata = techIconImports[techIcon.src].default;
 ---
 
-<article class="stack-card">
-  <Image class="stack-card__icon" src={stackIconMetadata} alt={stackIcon.alt} />
-  <div class="stack-card__info">
-    <h3 class="stack-card__name">{formattedName}</h3>
-    <p class="stack-card__purpose">{purpose}</p>
+<article class="technology-card">
+  <Image
+    class="technology-card__icon"
+    src={techIconMetadata}
+    alt={techIcon.alt}
+  />
+  <div class="technology-card__info">
+    <h3 class="technology-card__name">{formattedName}</h3>
+    <p class="technology-card__purpose">{purpose}</p>
   </div>
 </article>
 
 <style>
-  .stack-card {
+  .technology-card {
     /* Layout */
     display: flex;
     padding: var(--space-400);
@@ -47,7 +51,7 @@ const stackIconMetadata = techIconImports[stackIcon.src].default;
       var(--size-depth-negative-100) var(--color-black-200);
   }
 
-  .stack-card__icon {
+  .technology-card__icon {
     /* Layout */
     object-fit: contain;
     width: 5rem;
@@ -61,7 +65,7 @@ const stackIconMetadata = techIconImports[stackIcon.src].default;
     border-radius: 0.25rem;
   }
 
-  .stack-card__info {
+  .technology-card__info {
     /* Layout */
     display: flex;
     flex-direction: column;
@@ -72,8 +76,8 @@ const stackIconMetadata = techIconImports[stackIcon.src].default;
     flex: 1 0 0;
   }
 
-  .stack-card__name,
-  .stack-card__purpose {
+  .technology-card__name,
+  .technology-card__purpose {
     /* Layout */
     align-self: stretch;
 
@@ -87,14 +91,14 @@ const stackIconMetadata = techIconImports[stackIcon.src].default;
     line-height: 140%;
   }
 
-  .stack-card__purpose {
+  .technology-card__purpose {
     /* Typography */
     font-size: var(--body-size-small);
     font-weight: var(--body-font-weight-regular);
   }
 
   @media screen and (min-width: 48em) {
-    .stack-card {
+    .technology-card {
       flex-direction: row;
       height: 8.125rem;
       min-height: 8.125rem;
@@ -102,19 +106,19 @@ const stackIconMetadata = techIconImports[stackIcon.src].default;
       padding: var(--space-600);
     }
 
-    .stack-card__info {
+    .technology-card__info {
       /* Text Limit */
       overflow: hidden;
     }
 
-    .stack-card__name {
+    .technology-card__name {
       /* Text Limit */
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 1;
     }
 
-    .stack-card__purpose {
+    .technology-card__purpose {
       /* Text Limit */
       display: -webkit-box;
       -webkit-box-orient: vertical;
