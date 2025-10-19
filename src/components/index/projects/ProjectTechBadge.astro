@@ -1,5 +1,5 @@
 ---
-import { techIconImports, techIconsMap } from "@/constants";
+import { techIconsMap } from "@/constants";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -8,23 +8,17 @@ interface Props {
 
 const { technology } = Astro.props;
 
-// Get icon src and alt
 const icon = techIconsMap.get(technology);
-
-// Validate icon existence
 if (!icon)
   throw new Error(
     `Given technology name \"${technology}\" wasn't found in the techIconsMap.`
   );
-
-// Get icon metadata
-const iconMetadata = techIconImports[icon.src].default;
 ---
 
 <span class="project-tech-badge">
   <Image
     class="project-tech-badge__icon"
-    src={iconMetadata}
+    src={icon.metadata}
     alt=""
     aria-hidden="true"
   />

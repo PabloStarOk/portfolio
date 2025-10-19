@@ -1,5 +1,5 @@
 ---
-import { techIconImports, techIconsMap } from "@/constants";
+import { techIconsMap } from "@/constants";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -13,12 +13,10 @@ if (!osIcon)
   throw new Error(
     "Given supported operating system name wasn't found in the techStackIcons.json file."
   );
-
-const osIconMetadata = techIconImports[osIcon.src].default;
 ---
 
 <article class="project-os">
-  <Image class="project-os__icon" src={osIconMetadata} alt={osIcon.alt} />
+  <Image class="project-os__icon" src={osIcon.metadata} alt={osIcon.alt} />
   <p class="project-os__name">{osName}</p>
 </article>
 

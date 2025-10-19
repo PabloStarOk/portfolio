@@ -1,5 +1,5 @@
 ---
-import { techIconImports, techIconsMap } from "@/constants";
+import { techIconsMap } from "@/constants";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -10,22 +10,17 @@ interface Props {
 
 const { technologyName, version, purpose } = Astro.props;
 
-const techIcon = techIconsMap.get(technologyName);
-if (!techIcon)
+const icon = techIconsMap.get(technologyName);
+if (!icon)
   throw new Error(
     `Given technology name \"${technologyName}\" wasn't found in the techStackIcons.json file.`
   );
 
 const formattedName = technologyName + (version ? " " + version : "");
-const techIconMetadata = techIconImports[techIcon.src].default;
 ---
 
 <article class="technology-card">
-  <Image
-    class="technology-card__icon"
-    src={techIconMetadata}
-    alt={techIcon.alt}
-  />
+  <Image class="technology-card__icon" src={icon.metadata} alt={icon.alt} />
   <div class="technology-card__info">
     <h3 class="technology-card__name">{formattedName}</h3>
     <p class="technology-card__purpose">{purpose}</p>
