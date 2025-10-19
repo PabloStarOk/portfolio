@@ -1,7 +1,7 @@
 ---
 import ProjectCard from "@/components/index/projects/ProjectCard.astro";
 import { projectsThumbnailsDir } from "@/constants";
-import SectionLayout from "@/layouts/SectionLayout.astro";
+import SectionLayout from "@/layouts/index/SectionLayout.astro";
 import { getCollection } from "astro:content";
 
 const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
