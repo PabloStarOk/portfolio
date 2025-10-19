@@ -143,14 +143,18 @@ techStack.map((stack) => {
     {
       challenges.length > 0 && (
         <ProjectSectionLayout title="Desafíos">
-          {challenges.map((challenge) => {
-            return (
-              <ProjectChallengeDetail title={challenge.title}>
-                <p slot="situation">{challenge.situation}</p>
-                <p slot="solution">{challenge.solution}</p>
-              </ProjectChallengeDetail>
-            );
-          })}
+          <ul class="project-page__challenges">
+            {challenges.map((challenge) => {
+              return (
+                <li>
+                  <ProjectChallengeDetail title={challenge.title}>
+                    <p slot="situation">{challenge.situation}</p>
+                    <p slot="solution">{challenge.solution}</p>
+                  </ProjectChallengeDetail>
+                </li>
+              );
+            })}
+          </ul>
         </ProjectSectionLayout>
       )
     }
@@ -248,6 +252,18 @@ techStack.map((stack) => {
       align-self: center;
       width: 100%;
       height: auto;
+    }
+
+    .project-page__challenges {
+      /* Layout */
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+      gap: var(--space-600);
+
+      /* Style */
+      list-style: none;
     }
 
     @media screen and (min-width: 48em) {
