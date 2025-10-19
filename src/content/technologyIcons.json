@@ -1,38 +1,38 @@
 {
   ".NET": {
-    "src": "/src/assets/technologies/DotnetIcon.svg",
+    "src": "/src/assets/shared/technologies/DotnetIcon.svg",
     "alt": "Logo característico de Dotnet."
   },
   "C#": {
-    "src": "/src/assets/technologies/CsharpIcon.svg",
+    "src": "/src/assets/shared/technologies/CsharpIcon.svg",
     "alt": "Logo característico de Csharp."
   },
   "Jetpack Compose": {
-    "src": "/src/assets/technologies/JetpackComposeIcon.svg",
+    "src": "/src/assets/shared/technologies/JetpackComposeIcon.svg",
     "alt": "Logo característico de Jetpack Compose."
   },
   "Kotlin": {
-    "src": "/src/assets/technologies/KotlinIcon.svg",
+    "src": "/src/assets/shared/technologies/KotlinIcon.svg",
     "alt": "Logo característico de Kotlin."
   },
   "PostgreSQL": {
-    "src": "/src/assets/technologies/PostgreSqlIcon.svg",
+    "src": "/src/assets/shared/technologies/PostgreSqlIcon.svg",
     "alt": "Logo característico del sistema de base de datos PostgreSQL."
   },
   "Linux": {
-    "src": "/src/assets/technologies/LinuxIcon.svg",
+    "src": "/src/assets/shared/technologies/LinuxIcon.svg",
     "alt": "Mascota oficial del sistema operativo Linux llamada Tux."
   },
   "Windows 10": {
-    "src": "/src/assets/technologies/WindowsIcon.svg",
+    "src": "/src/assets/shared/technologies/WindowsIcon.svg",
     "alt": "Logo característico del sistema operativo Windows."
   },
   "Windows 11": {
-    "src": "/src/assets/technologies/WindowsIcon.svg",
+    "src": "/src/assets/shared/technologies/WindowsIcon.svg",
     "alt": "Logo característico del sistema operativo Windows"
   },
   "Android": {
-    "src": "/src/assets/technologies/AndroidIcon.svg",
+    "src": "/src/assets/shared/technologies/AndroidIcon.svg",
     "alt": "Logo característico del sistema operativo Android."
   }
 }

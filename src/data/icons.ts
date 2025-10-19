@@ -1,7 +1,7 @@
 import { getCollection } from "astro:content";
 
 const techIconImports = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/technologies/*.svg",
+  "/src/assets/shared/technologies/*.svg",
   { eager: true }
 );
 
