@@ -119,13 +119,17 @@ techStack.map((stack) => {
     </ProjectSectionLayout>
 
     <ProjectSectionLayout title="Plataformas Soportadas">
-      <div class="project-page__supported-os">
+      <ul class="project-page__supported-os">
         {
           supportedOs.map((os) => {
-            return <ProjectSupportedOsCard osName={os} />;
+            return (
+              <li>
+                <ProjectSupportedOsCard osName={os} />
+              </li>
+            );
           })
         }
-      </div>
+      </ul>
     </ProjectSectionLayout>
 
     <ProjectSectionLayout title="Objetivo">
@@ -196,6 +200,9 @@ techStack.map((stack) => {
       justify-content: center;
       flex-wrap: wrap;
       gap: var(--space-800);
+
+      /* Style */
+      list-style: none;
     }
 
     .project-page__md-content {
