@@ -84,19 +84,21 @@ techStack.map((stack) => {
     />
 
     <ProjectSectionLayout title="Tecnologías Usadas">
-      <div class="project-page__card-grid">
+      <ul class="project-page__card-grid">
         {
           techStack.map((stack) => {
             return (
-              <ProjectStackCard
-                stackName={stack.name}
-                version={stack.version}
-                purpose={stack.purpose}
-              />
+              <li>
+                <ProjectStackCard
+                  stackName={stack.name}
+                  version={stack.version}
+                  purpose={stack.purpose}
+                />
+              </li>
             );
           })
         }
-      </div>
+      </ul>
     </ProjectSectionLayout>
 
     <ProjectSectionLayout title="Características">
@@ -179,6 +181,9 @@ techStack.map((stack) => {
       display: grid;
       align-self: stretch;
       gap: var(--space-800);
+
+      /* Style */
+      list-style: none;
     }
 
     .project-page__supported-os {
