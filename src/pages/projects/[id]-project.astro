@@ -102,18 +102,20 @@ techStack.map((stack) => {
     </ProjectSectionLayout>
 
     <ProjectSectionLayout title="Características">
-      <div class="project-page__card-grid">
+      <ul class="project-page__card-grid">
         {
           features.map((feature) => {
             return (
-              <ProjectFeatureCard
-                title={feature.title}
-                description={feature.description}
-              />
+              <li>
+                <ProjectFeatureCard
+                  title={feature.title}
+                  description={feature.description}
+                />
+              </li>
             );
           })
         }
-      </div>
+      </ul>
     </ProjectSectionLayout>
 
     <ProjectSectionLayout title="Plataformas Soportadas">
