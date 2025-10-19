@@ -1,8 +1,8 @@
 ---
+import ProjectCard from "@/components/index/projects/ProjectCard.astro";
 import { projectsThumbnailsDir } from "@/constants";
 import SectionLayout from "@/layouts/SectionLayout.astro";
 import { getCollection } from "astro:content";
-import ProjectCard from "./projects/ProjectCard.astro";
 
 const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/projects/thumbnails/*.webp",
