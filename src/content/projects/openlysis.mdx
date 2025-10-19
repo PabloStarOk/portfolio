@@ -91,9 +91,9 @@ import FrontendArchitectureImg from "@/assets/projects/openlysis/frontend-archit
 import GlobalArchitectureImg from "@/assets/projects/openlysis/global-architecture.webp"
 import { Image } from "astro:assets"
 import OrchestratorArchitectureImg from "@/assets/projects/openlysis/orchestrator-architecture.webp"
-import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro"
+import SectionLayout from "@/layouts/projects/SectionLayout.astro"
 
-<ProjectSectionLayout title="Arquitectura">
+<SectionLayout title="Arquitectura">
 ### Global
 
 Entendiendo las limitaciones de recursos que tienen los dispositivos móviles, en especial la batería, el sistema se divide en una parte back-end y otra front-end, orientadas a la extensibilidad y rendimiento.
@@ -116,4 +116,4 @@ La aplicación de Android está basada en una arquitectura de capas, en las que 
 
 <Image src={FrontendArchitectureImg} alt="Arquitectura del sistema front-end mostrando una capa de presentación hecha con Jetpack Compose y una capa de datos con interacción al sistema back-end y al almacenamiento local del dispositivo Android." />
 
-</ProjectSectionLayout>
+</SectionLayout>
