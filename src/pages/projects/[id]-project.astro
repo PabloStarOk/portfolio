@@ -11,6 +11,7 @@ import { techIconsMap } from "@/data/icons";
 import { thumbnailImports } from "@/data/thumbnails";
 import Layout from "@/layouts/Layout.astro";
 import SectionLayout from "@/layouts/projects/SectionLayout.astro";
+import CrossHairIcon from "@lucide/astro/icons/crosshair";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -136,7 +137,7 @@ techStack.map((technology) => {
     </SectionLayout>
 
     <SectionLayout title="Objetivo">
-      <InfoCard systemIconName="Target">{objective}</InfoCard>
+      <InfoCard Icon={CrossHairIcon}>{objective}</InfoCard>
     </SectionLayout>
 
     <div class="project-page__md-content">
