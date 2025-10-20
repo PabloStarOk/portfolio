@@ -3,6 +3,7 @@ import "@/styles/global.css";
 
 interface Props {
   buttonType: "primary" | "secondary" | "tertiary";
+  size?: "default" | "small" | "x-small";
   id?: string;
   className?: string;
   onclick?: string;
@@ -10,13 +11,20 @@ interface Props {
   targetDevice?: "mobile" | "desktop";
 }
 
-const { id, className, buttonType, onclick, ariaLabel, targetDevice } =
-  Astro.props;
+const {
+  id,
+  className,
+  buttonType,
+  size = "default",
+  onclick,
+  ariaLabel,
+  targetDevice,
+} = Astro.props;
 ---
 
 <button
   id={id}
-  class=`icon-button icon-button--${buttonType} ${className}`
+  class=`icon-button icon-button--${buttonType} icon-button--${size} ${className}`
   onclick={onclick}
   aria-label={ariaLabel}
   data-target-device={targetDevice}
@@ -34,14 +42,9 @@ const { id, className, buttonType, onclick, ariaLabel, targetDevice } =
 <style>
   .icon-button {
     display: flex;
-    min-width: 3rem;
-    min-height: 3rem;
-    max-height: 3rem;
-    padding: var(--space-300);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-300);
     box-sizing: border-box;
 
     border: none;
@@ -56,6 +59,30 @@ const { id, className, buttonType, onclick, ariaLabel, targetDevice } =
       transform 0.2s ease-in-out,
       filter 0.2s ease-in-out,
       outline-offset 0.2s ease-in-out;
+  }
+
+  .icon-button--default {
+    min-width: 3rem;
+    min-height: 3rem;
+    max-height: 3rem;
+    gap: var(--space-300);
+    padding: var(--space-300);
+  }
+
+  .icon-button--small {
+    min-width: 2.1875rem;
+    min-height: 2.1875rem;
+    max-height: 2.1875rem;
+    gap: var(--space-200);
+    padding: var(--space-200);
+  }
+
+  .icon-button--x-small {
+    min-width: 1.875rem;
+    min-height: 1.875rem;
+    max-height: 1.875rem;
+    gap: var(--space-150);
+    padding: var(--space-150);
   }
 
   .icon-button--secondary {

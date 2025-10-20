@@ -6,6 +6,7 @@ interface Props {
   target?: string;
   rel?: string;
   type?: "primary" | "secondary" | "tertiary";
+  size?: "default" | "small" | "x-small";
   class?: string;
 }
 
@@ -15,6 +16,7 @@ const {
   target = "_blank",
   rel = "",
   type = "primary",
+  size = "default",
   class: className,
 } = Astro.props;
 
@@ -27,7 +29,7 @@ const relation =
 
 <a
   id={id}
-  class=`anchor-button anchor-button--${type} ${className}`
+  class=`anchor-button anchor-button--${type} anchor-button--${size} ${className}`
   target={target}
   rel={relation}
   aria-label={ariaLabel}
@@ -49,13 +51,8 @@ const relation =
   .anchor-button {
     /* Layout */
     display: flex;
-    min-width: 3rem;
-    min-height: 3rem;
-    max-height: 3rem;
-    padding: var(--space-300);
     align-items: center;
     justify-content: center;
-    gap: var(--space-300);
     box-sizing: border-box;
 
     /* Style */
@@ -77,6 +74,30 @@ const relation =
       transform 0.2s ease-in-out,
       filter 0.2s ease-in-out,
       outline-offset 0.2s ease-in-out;
+  }
+
+  .anchor-button--default {
+    min-width: 3rem;
+    min-height: 3rem;
+    max-height: 3rem;
+    gap: var(--space-300);
+    padding: var(--space-300);
+  }
+
+  .anchor-button--small {
+    min-width: 2.1875rem;
+    min-height: 2.1875rem;
+    max-height: 2.1875rem;
+    gap: var(--space-200);
+    padding: var(--space-200);
+  }
+
+  .anchor-button--x-small {
+    min-width: 1.875rem;
+    min-height: 1.875rem;
+    max-height: 1.875rem;
+    gap: var(--space-150);
+    padding: var(--space-150);
   }
 
   .anchor-button--primary {
