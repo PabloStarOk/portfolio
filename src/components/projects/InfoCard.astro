@@ -10,7 +10,7 @@ const { title, Icon } = Astro.props;
 ---
 
 <article class="project-info-card">
-  <Icon size={48} style="stroke: url(#brandGradient)" />
+  <Icon size={48} color="var(--color-icon-default-default)" />
   <div class="project-info-card__content">
     {title && <h3 class="project-info-card__title">{title}</h3>}
     <p class="project-info-card__description">
@@ -63,6 +63,12 @@ const { title, Icon } = Astro.props;
     font-style: normal;
     font-weight: var(--body-font-weight-strong);
     line-height: 140%;
+
+    /* Remove [id]-project.astro styles */
+    background: unset !important;
+    background-clip: unset !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
   }
 
   .project-info-card__description {
