@@ -1,5 +1,5 @@
 ---
-import SystemIcon from "@/icons/SystemIcon.astro";
+import ChevronDownIcon from "@lucide/astro/icons/chevron-down";
 
 interface Props {
   title: string;
@@ -11,10 +11,10 @@ const { title } = Astro.props;
 <details class="project-challenge">
   <summary class="project-challenge__summary">
     <h3 class="project-challenge__summary__title">{title}</h3>
-    <SystemIcon
+    <ChevronDownIcon
+      size={24}
+      color="var(--color-icon-default-default)"
       class="project-challenge__summary__chevron"
-      iconName="Chevron"
-      style={{ pathColor: "var(--color-icon-default-default)" }}
     />
   </summary>
   <div class="project-challenge__info">
@@ -80,12 +80,6 @@ const { title } = Astro.props;
     font-style: normal;
     font-weight: var(--subheading-font-weight-strong);
     line-height: normal;
-  }
-
-  .project-challenge__summary__chevron {
-    /* Layout */
-    width: 1.375rem;
-    max-width: 1.375rem;
   }
 
   .project-challenge__info {
