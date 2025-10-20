@@ -20,10 +20,14 @@ services:
       - type: bind
         source: ${WORKSPACE_SOURCE}
         target: ${WORKSPACE_TARGET}
+      - node_modules_volume:/home/node/app/node_modules
     networks:
       - AstroDevNetwork
     ports:
       - 4321:4321
+
+volumes:
+  node_modules_volume:
 
 networks:
   AstroDevNetwork:
