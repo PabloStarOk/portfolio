@@ -1,7 +1,6 @@
 ---
 import AnchorButton from "@/components/shared/buttons/AnchorButton.astro";
 import CopyIcon from "@lucide/astro/icons/copy";
-import Image from "astro/components/Image.astro";
 import IconButton from "@/components/shared/buttons/IconButton.astro";
 import SendIcon from "@lucide/astro/icons/send";
 import ExternalLinkIcon from "@lucide/astro/icons/external-link";
@@ -31,7 +30,7 @@ const {
 } = Astro.props;
 ---
 
-<article class="contact-card">
+<div class="contact-card">
   <div class="contact-card__wrapper">
     <header>
       <h3 class="contact-card__title">
@@ -39,19 +38,24 @@ const {
       </h3>
     </header>
     <div class="contact-card__content">
-      <Icon />
-      <p class="contact-card__info">{contactInfo}</p>
+      <Icon
+        size={24}
+        color="var(--color-icon-default-default)"
+        class="contact-card__icon"
+      />
+      <p class="contact-card__info"><span>{contactInfo}</span></p>
     </div>
   </div>
   <footer class="contact-card__buttons">
     {
       sendButtonData && sendButtonData.href && (
         <AnchorButton
-          type="secondary"
+          type="tertiary"
+          size="small"
           href={sendButtonData.href}
           ariaLabel={sendButtonData.ariaLabel}
         >
-          <SendIcon style="stroke: url(#brandGradient)" />
+          <SendIcon size={20} style="stroke: url(#brandGradient)" />
         </AnchorButton>
       )
     }
@@ -59,11 +63,12 @@ const {
     {
       redirectButtonData && redirectButtonData.href && (
         <AnchorButton
-          type="secondary"
+          type="tertiary"
+          size="small"
           href={redirectButtonData.href}
           ariaLabel={redirectButtonData.ariaLabel}
         >
-          <ExternalLinkIcon style="stroke: url(#brandGradient)" />
+          <ExternalLinkIcon size={20} style="stroke: url(#brandGradient)" />
         </AnchorButton>
       )
     }
@@ -71,25 +76,26 @@ const {
     {
       copyButtonData && (
         <IconButton
-          buttonType="secondary"
+          buttonType="tertiary"
+          size="small"
           className="contact-card__copy-button"
           ariaLabel={copyButtonData.ariaLabel ?? ""}
         >
-          <CopyIcon style="stroke: url(#brandGradient)" />
+          <CopyIcon size={20} style="stroke: url(#brandGradient)" />
         </IconButton>
       )
     }
   </footer>
-</article>
+</div>
 
 <style>
   .contact-card {
     /* Layout */
     display: flex;
-    height: 8.125rem;
-    min-height: 8.125rem;
-    max-height: 8.125rem;
-    padding: var(--space-300) var(--space-400);
+    height: 6.875rem;
+    min-height: 6.875rem;
+    max-height: 6.875rem;
+    padding: var(--space-300) var(--space-300) var(--space-300) var(--space-600);
     align-items: center;
     gap: var(--space-300);
     box-sizing: border-box;
@@ -111,7 +117,7 @@ const {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: var(--space-200);
+    gap: var(--space-100);
     align-self: stretch;
     flex-grow: 1;
     overflow: hidden;
@@ -122,13 +128,10 @@ const {
     /* Typography */
     font-size: var(--body-size-small);
     font-style: normal;
-    font-weight: var(--body-font-weight-strong);
+    font-weight: var(--body-font-weight-regular);
 
     /* Style */
-    background: var(--primary-color-1000);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--color-text-default-secondary);
   }
 
   .contact-card__content {
@@ -142,40 +145,49 @@ const {
 
   .contact-card__info {
     /* Layout */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
 
     /* Typography */
     overflow: hidden;
     color: var(--color-text-default-default);
-    text-overflow: ellipsis;
     font-size: var(--body-size-medium);
     font-style: normal;
     font-weight: var(--body-font-weight-regular);
+  }
+
+  .contact-card__icon {
+    flex-shrink: 0;
+  }
+
+  .contact-card__info > span {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .contact-card__buttons {
     /* Layout */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: var(--space-200);
+    gap: var(--space-300);
     align-self: stretch;
   }
 
   @media (min-width: 48em) {
     .contact-card {
       min-width: 18.75rem;
-      padding: var(--space-300) var(--space-600);
     }
   }
 
   @media (min-width: 64em) {
     .contact-card {
       min-width: 25rem;
-      padding: var(--space-300) var(--space-600);
     }
   }
 </style>
