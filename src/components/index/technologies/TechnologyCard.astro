@@ -1,54 +1,53 @@
 ---
-import DatabaseIcon from "@/icons/static-icons/DbIcon.svg";
-import FrameworkIcon from "@/icons/static-icons/FrameworkIcon.svg";
-import LanguageIcon from "@/icons/static-icons/LanguageIcon.svg";
-import ToolIcon from "@/icons/static-icons/ToolIcon.svg";
+import type { AstroComponent } from "@lucide/astro";
+import CodeIcon from "@lucide/astro/icons/code";
+import DatabaseIcon from "@lucide/astro/icons/database";
+import LibraryIcon from "@lucide/astro/icons/library-big";
+import WrenchIcon from "@lucide/astro/icons/wrench";
 import { Image } from "astro:assets";
 
 interface Props {
   title: string;
-    iconSrc: ImageMetadata;
+  iconSrc: ImageMetadata;
   iconAlt: string;
   type: "lang" | "db" | "framework" | "tool";
 }
 
 const { title, iconSrc, iconAlt, type: stackType } = Astro.props;
 
-let typeIcon: ImageMetadata;
-let typeAlt: string;
-
 // Get technology type
+let TechTypeIcon: AstroComponent = DatabaseIcon;
 switch (stackType) {
   case "lang":
-    typeIcon = LanguageIcon;
-    typeAlt = "Database icon";
+    TechTypeIcon = CodeIcon;
     break;
 
   case "db":
-    typeIcon = DatabaseIcon;
-    typeAlt = "Database icon";
+    TechTypeIcon = DatabaseIcon;
     break;
 
   case "framework":
-    typeIcon = FrameworkIcon;
-    typeAlt = "Framework icon";
+    TechTypeIcon = LibraryIcon;
     break;
 
   case "tool":
-    typeIcon = ToolIcon;
-    typeAlt = "Tool icon";
+    TechTypeIcon = WrenchIcon;
     break;
 
   default:
-    typeIcon = LanguageIcon;
-    typeAlt = "Language icon";
+    TechTypeIcon = CodeIcon;
     break;
 }
 ---
 
 <article class="technology-card">
-  <Image class="technology-card__type" src={typeIcon} alt={typeAlt} loading="lazy" />
-  <Image class="technology-card__icon" src={iconSrc} alt={iconAlt} loading="lazy" />
+  <TechTypeIcon class="technology-card__type" />
+  <Image
+    class="technology-card__icon"
+    src={iconSrc}
+    alt={iconAlt}
+    loading="lazy"
+  />
   <header class="technology-card__header">
     <p class="technology-card__title">{title}</p>
   </header>

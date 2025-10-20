@@ -1,10 +1,10 @@
 ---
 import CloudOverlay from "@/assets/index/CloudOverlay.svg";
 import AnchorButton from "@/components/shared/buttons/AnchorButton.astro";
-import GitHubIcon from "@/icons/component-icons/GitHub.astro";
-import LinkedinIcon from "@/icons/component-icons/Linkedin.astro";
-import OpenInNewIcon from "@/icons/component-icons/OpenInNew.astro";
 import SectionLayout from "@/layouts/index/SectionLayout.astro";
+import ExternalLinkIcon from "@lucide/astro/icons/external-link";
+import GitHubIcon from "@lucide/astro/icons/github";
+import LinkedInIcon from "@lucide/astro/icons/linkedin";
 import { Image } from "astro:assets";
 import ProfilePhoto from "public/Profile.webp";
 ---
@@ -41,7 +41,10 @@ import ProfilePhoto from "public/Profile.webp";
         href="https://drive.google.com/file/d/1eR9MDd-jEbYz9ZxDpTeiNDbBj2kslZS_/view?usp=sharing"
         ariaLabel="Hoja de vida en una nueva página"
       >
-        <OpenInNewIcon style="stroke: var(--color-icon-neutral-onneutral);" />
+        <ExternalLinkIcon
+          size={24}
+          color="var(--color-icon-neutral-onneutral)"
+        />
         Ver CV
       </AnchorButton>
 
@@ -50,7 +53,7 @@ import ProfilePhoto from "public/Profile.webp";
         ariaLabel="Perfil de GitHub en una nueva página"
         type="secondary"
       >
-        <GitHubIcon style="fill: url(#brandGradient)" />
+        <GitHubIcon size={24} style="stroke: url(#brandGradient)" />
       </AnchorButton>
 
       <AnchorButton
@@ -58,7 +61,11 @@ import ProfilePhoto from "public/Profile.webp";
         ariaLabel="Perfil de LinkedIn en una nueva página"
         type="secondary"
       >
-        <LinkedinIcon style="fill: url(#brandGradient)" />
+        <LinkedInIcon
+          size={24}
+          style="stroke: url(#brandGradient)"
+          stroke-width={1.5}
+        />
       </AnchorButton>
     </footer>
   </div>

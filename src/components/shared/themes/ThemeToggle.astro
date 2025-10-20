@@ -1,4 +1,8 @@
 ---
+import SunIcon from "@lucide/astro/icons/sun";
+import MoonIcon from "@lucide/astro/icons/moon";
+import SunMoonIcon from "@lucide/astro/icons/sun-moon";
+
 interface Props {
   /*
    * Determines if the theme toggle is visible on mobile and tablet devices.
@@ -23,55 +27,26 @@ const { targetDevice } = Astro.props;
     aria-label="Toggle Theme"
   >
     <div class="theme-toggle__icons">
-      <svg
-        role="img"
-        aria-hidden="true"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+      <SunMoonIcon
+        size={20}
+        color="var(--color-icon-neutral-onneutral)"
         class="theme-toggle__icon"
         data-icon="auto"
-      >
-        <path
-          d="M12.166 4.163a8.125 8.125 0 1 1 0 16.25V4.163Zm0-1.875a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"
-          fill="var(--color-icon-neutral-onneutral)"></path>
-      </svg>
-      <svg
-        role="img"
-        aria-hidden="true"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+      />
+
+      <MoonIcon
+        size={20}
+        color="var(--color-icon-neutral-onneutral)"
         class="theme-toggle__icon"
         data-icon="dark"
-      >
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M9.373 4.45c.22.182.317.48.248.763a7.192 7.192 0 0 0-.205 1.708c0 3.828 2.992 6.931 6.682 6.931 1.091 0 2.12-.27 3.028-.75.25-.133.552-.101.771.08.22.183.317.481.248.763-.891 3.645-4.074 6.343-7.865 6.343-4.481 0-8.113-3.768-8.113-8.416 0-3.276 1.804-6.113 4.435-7.503.25-.133.552-.1.771.081Z"
-          fill="var(--color-icon-neutral-onneutral)"></path>
-      </svg>
-      <svg
-        role="img"
-        aria-hidden="true"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+      />
+
+      <SunIcon
+        size={20}
+        color="var(--color-icon-neutral-onneutral)"
         class="theme-toggle__icon"
         data-icon="light"
-      >
-        <path
-          d="M12.166.288c.51 0 .924.413.924.923v2.77a.923.923 0 0 1-1.847 0V1.21c0-.51.414-.923.923-.923ZM6.628 12.288a5.538 5.538 0 1 1 11.077 0 5.538 5.538 0 0 1-11.077 0ZM20.652 5.108a.923.923 0 0 0-1.306-1.305L17.388 5.76a.923.923 0 1 0 1.306 1.305l1.958-1.958ZM24.166 12.288c0 .51-.413.923-.923.923h-2.769a.923.923 0 0 1 0-1.846h2.77c.51 0 .922.413.922.923ZM19.346 20.773a.923.923 0 1 0 1.306-1.305l-1.958-1.959a.923.923 0 0 0-1.306 1.306l1.958 1.958ZM12.166 19.672c.51 0 .924.414.924.924v2.769a.923.923 0 0 1-1.847 0v-2.77c0-.51.414-.922.923-.922ZM6.945 18.815a.923.923 0 1 0-1.305-1.306L3.68 19.468a.923.923 0 1 0 1.306 1.305l1.958-1.958ZM4.782 12.288c0 .51-.413.923-.923.923h-2.77a.923.923 0 0 1 0-1.846h2.77c.51 0 .923.413.923.923ZM5.64 7.066a.923.923 0 1 0 1.305-1.305L4.987 3.803A.923.923 0 0 0 3.68 5.108L5.64 7.066Z"
-          fill="var(--color-icon-neutral-onneutral)"
-        >
-        </path>
-      </svg>
+      />
     </div>
     <p class="theme-toggle__content">Auto</p>
   </button>

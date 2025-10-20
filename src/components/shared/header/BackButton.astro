@@ -1,6 +1,6 @@
 ---
 import AnchorButton from "@/components/shared/buttons/AnchorButton.astro";
-import Arrow from "@/icons/component-icons/Arrow.astro";
+import LeftArrowIcon from "@/icons/LeftArrow.astro";
 ---
 
 <AnchorButton
@@ -10,7 +10,7 @@ import Arrow from "@/icons/component-icons/Arrow.astro";
   target="_self"
   type="tertiary"
 >
-  <Arrow style="fill: url(#brandGradient)" direction="left" />
+  <LeftArrowIcon size={24} pathStyle="stroke: url(#brandGradient);" />
   <span class="back-button__content">Atrás</span>
 </AnchorButton>
 

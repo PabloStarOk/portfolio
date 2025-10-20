@@ -53,26 +53,29 @@ challenges:
   ]
 ---
 
+import HardDriveIcon from "@lucide/astro/icons/hard-drive"
 import InfoCard from "@/components/projects/InfoCard.astro"
+import LibraryIcon from "@lucide/astro/icons/library-big"
 import SectionLayout from "@/layouts/projects/SectionLayout.astro"
+import TerminalIcon from "@lucide/astro/icons/terminal"
 
 <SectionLayout title="Arquitectura">
 Esta aplicación está constituida a partir de una arquitectura sencilla que se asemeja a la ‘clean architecture’ que se divide en ‘backend’ y ‘frontend’, permitiendo ser modular y acoplar nuevas sistemas en la capa de presentación.
   <InfoCard
         title="Servicio o daemon (Worker Service)"
-        systemIconName="Server">
+        Icon={HardDriveIcon}>
     Es el núcleo de la aplicación y actúa de forma independiente, implementa un servidor que gestiona las peticiones y respuestas a través de una ‘named pipe’ de .NET, de tal forma que permite recibir comandos desde cualquier otro proceso.
   </InfoCard>
 
   <InfoCard
         title="Interfaz de Línea de Comandos (Aplicación de Consola)"
-        systemIconName="CommandLine">
+        Icon={TerminalIcon}>
     Funciona como sistema de entrada del usuario para emitir los diferentes comando que requiera, la CLI está soportada sobre la librería ‘System.CommandLine’.
   </InfoCard>
 
   <InfoCard
         title="Librería IPC (Biblioteca)"
-        systemIconName="Book">
+        Icon={LibraryIcon}>
     Provee las clases e interfaces necesarias para estandarizar la comunicación fácilmente entre la CLI y el servicio facilitando el envío de peticiones y respuestas estructurados de forma básica mejorando la conversión y seguridad de la misma aplicación.
   </InfoCard>
 </SectionLayout>

@@ -1,20 +1,16 @@
 ---
-import SystemIcon from "@/icons/SystemIcon.astro";
+import type { AstroComponent } from "@lucide/astro";
 
 interface Props {
   title?: string;
-  systemIconName: string;
+  Icon: AstroComponent;
 }
 
-const { title, systemIconName } = Astro.props;
+const { title, Icon } = Astro.props;
 ---
 
 <article class="project-info-card">
-  <SystemIcon
-    class="project-info-card__icon"
-    iconName={systemIconName}
-    style={{ pathColor: "url(#brandGradient)" }}
-  />
+  <Icon size={48} style="stroke: url(#brandGradient)" />
   <div class="project-info-card__content">
     {title && <h3 class="project-info-card__title">{title}</h3>}
     <p class="project-info-card__description">
@@ -43,14 +39,6 @@ const { title, systemIconName } = Astro.props;
     background: var(--background-color);
     box-shadow: var(--size-depth-0) var(--size-depth-200) var(--size-depth-400)
       var(--size-depth-negative-200) var(--color-black-300);
-  }
-
-  .project-info-card__icon {
-    /* Layout */
-    width: 4.375rem;
-    min-width: 4.375rem;
-    max-width: 4.375rem;
-    fill: none;
   }
 
   .project-info-card__content {

@@ -1,6 +1,6 @@
 ---
 import ThemeToggle from "@/components/shared/themes/ThemeToggle.astro";
-import CloseIcon from "@/icons/component-icons/Close.astro";
+import CloseIcon from "@lucide/astro/icons/x";
 import "@/styles/global.css";
 import IconButton from "@/components/shared/buttons/IconButton.astro";
 import MenuLinks from "@/components/shared/header/MenuLinks.astro";
@@ -20,7 +20,7 @@ const { id } = Astro.props;
       ariaLabel="Close Menu"
       buttonType="tertiary"
     >
-      <CloseIcon size={32} style="fill: url(#brandGradient)" />
+      <CloseIcon size={40} style="stroke: url(#brandGradient)" />
     </IconButton>
   </div>
   <MenuLinks targetDevice="mobile" />
