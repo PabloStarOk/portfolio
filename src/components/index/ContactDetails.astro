@@ -1,10 +1,10 @@
 ---
 import ContactCard from "@/components/index/contact/ContactCard.astro";
-import EmailIcon from "@/icons/static-icons/EmailIcon.svg";
-import GitHubIcon from "@/icons/static-icons/GitHubIcon.svg";
-import LinkedinIcon from "@/icons/static-icons/LinkedinIcon.svg";
-import LocationIcon from "@/icons/static-icons/LocationIcon.svg";
 import SectionLayout from "@/layouts/index/SectionLayout.astro";
+import GitHubIcon from "@lucide/astro/icons/github";
+import InboxIcon from "@lucide/astro/icons/inbox";
+import LinkedInIcon from "@lucide/astro/icons/linkedin";
+import MapPinIcon from "@lucide/astro/icons/map-pin";
 ---
 
 <SectionLayout id="contact" title="Contacto e Información">
@@ -13,16 +13,14 @@ import SectionLayout from "@/layouts/index/SectionLayout.astro";
       <ContactCard
         title="Ubicación"
         contactInfo="Bogotá, Colombia"
-        iconSrc={LocationIcon}
-        iconAlt="Icono del planeta tierra"
+        Icon={MapPinIcon}
       />
     </li>
     <li class="contact-info__item">
       <ContactCard
         title="Gmail"
         contactInfo="pedropablorodriguezcarranza@gmail.com"
-        iconSrc={EmailIcon}
-        iconAlt="Icono de correo"
+        Icon={InboxIcon}
         sendButtonData={{
           href: "https://mail.google.com/mail/?view=cm&fs=1&to=pedropablorodriguezcarranza@gmail.com&su=Oportunidad%20Laboral%20de%20[Nombre%20de%20la%20Empresa]&body=Reciba%20un%20cordial%20saludo%2C%20somos%20[Nombre%20de%20la%20Empresa]%2C%20mi%20nombre%20es%20[Nombre]%20y%20hemos%20estado%20revisando%20su%20portafolio%20y%20nos%20gustar%C3%ADa%20conocer%20m%C3%A1s%20sobre%20usted%20para%20ofrecerle%20una%20oportunidad%20laboral.%0A%0AQuedamos%20atentos%20a%20su%20respuesta.%0A%0AAtentamente%2C%20[Nombre%20de%20la%20Empresa].",
           ariaLabel: "Enviar mensaje a Gmail",
@@ -36,8 +34,7 @@ import SectionLayout from "@/layouts/index/SectionLayout.astro";
       <ContactCard
         title="GitHub"
         contactInfo="github.com/PabloStarOk"
-        iconSrc={GitHubIcon}
-        iconAlt="Icono de GitHub"
+        Icon={GitHubIcon}
         redirectButtonData={{
           href: "https://github.com/PabloStarOk",
           ariaLabel: "Perfil de GitHub en una nueva página",
@@ -51,8 +48,7 @@ import SectionLayout from "@/layouts/index/SectionLayout.astro";
       <ContactCard
         title="LinkedIn"
         contactInfo="linkedin.com/in/pedro-pablo-rodriguez"
-        iconSrc={LinkedinIcon}
-        iconAlt="Icono de LinkedIn"
+        Icon={LinkedInIcon}
         redirectButtonData={{
           href: "http://www.linkedin.com/in/pedro-pablo-rodriguez",
           ariaLabel: "Perfil de LinkedIn en una nueva página",
