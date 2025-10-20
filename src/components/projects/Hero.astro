@@ -1,7 +1,7 @@
 ---
 import AnchorButton from "@/components/shared/buttons/AnchorButton.astro";
-import GitHub from "@/icons/component-icons/GitHub.astro";
 import "@/styles/global.css";
+import GitHubIcon from "@lucide/astro/icons/github";
 import { Image } from "astro:assets";
 
 // TODO: Should this type moved to an specific file?
@@ -42,8 +42,8 @@ let buttonStyle: string;
           buttonCount++;
           buttonStyle =
             buttonCount > 1
-              ? "fill: url(#brandGradient);"
-              : "fill: var(--color-icon-neutral-onneutral, red);";
+              ? "stroke: url(#brandGradient);"
+              : "stroke: var(--color-icon-neutral-onneutral, red);";
           return (
             <AnchorButton
               href={button.href}
@@ -51,7 +51,7 @@ let buttonStyle: string;
               type={buttonCount > 1 ? "secondary" : "primary"}
               class="project-hero__button"
             >
-              {button.type === "GitHub" && <GitHub style={buttonStyle} />}
+              {button.type === "GitHub" && <GitHubIcon style={buttonStyle} />}
               {button.type}
             </AnchorButton>
           );
