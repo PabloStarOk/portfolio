@@ -1,6 +1,6 @@
 ---
 import ProjectTechBadge from "@/components/index/projects/ProjectTechBadge.astro";
-import Arrow from "@/icons/component-icons/Arrow.astro";
+import RightArrowIcon from "@/icons/component-icons/RightArrow.astro";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -19,7 +19,7 @@ const { name, description, techStack, href, thumbnailSrc, thumbnailAlt } =
 <a class="project-card" href={href} rel="noopener" aria-label=`${name} project`>
   <header class="project-card__header">
     <div class="project-card__text">
-      <Arrow style="fill: url(#brandGradient);" />
+      <RightArrowIcon size={24} pathStyle="stroke: url(#brandGradient);" />
       <h3
         class="project-card__title"
         transition:name={`title-${name}-transition`}
