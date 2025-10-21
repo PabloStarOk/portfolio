@@ -198,7 +198,11 @@ const { targetDevice } = Astro.props;
       const section = sectionsMap.get(link);
       if (!section) return;
 
-      updateActiveLinks([link]);
+      const id = new URL(link.href).hash.substring(1);
+      const linksToUpdate = linksMap.get(id);
+      if (linksToUpdate) {
+        updateActiveLinks(linksToUpdate);
+      }
 
       // Observe section and reset state after timeout
       linkClickedObserver.observe(section);
