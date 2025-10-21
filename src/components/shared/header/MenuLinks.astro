@@ -7,11 +7,11 @@ const { targetDevice } = Astro.props;
 ---
 
 <nav class="menu-links" data-target-device={targetDevice}>
-  <a class="menu-links__link" href="/#hero">Inicio</a>
-  <a class="menu-links__link" href="/#projects">Proyectos</a>
-  <a class="menu-links__link" href="/#technologies">Tecnologías</a>
-  <a class="menu-links__link" href="/#contact">Contacto</a>
-  <a class="menu-links__link" href="/#about">Sobre Mí</a>
+  <a class="menu-links__link" href="/#hero"><span>Inicio</span></a>
+  <a class="menu-links__link" href="/#projects"><span>Proyectos</span></a>
+  <a class="menu-links__link" href="/#technologies"><span>Tecnologías</span></a>
+  <a class="menu-links__link" href="/#contact"><span>Contacto</span></a>
+  <a class="menu-links__link" href="/#about"><span>Sobre Mí</span></a>
 </nav>
 
 <style is:inline>
@@ -39,6 +39,28 @@ const { targetDevice } = Astro.props;
       outline-offset 0.2s ease-in-out;
   }
 
+  .menu-links__link span {
+    /* Typography */
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+    line-height: normal;
+  }
+
+  .menu-links__link.active {
+    background: var(--primary-color-100);
+  }
+
+  .menu-links__link.active span {
+    /* Typography */
+    font-weight: var(--body-font-weight-strong);
+
+    /* Style */
+    background: var(--primary-color-1000);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
+
   .menu-links__link:hover,
   .menu-links__link:focus-visible {
     color: var(--color-text-default-default);
@@ -49,18 +71,6 @@ const { targetDevice } = Astro.props;
     outline-width: 0.188rem;
     outline-offset: var(--space-200);
     border-radius: var(--radius-50);
-  }
-
-  .menu-links__link:active {
-    background: var(--primary-color-100);
-  }
-
-  .menu-links__link.active {
-    font-weight: var(--font-weight-semibold);
-
-    background: var(--primary-color-1000);
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
   }
 
   .menu-links[data-target-device="mobile"] {
@@ -83,6 +93,10 @@ const { targetDevice } = Astro.props;
   }
 
   @media screen and (min-width: 64em) {
+    .menu-links__link.active {
+      background: none;
+    }
+
     .menu-links__link::after {
       content: "";
       position: absolute;
