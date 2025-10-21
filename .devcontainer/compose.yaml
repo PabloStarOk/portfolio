@@ -17,22 +17,17 @@ services:
       NODE_ENV: ${NODE_ENV}
       CI: ${CI_ENV}
     volumes:
-      - type: ${WORKSPACE_MOUNT_TYPE}
+      - type: bind
         source: ${WORKSPACE_SOURCE}
         target: ${WORKSPACE_TARGET}
+      - node_modules_volume:/home/node/app/node_modules
     networks:
       - AstroDevNetwork
-    port:
+    ports:
       - 4321:4321
-    # If needed, uncomment the following lines to set resource limits
-    # deploy:
-    #   resources:
-    #     limits:
-    #       cpus: ${ASTRO_MAX_CPU_COUNT}
-    #       memory: ${ASTRO_MAX_MEM}
-    #     reservations:
-    #       cpus: ${ASTRO_MIN_CPU_COUNT}
-    #       memory: ${ASTRO_MIN_MEM}
+
+volumes:
+  node_modules_volume:
 
 networks:
   AstroDevNetwork:

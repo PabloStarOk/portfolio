@@ -1,0 +1,341 @@
+---
+import SunIcon from "@lucide/astro/icons/sun";
+import MoonIcon from "@lucide/astro/icons/moon";
+import SunMoonIcon from "@lucide/astro/icons/sun-moon";
+
+interface Props {
+  /*
+   * Determines if the theme toggle is visible on mobile and tablet devices.
+   * Set to `true` for mobile-specific instances.
+   */
+  targetDevice?: "mobile" | "desktop";
+}
+
+const { targetDevice } = Astro.props;
+---
+
+<div
+  id="toggleContainer"
+  class="theme-toggle"
+  data-state="auto"
+  data-target-device={targetDevice}
+>
+  <button
+    id="themeToggle"
+    class="theme-toggle__button"
+    data-state="auto"
+    aria-label="Toggle Theme"
+  >
+    <div class="theme-toggle__icons">
+      <SunMoonIcon
+        size={20}
+        color="var(--color-icon-neutral-onneutral)"
+        class="theme-toggle__icon"
+        data-icon="auto"
+      />
+
+      <MoonIcon
+        size={20}
+        color="var(--color-icon-neutral-onneutral)"
+        class="theme-toggle__icon"
+        data-icon="dark"
+      />
+
+      <SunIcon
+        size={20}
+        color="var(--color-icon-neutral-onneutral)"
+        class="theme-toggle__icon"
+        data-icon="light"
+      />
+    </div>
+    <p class="theme-toggle__content">Auto</p>
+  </button>
+</div>
+
+<style>
+  /* Classes */
+  .theme-toggle {
+    position: relative;
+
+    background: transparent;
+
+    display: flex;
+    flex-direction: row;
+
+    min-width: 5.5rem;
+    max-height: 2.5rem;
+
+    padding: var(--space-100);
+    border-radius: var(--radius-200);
+
+    box-sizing: border-box;
+  }
+
+  .theme-toggle__button {
+    width: 1.8rem;
+    min-height: 1.8rem;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-150);
+
+    padding: var(--space-50);
+    background: var(--primary-color-1000);
+    border-radius: var(--radius-100);
+    border: transparent;
+
+    transform: translateX(0);
+
+    transition:
+      transform 0.2s ease-in-out,
+      width 0.2s ease;
+  }
+
+  .theme-toggle__icons {
+    position: relative;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .theme-toggle__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(0.8) rotate(-90deg);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .theme-toggle__content {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+    font-family: "Montserrat Variable";
+    font-size: var(--body-size-small);
+    font-weight: var(--body-font-weight-strong);
+    color: var(--color-text-neutral-onneutral);
+
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Pseudo Elements */
+  .theme-toggle::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    /* Solid gradient border */
+    border: 1px solid transparent;
+    background: var(--primary-color-1000);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+
+    border-radius: inherit;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Pseudo Classes */
+  .theme-toggle__button:hover {
+    cursor: pointer;
+  }
+
+  .theme-toggle__button:focus-visible {
+    outline: var(--space-100) solid var(--right-color-1000);
+    outline-width: 0.188rem;
+    outline-offset: var(--space-200);
+    border-radius: var(--radius-50);
+
+    transition: outline-offset 0.2s ease-in-out;
+  }
+
+  /* Data Attributes */
+  .theme-toggle[data-state="light"] {
+    justify-content: flex-end;
+  }
+
+  .theme-toggle__button[data-state="auto"] {
+    width: 100%;
+  }
+
+  .theme-toggle__button[data-state="auto"] [data-icon="auto"],
+  .theme-toggle__button[data-state="dark"] [data-icon="dark"],
+  .theme-toggle__button[data-state="light"] [data-icon="light"] {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  .theme-toggle__button[data-state="auto"] .theme-toggle__content {
+    visibility: visible;
+    opacity: 1;
+    display: inline;
+  }
+
+  .theme-toggle[data-target-device="desktop"] {
+    display: none !important;
+  }
+
+  /* Media Queries */
+  @media screen and (max-width: 64em) {
+    .theme-toggle[data-target-device="mobile"] {
+      display: none !important;
+    }
+  }
+
+  @media screen and (min-width: 64em) {
+    .theme-toggle[data-target-device="desktop"] {
+      display: flex !important;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Apply styles before loading.
+  (function () {
+    const storedTheme = window.theme.getTheme();
+    const toggles = document.querySelectorAll(".theme-toggle__button");
+
+    for (const toggle of toggles) {
+      const container = toggle.closest(".theme-toggle");
+
+      toggle.dataset.state = storedTheme;
+      container.dataset.state = storedTheme;
+    }
+  })();
+</script>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    // Types
+    type ToggleElements = {
+      container: HTMLDivElement;
+      icon: HTMLImageElement;
+      content: HTMLParagraphElement;
+    };
+
+    type ToggleState = {
+      content: string;
+      width: string;
+      alignment: string;
+      hasTimeout: boolean;
+      timeout?: number;
+    };
+
+    // Global constants
+    const toggles = document.querySelectorAll(
+      ".theme-toggle__button"
+    ) as NodeListOf<HTMLButtonElement>;
+    const containersMap = new WeakMap<HTMLButtonElement, ToggleElements>();
+    const timeoutPool: WeakMap<HTMLButtonElement, { timeout: NodeJS.Timeout }> =
+      new WeakMap();
+
+    const defaultState: ToggleState = {
+      content: "Auto",
+      width: "100%",
+      alignment: "flex-start",
+      hasTimeout: false,
+      timeout: 0,
+    };
+    const toggleStates: Map<string, ToggleState> = new Map([
+      ["auto", defaultState],
+      [
+        "dark",
+        {
+          content: "",
+          width: "1.8rem",
+          alignment: "flex-start",
+          hasTimeout: true,
+          timeout: 150,
+        },
+      ],
+      [
+        "light",
+        {
+          content: "",
+          width: "1.8rem",
+          alignment: "flex-end",
+          hasTimeout: false,
+          timeout: 0,
+        },
+      ],
+    ]);
+
+    // Map related elements (container <div>, icon <svg> and content <p>) of each toggle.
+    for (const toggle of toggles) {
+      let icon: HTMLImageElement | any;
+      let content: HTMLParagraphElement | any;
+
+      const container = toggle.closest(".theme-toggle") as HTMLDivElement;
+
+      for (const child of toggle.children) {
+        switch (child.tagName) {
+          case "IMG":
+            icon = child as HTMLImageElement;
+          case "P":
+            content = child as HTMLParagraphElement;
+        }
+      }
+
+      const elements: ToggleElements = {
+        container,
+        icon,
+        content,
+      };
+      containersMap.set(toggle, elements);
+    }
+
+    // Set the state of the toggle
+    function setToggleState(toggle: HTMLButtonElement, targetTheme: string) {
+      if (toggle.dataset.state === targetTheme) return;
+
+      clearTimeout(timeoutPool.get(toggle)?.timeout);
+
+      const state = toggleStates.get(targetTheme) || defaultState;
+      const elements = containersMap.get(toggle);
+
+      if (state && elements) {
+        elements.content.textContent = state.content;
+        // Fill the container to simulate an translation animation.
+        // (Specially used to move from light theme (right side) to dark theme (left side) mode)
+        if (state.hasTimeout) toggle.style.width = "100%";
+        let timeout = setTimeout(() => {
+          toggle.style.width = state.width;
+          elements.container.dataset.state = targetTheme;
+          toggle.dataset.state = targetTheme;
+        }, state.timeout);
+
+        timeoutPool.set(toggle, { timeout });
+      }
+    }
+
+    // Change the current theme of the portfolio
+    function changeTheme(toggle: HTMLButtonElement) {
+      const stateCycle = ["dark", "auto", "light"];
+      const currentState = toggle.dataset.state || "dark";
+      const nextTheme =
+        stateCycle[(stateCycle.indexOf(currentState) + 1) % stateCycle.length];
+      window.theme.setTheme(nextTheme as "auto" | "dark" | "light");
+    }
+
+    toggles.forEach((s) => s.addEventListener("click", () => changeTheme(s)));
+    document.addEventListener("theme-changed", (event: Event) => {
+      const themeChangedEvent = event as CustomEvent<ThemeChangedDetail>;
+      for (const toggle of toggles) {
+        setToggleState(toggle, themeChangedEvent.detail.theme);
+      }
+    });
+  });
+</script>

@@ -1,0 +1,25 @@
+---
+import AnchorButton from "@/components/shared/buttons/AnchorButton.astro";
+import LeftArrowIcon from "@/icons/LeftArrow.astro";
+---
+
+<AnchorButton
+  id="backButton"
+  href="javascript:window.history.back()"
+  ariaLabel="Volver atrás"
+  target="_self"
+  type="tertiary"
+>
+  <LeftArrowIcon size={24} pathStyle="stroke: url(#brandGradient);" />
+  <span class="back-button__content">Atrás</span>
+</AnchorButton>
+
+<style>
+  .back-button__content {
+    /* Typography */
+    font-size: var(--body-size-large);
+    font-style: normal;
+    font-weight: var(--body-font-weight-strong);
+    line-height: 140%;
+  }
+</style>

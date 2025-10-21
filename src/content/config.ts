@@ -5,16 +5,16 @@ const Button = z.object({
     type: z.enum(["LiveDemo", "GitHub"]),
     url: z.string().url()
 })
-const TechStackEnum = z.enum([".NET", "C#"])
-const SupportedOs = z.enum(["Linux", "Windows 10", "Windows 11"])
+const TechStackEnum = z.enum([".NET", "C#", "Jetpack Compose", "Kotlin", "PostgreSQL"])
+const SupportedOs = z.enum(["Linux", "Windows 10", "Windows 11", "Android"])
 const ImageAsset = z.object({
     fileName: z.string(),
     alt: z.string()
 })
 
 // Collections
-const techStackIcons = defineCollection({
-    loader: file("src/content/techStackIcons.json"),
+const technologyIcons = defineCollection({
+    loader: file("src/content/technologyIcons.json"),
     schema: z.object({
         src: z.string().min(1),
         alt: z.string().min(1)
@@ -25,7 +25,7 @@ const projects = defineCollection({
     loader: glob({ pattern: "**/*.{mdx, md}", base: "src/content/projects" }),
     schema: z.object({
         name: z.string().max(30),
-        shortDescription: z.string().max(50),
+        shortDescription: z.string().max(90),
         featuredProject: z.boolean().default(false).optional(), // If true, will be displayed at index.
         assets: z.object({
             thumbnail: ImageAsset,
@@ -45,7 +45,13 @@ const projects = defineCollection({
             description: z.string().max(100)
         })),
         supportedOs: z.array(SupportedOs),
+        objective: z.string(),
+        challenges: z.array(z.object({
+            title: z.string().max(70),
+            situation: z.string().max(350),
+            solution: z.string().max(350)
+        }))
     })
 })
 
-export const collections = { projects, techStackIcons }
+export const collections = { projects, technologyIcons }

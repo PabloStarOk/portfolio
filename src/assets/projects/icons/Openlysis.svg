@@ -1,0 +1,44 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="48"
+  height="48"
+  fill="none"
+  viewBox="0 0 48 48"
+>
+  <path
+    fill="#fff"
+    d="M21.063 9.233a15.06 15.06 0 0 1 13.582 4.12l-6.9 6.9A5.342 5.342 0 1 0 24 29.803v9.25a15.06 15.06 0 0 1-12.518-6.691 15.056 15.056 0 0 1 9.581-23.13"
+  >
+  </path>
+  <path fill="#fff" d="M27.746 20.252A5.343 5.343 0 0 1 24 29.803v-5.805z">
+  </path>
+  <path
+    fill="#fff"
+    fill-rule="evenodd"
+    d="M24 0c13.255 0 24 10.745 24 24 0 13.254-10.745 24-24 24C10.747 48 0 37.254 0 24 0 10.745 10.746 0 24 0m0 5.175C13.604 5.175 5.176 13.603 5.176 24S13.605 42.825 24 42.825c10.397 0 18.825-8.43 18.825-18.825 0-10.397-8.428-18.824-18.825-18.825"
+    clip-rule="evenodd"
+  >
+  </path>
+  <defs>
+    <linearGradient id="brandGradientLight" gradientUnits="userSpaceOnUse">
+      <stop style="stop-color: #3563CB;"></stop>
+      <stop offset="100%" style="stop-color: #A242BF;"></stop>
+    </linearGradient>
+    <linearGradient id="brandGradientDark" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" style="stop-color: #FF67A7;"></stop>
+      <stop offset="100%" style="stop-color: #FC8E50;"></stop>
+    </linearGradient>
+  </defs>
+  <style>
+    @media (prefers-color-scheme: light) {
+      path {
+        fill: url(#brandGradientLight);
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+      path {
+        fill: url(#brandGradientDark);
+      }
+    }
+  </style>
+</svg>

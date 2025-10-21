@@ -1,0 +1,176 @@
+---
+import type { AstroComponent } from "@lucide/astro";
+import CodeIcon from "@lucide/astro/icons/code";
+import DatabaseIcon from "@lucide/astro/icons/database";
+import LibraryIcon from "@lucide/astro/icons/library-big";
+import WrenchIcon from "@lucide/astro/icons/wrench";
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  iconSrc: ImageMetadata;
+  iconAlt: string;
+  type: "lang" | "db" | "framework" | "tool";
+}
+
+const { title, iconSrc, iconAlt, type: stackType } = Astro.props;
+
+// Get technology type
+let TechTypeIcon: AstroComponent = DatabaseIcon;
+switch (stackType) {
+  case "lang":
+    TechTypeIcon = CodeIcon;
+    break;
+
+  case "db":
+    TechTypeIcon = DatabaseIcon;
+    break;
+
+  case "framework":
+    TechTypeIcon = LibraryIcon;
+    break;
+
+  case "tool":
+    TechTypeIcon = WrenchIcon;
+    break;
+
+  default:
+    TechTypeIcon = CodeIcon;
+    break;
+}
+---
+
+<article class="technology-card">
+  <TechTypeIcon class="technology-card__type" />
+  <Image
+    class="technology-card__icon"
+    src={iconSrc}
+    alt={iconAlt}
+    loading="lazy"
+  />
+  <header class="technology-card__header">
+    <p class="technology-card__title">{title}</p>
+  </header>
+</article>
+
+<style>
+  .technology-card {
+    /* Layout */
+    position: relative;
+    display: inline-flex;
+    min-width: 8.125rem;
+    max-width: 8.125rem;
+    aspect-ratio: 1/1;
+    padding: var(--space-200);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    gap: var(--space-200);
+
+    /* Style */
+    border-radius: var(--radius-100);
+    border: 1px solid var(--color-border-default-default);
+
+    box-shadow: var(--size-depth-0) var(--size-depth-200) var(--size-depth-400)
+      var(--size-depth-negative-200) var(--color-black-300);
+
+    /* Animations */
+    transition: border-color 0.3s ease-in-out;
+  }
+
+  .technology-card__type {
+    /* Layout */
+    position: absolute;
+    width: auto;
+    height: 10%;
+    max-height: 1rem;
+    object-fit: contain;
+    top: 8%;
+    right: 5%;
+  }
+
+  .technology-card__icon {
+    /* Layout */
+    height: 3.125rem;
+    max-height: 3.125rem;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .technology-card__header {
+    /* Layout */
+    display: flex;
+    padding: var(--space-0);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-50);
+  }
+
+  .technology-card__title {
+    /* Layout */
+    align-self: stretch;
+
+    /* Typography */
+    color: var(--color-text-default-default);
+    text-align: center;
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-strong);
+    line-height: 120%;
+  }
+
+  .technology-card:hover {
+    /* Style */
+    border-color: var(--right-color-1000);
+  }
+
+  .technology-card:hover .technology-card__title {
+    /* Style */
+    background: var(--primary-color-1000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .technology-card::before {
+    /* Layout */
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+
+    /* Style */
+    background-image: var(--primary-color-100);
+
+    /* Animations */
+    transition: opacity 0.3s linear;
+  }
+
+  .technology-card:hover::before {
+    /* Style */
+    opacity: 1;
+  }
+
+  @media (min-width: 48em) {
+    .technology-card {
+      /* Layout */
+      min-width: 12.1875rem;
+      max-width: 12.1875rem;
+      min-height: 10.25rem;
+      max-height: 10.25rem;
+      padding: var(--space-200);
+    }
+
+    .technology-card__icon {
+      /* Layout */
+      height: 5rem;
+      max-height: 5rem;
+    }
+  }
+</style>

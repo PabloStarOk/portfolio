@@ -1,0 +1,93 @@
+---
+import Illustration from "@/assets/index/about/Illustration.svg";
+import SectionLayout from "@/layouts/index/SectionLayout.astro";
+import { Image } from "astro:assets";
+---
+
+<SectionLayout id="about" title="Sobre Mí">
+  <div class="about">
+    <div class="about__content">
+      <p>
+        Soy un estudiante de Ingeniería de Sistemas de la UNAD, próximo a
+        graduarme. Me encanta el desarrollo de software porque me permite
+        construir soluciones tangibles y eficientes a problemas complejos, lo
+        que también me ayuda a liberar mi creatividad.
+      </p>
+      <p>
+        Mi <strong>interés principal es el desarrollo backend</strong>, ya que
+        disfruto diseñando y construyendo la arquitectura, la lógica de negocio
+        y los sistemas de datos. <strong
+          >Me especializo en el ecosistema de .NET</strong
+        >, y mi objetivo es aplicar mi conocimiento para <strong
+          >crear servicios y productos backend, que sean robustos, escalables,
+          seguros y eficientes</strong
+        >, para contribuir significativamente a la experiencia del usuario
+        final.
+      </p>
+      <p>
+        Además de mi enfoque en backend, mi experiencia con proyectos en Astro y
+        Jetpack Compose demuestra mi <strong
+          >flexibilidad para adaptarme a otros ecosistemas y mi capacidad para
+          diseñar productos</strong
+        >, usando Figma para crear interfaces de usuario amigables e intuitivas.
+      </p>
+    </div>
+    <Image
+      src={Illustration}
+      alt="Una una persona desarrollando software en un entorno de trabajo."
+      class="about__illustration"
+    />
+  </div>
+</SectionLayout>
+
+<style>
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-400);
+    align-self: stretch;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about__content {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-400);
+    flex: 1 0 0;
+  }
+
+  .about__content p {
+    /* Typography */
+    color: var(--color-text-default-default);
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+    line-height: 140%;
+  }
+
+  .about__content strong {
+    /* Typography */
+    color: var(--color-text-default-default);
+    font-weight: var(--body-font-weight-strong);
+  }
+
+  .about__illustration {
+    /* Layout */
+    width: 100%;
+    max-width: 25rem;
+  }
+
+  @media (min-width: 64em) {
+    .about {
+      flex-direction: row;
+    }
+
+    .about__illustration {
+      /* Layout */
+      flex: 1 0 0;
+      max-width: none;
+    }
+  }
+</style>

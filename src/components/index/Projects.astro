@@ -1,0 +1,77 @@
+---
+import ProjectCard from "@/components/index/projects/ProjectCard.astro";
+import { projectsThumbnailsDir } from "@/constants";
+import SectionLayout from "@/layouts/index/SectionLayout.astro";
+import { getCollection } from "astro:content";
+
+const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/projects/thumbnails/*.webp",
+  { eager: true }
+);
+
+const projectsCollection = await getCollection("projects");
+
+// Validate thumbnail paths
+projectsCollection.forEach(({ id, data: { assets } }) => {
+  const path = projectsThumbnailsDir + assets.thumbnail.fileName;
+  if (!thumbnailImports[path])
+    throw new Error(
+      `File name \"${assets.thumbnail.fileName}\" given in \"${id}\" doesn't exist at ${projectsThumbnailsDir}"`
+    );
+});
+
+// Display only featured projects
+const featuredProjects = projectsCollection.filter(
+  ({ data }) => data.featuredProject
+);
+---
+
+<SectionLayout id="projects" title="Proyectos">
+  <ul class="projects">
+  {
+    featuredProjects.map(({ id, data }) => {
+      const path = projectsThumbnailsDir + data.assets.thumbnail.fileName;
+      return (
+        <li>
+          <ProjectCard
+            name={data.name}
+            description={data.shortDescription}
+            techStack={data.techStack.map((technology) => technology.name)},
+            href={`/projects/${id}-project`}
+            thumbnailSrc={thumbnailImports[path].default}
+            thumbnailAlt={data.assets.thumbnail.alt}
+          />
+        </li>
+      );
+    })
+  }
+  </ul>
+</SectionLayout>
+
+<style>
+  .projects {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+    gap: var(--space-1200);
+
+    /* Style */
+    list-style: none;
+  }
+
+  @media screen and (min-width: 48em) {
+    .projects {
+      /* Layout */
+      gap: var(--space-1600);
+    }
+  }
+
+  @media screen and (min-width: 64em) {
+    .projects {
+      /* Layout */
+      gap: var(--space-2400);
+    }
+  }
+</style>

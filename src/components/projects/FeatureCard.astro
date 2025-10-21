@@ -1,0 +1,93 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<article class="project-feature">
+  <h3 class="project-feature__title">{title}</h3>
+  <p class="project-feature__description">{description}</p>
+  <rect class="project-feature__rect"></rect>
+</article>
+
+<style>
+  .project-feature {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-400);
+    align-items: flex-start;
+    gap: var(--space-100);
+    align-self: stretch;
+    position: relative;
+
+    /* Style */
+    border-radius: var(--radius-100);
+    border: 1px solid var(--color-border-default-default);
+    background: var(--background-color);
+    box-shadow: var(--size-depth-0) var(--size-depth-100) var(--size-depth-200)
+      var(--size-depth-negative-100) var(--color-black-200);
+  }
+
+  .project-feature__title,
+  .project-feature__description {
+    /* Layout */
+    align-self: stretch;
+    word-break: normal;
+
+    /* Typography */
+    color: var(--color-text-default-default);
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-strong);
+    line-height: 140%;
+  }
+
+  .project-feature__description {
+    /* Typography */
+    font-weight: var(--body-font-weight-regular);
+  }
+
+  .project-feature__rect {
+    /* Layout */
+    width: 2.5rem;
+    height: 0.3125rem;
+    position: absolute;
+    align-self: center;
+    bottom: 0;
+
+    /* Style */
+    background: var(--primary-color-1000);
+    border: 1px solid transparent;
+    border-radius: var(--radius-100) var(--radius-100) 0 0;
+  }
+
+  @media screen and (min-width: 48em) {
+    .project-feature {
+      /* Layout */
+      height: 7.5rem;
+      min-height: 7.5rem;
+      max-height: 7.5rem;
+      padding: var(--space-600);
+    }
+
+    .project-feature__title,
+    .project-feature__description {
+      overflow: hidden;
+
+      /* Text Limit */
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+    }
+
+    .project-feature__description {
+      /* Text Limit */
+      -webkit-line-clamp: 2;
+    }
+  }
+</style>

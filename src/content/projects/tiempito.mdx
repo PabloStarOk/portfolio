@@ -17,7 +17,7 @@ techStack:
   [
     {
       name: ".NET",
-      version: "8.0",
+      version: "8",
       purpose: "Utilizado para la construcción del servicio, la CLI y una librería IPC.",
     },
     { name: "C#", purpose: "Lenguaje principal." },
@@ -42,43 +42,40 @@ features:
     },
   ]
 supportedOs: [Linux, Windows 10, Windows 11]
+objective: "Ofrecer una aplicación poco convencional para la gestión de sesiones de estudio, de trabajo u otras labores por medio de una interfaz de línea de comandos y un servicio desarrollados a través de las características ofrecidas por el framework .NET."
+challenges:
+  [
+    {
+      title: "Notificaciones",
+      situation: "Las diferencias de gestión de las notificaciones en Linux y Windows representó mayormente la creación de un diseño que permitiese estructurar e inyectar las dependencias únicamente necesarias de acuerdo con el sistema operativo.",
+      solution: "A través de las directivas de preprocesador y clases utilitarias ofrecidas por .NET se inyectaron dinámicamente las interfaces y clases para Windows o Linux."
+    }
+  ]
 ---
 
-import ProjectInfoCard from "@/components/projects/content/ProjectInfoCard.astro"
-import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro"
-import ProjectChallengeDetail from "@/components/projects/content/ProjectChallengeDetail.astro"
+import HardDriveIcon from "@lucide/astro/icons/hard-drive"
+import InfoCard from "@/components/projects/InfoCard.astro"
+import LibraryIcon from "@lucide/astro/icons/library-big"
+import SectionLayout from "@/layouts/projects/SectionLayout.astro"
+import TerminalIcon from "@lucide/astro/icons/terminal"
 
-<ProjectSectionLayout title="Objetivo">
-  <ProjectInfoCard
-        systemIconName="Target">
-    Ofrecer una aplicación poco convencional para la gestión de sesiones de estudio, de trabajo u otras labores por medio de una interfaz de línea de comandos y un servicio desarrollados a través de las características ofrecidas por el framework .NET.
-  </ProjectInfoCard>
-</ProjectSectionLayout>
-
-<ProjectSectionLayout title="Arquitectura">
+<SectionLayout title="Arquitectura">
 Esta aplicación está constituida a partir de una arquitectura sencilla que se asemeja a la ‘clean architecture’ que se divide en ‘backend’ y ‘frontend’, permitiendo ser modular y acoplar nuevas sistemas en la capa de presentación.
-  <ProjectInfoCard
+  <InfoCard
         title="Servicio o daemon (Worker Service)"
-        systemIconName="Server">
+        Icon={HardDriveIcon}>
     Es el núcleo de la aplicación y actúa de forma independiente, implementa un servidor que gestiona las peticiones y respuestas a través de una ‘named pipe’ de .NET, de tal forma que permite recibir comandos desde cualquier otro proceso.
-  </ProjectInfoCard>
+  </InfoCard>
 
-  <ProjectInfoCard
+  <InfoCard
         title="Interfaz de Línea de Comandos (Aplicación de Consola)"
-        systemIconName="CommandLine">
+        Icon={TerminalIcon}>
     Funciona como sistema de entrada del usuario para emitir los diferentes comando que requiera, la CLI está soportada sobre la librería ‘System.CommandLine’.
-  </ProjectInfoCard>
+  </InfoCard>
 
-  <ProjectInfoCard
+  <InfoCard
         title="Librería IPC (Biblioteca)"
-        systemIconName="Book">
+        Icon={LibraryIcon}>
     Provee las clases e interfaces necesarias para estandarizar la comunicación fácilmente entre la CLI y el servicio facilitando el envío de peticiones y respuestas estructurados de forma básica mejorando la conversión y seguridad de la misma aplicación.
-  </ProjectInfoCard>
-</ProjectSectionLayout>
-
-<ProjectSectionLayout title="Desafíos">
-  <ProjectChallengeDetail title="Notificaciones">
-  <p slot="situation">Las diferencias de gestión de las notificaciones en Linux y Windows representó mayormente la creación de un diseño que permitiese estructurar e inyectar las dependencias únicamente necesarias de acuerdo con el sistema operativo.</p>
-  <p slot="solution">A través de las directivas de preprocesador y clases utilitarias ofrecidas por .NET se inyectaron dinámicamente las interfaces y clases para Windows o Linux.</p>
-  </ProjectChallengeDetail>
-</ProjectSectionLayout>
+  </InfoCard>
+</SectionLayout>

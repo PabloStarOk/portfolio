@@ -1,0 +1,191 @@
+---
+import AstroIcon from "@/assets/shared/technologies/AstroIcon.svg";
+import CsharpIcon from "@/assets/shared/technologies/CsharpIcon.svg";
+import CssIcon from "@/assets/shared/technologies/CssIcon.svg";
+import DockerIcon from "@/assets/shared/technologies/DockerIcon.svg";
+import DotnetIcon from "@/assets/shared/technologies/DotnetIcon.svg";
+import FigmaIcon from "@/assets/shared/technologies/FigmaIcon.svg";
+import HtmlIcon from "@/assets/shared/technologies/HtmlIcon.svg";
+import JavascriptIcon from "@/assets/shared/technologies/JavascriptIcon.svg";
+import JetpackComposeIcon from "@/assets/shared/technologies/JetpackComposeIcon.svg";
+import KotlinIcon from "@/assets/shared/technologies/KotlinIcon.svg";
+import PostgreSqlIcon from "@/assets/shared/technologies/PostgreSqlIcon.svg";
+import TechnologyCard from "@/components/index/technologies/TechnologyCard.astro";
+import SectionLayout from "@/layouts/index/SectionLayout.astro";
+---
+
+<SectionLayout id="technologies" title="Tecnologías">
+  <section class="tech-section">
+    <div class="tech-section__header">
+      <h3 class="tech-section__title">Principales</h3>
+      <p class="tech-section__description">
+        Mi stack de desarrollo principal, centrado en la creación de
+        aplicaciones backend.
+      </p>
+    </div>
+    <ul class="tech-section__list">
+      <li>
+        <TechnologyCard
+          title=".NET"
+          iconSrc={DotnetIcon}
+          iconAlt="Logo de .NET"
+          type="framework"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="C#"
+          iconSrc={CsharpIcon}
+          iconAlt="Logo de CSharp"
+          type="lang"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="PostgreSQL"
+          iconSrc={PostgreSqlIcon}
+          iconAlt="Logo de PostgreSQL"
+          type="db"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="Docker"
+          iconSrc={DockerIcon}
+          iconAlt="Logo de Docker"
+          type="tool"
+        />
+      </li>
+    </ul>
+  </section>
+
+  <section class="tech-section">
+    <div class="tech-section__header">
+      <h3 class="tech-section__title">Secundarias</h3>
+      <p class="tech-section__description">
+        Experiencia práctica desarrollando proyectos full-stack y web para
+        complementar mi enfoque backend.
+      </p>
+    </div>
+    <ul class="tech-section__list">
+      <li>
+        <TechnologyCard
+          title="Astro"
+          iconSrc={AstroIcon}
+          iconAlt="Logo de Astro framework"
+          type="framework"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="JavaScript"
+          iconSrc={JavascriptIcon}
+          iconAlt="Logo de JavaScript"
+          type="lang"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="HTML"
+          iconSrc={HtmlIcon}
+          iconAlt="Logo de HTML"
+          type="lang"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="CSS"
+          iconSrc={CssIcon}
+          iconAlt="Logo de CSS"
+          type="lang"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="Jetpack Compose"
+          iconSrc={JetpackComposeIcon}
+          iconAlt="Logo de Jetpack Compose"
+          type="framework"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="Kotlin"
+          iconSrc={KotlinIcon}
+          iconAlt="Logo de Kotlin"
+          type="lang"
+        />
+      </li>
+      <li>
+        <TechnologyCard
+          title="Figma"
+          iconSrc={FigmaIcon}
+          iconAlt="Logo de Figma"
+          type="tool"
+        />
+      </li>
+    </ul>
+  </section>
+</SectionLayout>
+
+<style>
+  .tech-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-600);
+  }
+
+  .tech-section__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-150);
+    align-self: stretch;
+  }
+
+  .tech-section__title {
+    /* Typography */
+    text-align: center;
+    font-size: var(--subheading-size-medium);
+    font-style: normal;
+    font-weight: var(--subheading-font-weight-strong, 600);
+    line-height: normal;
+
+    /* Style */
+    width: fit-content;
+    background: var(--primary-color-1000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .tech-section__description {
+    /* Typography */
+    text-align: center;
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+    line-height: 140%;
+
+    /* Style */
+    color: var(--color-text-default-secondary);
+    width: fit-content;
+  }
+
+  .tech-section__list {
+    padding: 0;
+    list-style: none;
+    align-self: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-400);
+  }
+
+  @media (min-width: 768px) {
+    .tech-section__list {
+      gap: var(--space-600);
+    }
+  }
+</style>

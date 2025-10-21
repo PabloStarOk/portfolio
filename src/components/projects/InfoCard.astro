@@ -1,0 +1,91 @@
+---
+import type { AstroComponent } from "@lucide/astro";
+
+interface Props {
+  title?: string;
+  Icon: AstroComponent;
+}
+
+const { title, Icon } = Astro.props;
+---
+
+<article class="project-info-card">
+  <Icon size={48} color="var(--color-icon-default-default)" />
+  <div class="project-info-card__content">
+    {title && <h3 class="project-info-card__title">{title}</h3>}
+    <p class="project-info-card__description">
+      <slot />
+    </p>
+  </div>
+</article>
+
+<style>
+  .project-info-card {
+    /* Layout */
+    display: flex;
+    padding: var(--space-600);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-600);
+    align-self: stretch;
+
+    /* Typography */
+    word-break: keep-all;
+
+    /* Style */
+    border-radius: var(--radius-100);
+    border: 1px solid var(--color-border-default-default);
+    background: var(--background-color);
+    box-shadow: var(--size-depth-0) var(--size-depth-200) var(--size-depth-400)
+      var(--size-depth-negative-200) var(--color-black-300);
+  }
+
+  .project-info-card__content {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-100);
+    align-self: stretch;
+    flex: 1 0 0;
+  }
+
+  .project-info-card__title,
+  .project-info-card__description {
+    /* Layout */
+    align-self: stretch;
+
+    /* Typography */
+    color: var(--color-text-default-default);
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-strong);
+    line-height: 140%;
+
+    /* Remove [id]-project.astro styles */
+    background: unset !important;
+    background-clip: unset !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+  }
+
+  .project-info-card__description {
+    font-weight: var(--body-font-weight-regular);
+  }
+
+  @media screen and (min-width: 48em) {
+    .project-info-card {
+      /* Layout */
+      flex-direction: row;
+    }
+
+    .project-info-card__title {
+      /* Typography */
+      font-size: var(--subheading-size-medium);
+      font-style: normal;
+      font-weight: var(--subheading-font-weight-strong);
+    }
+  }
+</style>

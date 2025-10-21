@@ -1,14 +1,17 @@
 ---
-import ProjectFeatureCard from "@/components/projects/content/ProjectFeatureCard.astro";
-import ProjectHero, {
-  type ProjectButton,
-} from "@/components/projects/content/ProjectHero.astro";
-import ProjectStackCard from "@/components/projects/content/ProjectStackCard.astro";
-import ProjectSupportedOsCard from "@/components/projects/content/ProjectSupportedOsCard.astro";
-import ProjectTitle from "@/components/projects/content/ProjectTitle.astro";
-import { projectsThumbnailsDir, techStackIconsMap } from "@/constants";
+import ChallengeDetail from "@/components/projects/ChallengeDetail.astro";
+import FeatureCard from "@/components/projects/FeatureCard.astro";
+import Hero, { type ProjectButton } from "@/components/projects/Hero.astro";
+import InfoCard from "@/components/projects/InfoCard.astro";
+import SupportedOsCard from "@/components/projects/SupportedOsCard.astro";
+import TechnologyCard from "@/components/projects/TechnologyCard.astro";
+import Title from "@/components/projects/Title.astro";
+import { projectsThumbnailsDir } from "@/constants";
+import { techIconsMap } from "@/data/icons";
+import { thumbnailImports } from "@/data/thumbnails";
 import Layout from "@/layouts/Layout.astro";
-import ProjectSectionLayout from "@/layouts/projects/ProjectSectionLayout.astro";
+import SectionLayout from "@/layouts/projects/SectionLayout.astro";
+import CrossHairIcon from "@lucide/astro/icons/crosshair";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -20,12 +23,26 @@ export async function getStaticPaths() {
 }
 
 // Project data
-const thumbnailImports = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/projects/thumbnails/*.webp",
-  { eager: true }
-);
 const { project } = Astro.props;
-const { name, assets, hero, techStack, features, supportedOs } = project.data;
+const {
+  name,
+  assets,
+  hero,
+  techStack,
+  features,
+  supportedOs,
+  objective,
+  challenges,
+} = project.data;
+
+const thumbnail =
+  thumbnailImports[projectsThumbnailsDir + assets.thumbnail.fileName]?.default;
+if (!thumbnail) {
+  throw new Error(
+    `Thumbnail with path ${projectsThumbnailsDir + assets.thumbnail.fileName} wasn't found.`
+  );
+}
+
 const { Content } = await render(project);
 
 // Hero buttons
@@ -43,9 +60,9 @@ hero.buttons.map((button) =>
 );
 
 // Validate tech stack icons.
-techStack.map((stack) => {
-  if (!techStackIconsMap.get(stack.name))
-    throw new Error("Tech stack doesn't exist at techStackIcons.json file.");
+techStack.map((technology) => {
+  if (!techIconsMap.get(technology.name))
+    throw new Error("Technology doesn't exist at techStackIcons.json file.");
 });
 ---
 
@@ -56,64 +73,95 @@ techStack.map((stack) => {
   displayThemeToggle={false}
   displayBackButton={true}
 >
-  <ProjectTitle
+  <Title
     title={name}
     iconName={assets.icon.fileName}
     iconAlt={assets.icon.alt}
   />
   <div class="project-page__content">
-    <ProjectHero
-      thumbnailSrc={thumbnailImports[
-        projectsThumbnailsDir + assets.thumbnail.fileName
-      ].default}
+    <Hero
+      thumbnailSrc={thumbnail}
       thumbnailAlt={assets.thumbnail.alt}
       description={hero.description}
       buttons={buttons}
       projectName={name}
     />
 
-    <ProjectSectionLayout title="Tecnologías Usadas">
-      <div class="project-page__card-grid">
+    <SectionLayout title="Tecnologías Usadas">
+      <ul class="project-page__card-grid">
         {
-          techStack.map((stack) => {
+          techStack.map((technology) => {
             return (
-              <ProjectStackCard
-                stackName={stack.name}
-                version={stack.version}
-                purpose={stack.purpose}
-              />
+              <li>
+                <TechnologyCard
+                  technologyName={technology.name}
+                  version={technology.version}
+                  purpose={technology.purpose}
+                />
+              </li>
             );
           })
         }
-      </div>
-    </ProjectSectionLayout>
+      </ul>
+    </SectionLayout>
 
-    <ProjectSectionLayout title="Características">
-      <div class="project-page__card-grid">
+    <SectionLayout title="Características">
+      <ul class="project-page__card-grid">
         {
           features.map((feature) => {
             return (
-              <ProjectFeatureCard
-                title={feature.title}
-                description={feature.description}
-              />
+              <li>
+                <FeatureCard
+                  title={feature.title}
+                  description={feature.description}
+                />
+              </li>
             );
           })
         }
-      </div>
-    </ProjectSectionLayout>
+      </ul>
+    </SectionLayout>
 
-    <ProjectSectionLayout title="Plataformas Soportadas">
-      <div class="project-page__supported-os">
+    <SectionLayout title="Plataformas Soportadas">
+      <ul class="project-page__supported-os">
         {
           supportedOs.map((os) => {
-            return <ProjectSupportedOsCard osName={os} />;
+            return (
+              <li>
+                <SupportedOsCard osName={os} />
+              </li>
+            );
           })
         }
-      </div>
-    </ProjectSectionLayout>
+      </ul>
+    </SectionLayout>
 
-    <Content />
+    <SectionLayout title="Objetivo">
+      <InfoCard Icon={CrossHairIcon}>{objective}</InfoCard>
+    </SectionLayout>
+
+    <div class="project-page__md-content">
+      <Content />
+    </div>
+
+    {
+      challenges.length > 0 && (
+        <SectionLayout title="Desafíos">
+          <ul class="project-page__challenges">
+            {challenges.map((challenge) => {
+              return (
+                <li>
+                  <ChallengeDetail title={challenge.title}>
+                    <p slot="situation">{challenge.situation}</p>
+                    <p slot="solution">{challenge.solution}</p>
+                  </ChallengeDetail>
+                </li>
+              );
+            })}
+          </ul>
+        </SectionLayout>
+      )
+    }
   </div>
 
   <style>
@@ -147,6 +195,9 @@ techStack.map((stack) => {
       display: grid;
       align-self: stretch;
       gap: var(--space-800);
+
+      /* Style */
+      list-style: none;
     }
 
     .project-page__supported-os {
@@ -157,6 +208,66 @@ techStack.map((stack) => {
       justify-content: center;
       flex-wrap: wrap;
       gap: var(--space-800);
+
+      /* Style */
+      list-style: none;
+    }
+
+    .project-page__md-content {
+      /* Layout */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-1200);
+    }
+
+    .project-page__md-content :global(h3) {
+      /* Layout */
+      align-self: flex-start;
+
+      /* Typography */
+      font-size: var(--subheading-size-medium);
+      font-style: normal;
+      font-weight: var(--subheading-font-weight-strong);
+      line-height: normal;
+
+      /* Style */
+      background: var(--primary-color-1000);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .project-page__md-content :global(p) {
+      /* Layout */
+      word-break: keep-all;
+
+      /* Typography */
+      color: var(--color-text-default-default);
+      font-size: var(--body-size-medium);
+      font-style: normal;
+      font-weight: var(--body-font-weight-regular);
+      line-height: 140%;
+    }
+
+    .project-page__md-content :global(img) {
+      /* Layout */
+      align-self: center;
+      width: 100%;
+      height: auto;
+    }
+
+    .project-page__challenges {
+      /* Layout */
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+      gap: var(--space-600);
+
+      /* Style */
+      list-style: none;
     }
 
     @media screen and (min-width: 48em) {
@@ -169,6 +280,11 @@ techStack.map((stack) => {
       .project-page__content {
         /* Layout */
         padding: var(--space-0) var(--space-800);
+        gap: var(--space-1600);
+      }
+
+      .project-page__md-content {
+        /* Layout */
         gap: var(--space-1600);
       }
     }
@@ -189,6 +305,16 @@ techStack.map((stack) => {
       .project-page__card-grid {
         /* Layout */
         grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+      }
+
+      .project-page__md-content {
+        /* Layout */
+        gap: var(--space-2400);
+      }
+
+      .project-page__md-content :global(img) {
+        /* Layout */
+        width: 80%;
       }
     }
   </style>

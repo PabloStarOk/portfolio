@@ -1,0 +1,146 @@
+---
+import "@/styles/global.css";
+
+interface Props {
+  buttonType: "primary" | "secondary" | "tertiary";
+  size?: "default" | "small" | "x-small";
+  id?: string;
+  className?: string;
+  onclick?: string;
+  ariaLabel?: string;
+  targetDevice?: "mobile" | "desktop";
+}
+
+const {
+  id,
+  className,
+  buttonType,
+  size = "default",
+  onclick,
+  ariaLabel,
+  targetDevice,
+} = Astro.props;
+---
+
+<button
+  id={id}
+  class=`icon-button icon-button--${buttonType} icon-button--${size} ${className}`
+  onclick={onclick}
+  aria-label={ariaLabel}
+  data-target-device={targetDevice}
+>
+  {(buttonType === "primary" || buttonType === "tertiary") && <slot />}
+  {
+    buttonType === "secondary" && (
+      <div class="icon-button-wrapper">
+        <slot />
+      </div>
+    )
+  }
+</button>
+
+<style>
+  .icon-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    border: none;
+    border-radius: var(--radius-100);
+    background: var(--primary-color-1000);
+
+    width: auto;
+    height: 100%;
+    padding: 0;
+
+    transition:
+      transform 0.2s ease-in-out,
+      filter 0.2s ease-in-out,
+      outline-offset 0.2s ease-in-out;
+  }
+
+  .icon-button--default {
+    min-width: 3rem;
+    min-height: 3rem;
+    max-height: 3rem;
+    gap: var(--space-300);
+    padding: var(--space-300);
+  }
+
+  .icon-button--small {
+    min-width: 2.1875rem;
+    min-height: 2.1875rem;
+    max-height: 2.1875rem;
+    gap: var(--space-200);
+    padding: var(--space-200);
+  }
+
+  .icon-button--x-small {
+    min-width: 1.875rem;
+    min-height: 1.875rem;
+    max-height: 1.875rem;
+    gap: var(--space-150);
+    padding: var(--space-150);
+  }
+
+  .icon-button--secondary {
+    position: relative;
+    padding: var(--space-25);
+  }
+
+  .icon-button--tertiary {
+    background: none;
+  }
+
+  .icon-button-wrapper {
+    /* Layout */
+    width: 100%;
+    aspect-ratio: 1/1;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Style */
+    background-color: var(--background-color);
+    border-radius: calc(var(--space-25) + var(--radius-50));
+  }
+
+  .icon-button:hover,
+  .icon-button:focus-visible {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+
+  .icon-button:focus-visible {
+    outline: var(--space-100) solid var(--right-color-1000);
+    outline-width: 0.188rem;
+    outline-offset: var(--space-50);
+    border-radius: var(--radius-50);
+  }
+
+  .icon-button:active {
+    filter: brightness(0.8);
+    animation: bounce 0.2s ease-in-out;
+  }
+
+  @media screen and (min-width: 64em) {
+    .icon-button[data-target-device="mobile"] {
+      display: none;
+    }
+  }
+
+  @keyframes bounce {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+</style>

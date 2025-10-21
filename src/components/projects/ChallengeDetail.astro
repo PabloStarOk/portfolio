@@ -1,0 +1,333 @@
+---
+import ChevronDownIcon from "@lucide/astro/icons/chevron-down";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<details class="project-challenge">
+  <summary class="project-challenge__summary">
+    <h3 class="project-challenge__summary__title">{title}</h3>
+    <ChevronDownIcon
+      size={32}
+      color="var(--color-icon-default-default)"
+      class="project-challenge__summary__chevron"
+    />
+  </summary>
+  <div class="project-challenge__info">
+    <div class="project-challenge__card project-challenge__card--situation">
+      <h4
+        class="project-challenge__subtitle project-challenge__subtitle--situation"
+      >
+        Situación
+      </h4>
+      <div class="project-challenge__description">
+        <slot name="situation" />
+      </div>
+    </div>
+    <div class="project-challenge__card project-challenge__card--solution">
+      <h4
+        class="project-challenge__subtitle project-challenge__subtitle--solution"
+      >
+        Solución
+      </h4>
+      <div class="project-challenge__description">
+        <slot name="solution" />
+      </div>
+    </div>
+  </div>
+</details>
+
+<style>
+  .project-challenge {
+    /* Layout */
+    display: flex;
+    align-self: stretch;
+    padding: var(--space-600);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: var(--space-400);
+    word-break: keep-all;
+
+    /* Style */
+    border-radius: var(--radius-100);
+    border: 1px solid var(--color-border-default-default);
+    background: var(--background-color);
+    box-shadow: var(--size-depth-0) var(--size-depth-100) var(--size-depth-200)
+      var(--size-depth-negative-100) var(--color-black-200);
+  }
+
+  .project-challenge__summary {
+    /* Layout */
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+
+    /* Animations */
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .project-challenge__summary__title {
+    /* Layout */
+    flex: 1 0 0;
+
+    /* Typography */
+    color: var(--color-text-default-default);
+    font-size: var(--subheading-size-medium);
+    font-style: normal;
+    font-weight: var(--subheading-font-weight-strong);
+    line-height: normal;
+  }
+
+  .project-challenge__info {
+    /* Layout */
+    display: grid;
+    padding: var(--space-0);
+    justify-content: center;
+    gap: var(--space-400);
+    align-self: stretch;
+  }
+
+  .project-challenge__card {
+    /* Layout */
+    display: flex;
+    padding: var(--space-300) var(--space-400);
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-100);
+
+    /* Style */
+    border-radius: var(--radius-100);
+  }
+
+  .project-challenge__card--situation {
+    /* Style */
+    background: var(--color-background-danger-tertiary);
+  }
+
+  .project-challenge__card--solution {
+    /* Style */
+    background: var(--color-background-positive-tertiary);
+  }
+
+  .project-challenge__subtitle {
+    /* Layout */
+    align-self: stretch;
+
+    /* Style */
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-strong);
+    line-height: 140%;
+  }
+
+  .project-challenge__subtitle--situation {
+    /* Style */
+    color: var(--color-text-danger-tertiary);
+  }
+
+  .project-challenge__subtitle--solution {
+    /* Style */
+    color: var(--color-text-positive-tertiary);
+  }
+
+  .project-challenge__description {
+    /* Layout */
+    align-self: stretch;
+
+    /* Style */
+    color: var(--color-text-default-default);
+    font-size: var(--body-size-medium);
+    font-style: normal;
+    font-weight: var(--body-font-weight-regular);
+    line-height: 140%;
+  }
+
+  .project-challenge:not([open]) {
+    gap: 0;
+  }
+
+  .project-challenge__summary:hover,
+  .project-challenge__summary:focus-visible {
+    /* Layout */
+    transform: scale(1.01);
+
+    /* Style */
+    cursor: pointer;
+  }
+
+  .project-challenge__summary:focus-visible {
+    outline: var(--space-100) solid var(--right-color-1000);
+    outline-width: 0.188rem;
+    outline-offset: var(--space-100);
+    border-radius: var(--radius-100);
+  }
+
+  @media screen and (min-width: 48em) {
+    .project-challenge__info {
+      /* Layout */
+      grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+    }
+  }
+</style>
+
+<script is:inline>
+  class Accordion {
+    details;
+    summary;
+    chevron;
+    content;
+
+    speedMs;
+    easing;
+    closedHeight;
+    remValue;
+
+    heightAnimation;
+    opacityAnimation;
+    chevronAnimation;
+    contentOpacity = 0;
+
+    isClosing;
+    isExpanding;
+
+    constructor(details, easing, speedMs) {
+      this.details = details;
+      this.remValue = parseFloat(
+        window.getComputedStyle(this.details).fontSize
+      );
+      this.easing = easing;
+      this.speedMs = speedMs;
+
+      // Close just in case and get the height when closed.
+      this.details.open = false;
+      this.closedHeight = details.offsetHeight;
+
+      // Get data
+      this.summary = details.querySelector("summary");
+      this.chevron = this.summary.querySelector(
+        ".project-challenge__summary__chevron"
+      );
+      this.content = details.querySelector(".project-challenge__info");
+
+      // Accordion data
+      this.heightAnimation = null;
+      this.opacityAnimation = null;
+      this.chevronAnimation = null;
+      this.isClosing = false;
+      this.isExpanding = false;
+      this.summary.addEventListener("click", (event) => this.onClick(event));
+    }
+
+    onClick(event) {
+      event?.preventDefault();
+      this.details.style.overflow = "hidden";
+      if (this.isClosing || !this.details.open) this.open();
+      else if (this.isExpanding || this.details.open) this.shrink();
+    }
+
+    open() {
+      this.details.style.height = `${this.details.offsetHeight / this.remValue}rem`;
+      this.details.open = true;
+      window.requestAnimationFrame(() => this.expand());
+    }
+
+    shrink() {
+      this.isClosing = true;
+
+      const startHeight = `${this.details.offsetHeight / this.remValue}rem`;
+      const endHeight = `${this.closedHeight / this.remValue}rem`;
+
+      if (this.heightAnimation) this.heightAnimation.cancel();
+      if (this.opacityAnimation) this.opacityAnimation.cancel();
+
+      this.heightAnimation = this.animate(startHeight, endHeight, 0, 0);
+
+      this.heightAnimation.onfinish = () => this.onAnimationFinish(false);
+      this.heightAnimation.oncancel = () => (this.isClosing = false);
+    }
+
+    expand() {
+      this.isExpanding = true;
+      const padding = parseInt(window.getComputedStyle(this.details).padding);
+      const gap = parseInt(window.getComputedStyle(this.content).gap);
+      const startHeight = `${this.details.offsetHeight / this.remValue}rem`;
+      const endHeight = `${(this.summary.offsetHeight + this.content.offsetHeight + 2 * padding + gap) / this.remValue}rem`;
+
+      if (this.heightAnimation) this.heightAnimation.cancel();
+      if (this.opacityAnimation) this.opacityAnimation.cancel();
+
+      this.heightAnimation = this.animate(startHeight, endHeight, 1, 180);
+
+      this.heightAnimation.onfinish = () => this.onAnimationFinish(true);
+      this.heightAnimation.oncancel = () => (this.isExpanding = false);
+    }
+
+    onAnimationFinish(open) {
+      this.details.open = open;
+      this.heightAnimation = null;
+      this.opacityAnimation = null;
+      this.chevronAnimation = null;
+      this.isClosing = false;
+      this.isExpanding = false;
+      this.details.style.height = this.details.style.overflow = "";
+    }
+
+    animate(startHeight, endHeight, endOpacity, endRotation) {
+      const options = {
+        duration: this.speedMs,
+        easing: this.easing,
+      };
+      const heightAnimation = this.animateHeight(
+        startHeight,
+        endHeight,
+        options
+      );
+      this.animateContent(endOpacity, options);
+      this.animateChevron(endRotation, options);
+
+      return heightAnimation;
+    }
+
+    animateHeight(startHeight, endHeight, animationOptions) {
+      return this.details.animate(
+        {
+          height: [startHeight, endHeight],
+        },
+        animationOptions
+      );
+    }
+
+    animateContent(endOpacity, animationOptions) {
+      this.opacityAnimation = this.content.animate(
+        {
+          opacity: [this.contentOpacity, endOpacity],
+        },
+        animationOptions
+      );
+      this.opacityAnimation.onfinish = this.opacityAnimation.oncancel = () =>
+        (this.contentOpacity = endOpacity);
+    }
+
+    animateChevron(endRotation, animationOptions) {
+      this.chevronAnimation = this.chevron.animate(
+        {
+          transform: "rotate(180deg)",
+        },
+        animationOptions
+      );
+      this.chevronAnimation.onfinish = () =>
+        (this.chevron.style.rotate = `${endRotation}deg`);
+    }
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    document.querySelectorAll("details").forEach((detailsEl) => {
+      new Accordion(detailsEl, "ease-in-out", 300);
+    });
+  });
+</script>
