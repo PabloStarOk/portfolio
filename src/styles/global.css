@@ -48,6 +48,9 @@
     --depth-negative-100: -0.25rem;
     --depth-negative-200: -0.5rem;
 
+    /* Typography */
+    --typography-font-family-default: "Montserrat Variable";
+
     /* Typography Size */
     --typography-title-hero-size: 4.5rem;
     --typography-title-size-base: 3rem;
@@ -142,7 +145,7 @@
 
 body {
     background-color: var(--background-color);
-    font-family: "Montserrat Variable";
+    font-family: var(--typography-font-family-default);
 }
 
 h1 {
