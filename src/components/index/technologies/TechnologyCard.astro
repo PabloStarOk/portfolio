@@ -70,7 +70,7 @@ switch (stackType) {
 
     /* Style */
     border-radius: var(--radius-100);
-    border: 1px solid var(--color-border-default-default);
+    border: 1px solid var(--color-border-default-primary);
 
     box-shadow: var(--depth-0) var(--depth-200) var(--depth-400)
       var(--depth-negative-200) var(--color-black-300);
@@ -113,7 +113,7 @@ switch (stackType) {
     align-self: stretch;
 
     /* Typography */
-    color: var(--color-text-default-default);
+    color: var(--color-foreground-default-primary);
     text-align: center;
     font-size: var(--typography-body-size-base);
     font-style: normal;
@@ -123,12 +123,12 @@ switch (stackType) {
 
   .technology-card:hover {
     /* Style */
-    border-color: var(--right-color-1000);
+    border-color: var(--color-primary-gradient-right-1000);
   }
 
   .technology-card:hover .technology-card__title {
     /* Style */
-    background: var(--primary-color-1000);
+    background: var(--color-primary-1000);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -146,7 +146,7 @@ switch (stackType) {
     opacity: 0;
 
     /* Style */
-    background-image: var(--primary-color-100);
+    background-image: var(--color-primary-100);
 
     /* Animations */
     transition: opacity 0.3s linear;

@@ -10,7 +10,7 @@ const { title, Icon } = Astro.props;
 ---
 
 <article class="project-info-card">
-  <Icon size={48} color="var(--color-icon-default-default)" />
+  <Icon size={48} color="var(--color-foreground-default-primary)" />
   <div class="project-info-card__content">
     {title && <h3 class="project-info-card__title">{title}</h3>}
     <p class="project-info-card__description">
@@ -35,8 +35,8 @@ const { title, Icon } = Astro.props;
 
     /* Style */
     border-radius: var(--radius-100);
-    border: 1px solid var(--color-border-default-default);
-    background: var(--background-color);
+    border: 1px solid var(--color-border-default-primary);
+    background: var(--color-background-default-primary);
     box-shadow: var(--depth-0) var(--depth-200) var(--depth-400)
       var(--depth-negative-200) var(--color-black-300);
   }
@@ -58,7 +58,7 @@ const { title, Icon } = Astro.props;
     align-self: stretch;
 
     /* Typography */
-    color: var(--color-text-default-default);
+    color: var(--color-foreground-default-primary);
     font-size: var(--typography-subheading-size-base);
     font-style: normal;
     font-weight: var(--typography-subheading-font-weight);
