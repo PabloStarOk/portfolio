@@ -61,10 +61,10 @@ const { name, description, techStack, href, thumbnailSrc, thumbnailAlt } =
     overflow: hidden;
 
     /* Style */
-    border: 1px solid var(--color-border-default-default);
+    border: 1px solid var(--color-border-default-primary);
     border-radius: var(--radius-200);
-    box-shadow: var(--size-depth-0) var(--size-depth-400) var(--size-depth-400)
-      var(--size-depth-negative-200) var(--color-black-200);
+    box-shadow: var(--depth-0) var(--depth-400) var(--depth-400)
+      var(--depth-negative-200) var(--color-black-200);
     text-decoration: none;
 
     /* Animations */
@@ -82,8 +82,8 @@ const { name, description, techStack, href, thumbnailSrc, thumbnailAlt } =
     padding: var(--space-600) var(--space-400);
 
     /* Style */
-    background: var(--background-color);
-    border-bottom: 1px solid var(--color-border-default-default);
+    background: var(--color-background-default-primary);
+    border-bottom: 1px solid var(--color-border-default-primary);
   }
 
   .project-card__text {
@@ -108,7 +108,7 @@ const { name, description, techStack, href, thumbnailSrc, thumbnailAlt } =
 
   .project-card__title {
     /* Typography */
-    font-size: var(--heading-size-base);
+    font-size: var(--typography-heading-size-base);
     font-style: normal;
     font-weight: var(--typography-heading-font-weight);
     line-height: 120%;
@@ -119,7 +119,7 @@ const { name, description, techStack, href, thumbnailSrc, thumbnailAlt } =
     -webkit-line-clamp: 2;
 
     /* Style */
-    background: var(--primary-color-1000);
+    background: var(--color-primary-1000);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -131,10 +131,10 @@ const { name, description, techStack, href, thumbnailSrc, thumbnailAlt } =
 
     /* Style */
     text-align: center;
-    color: var(--color-text-default-default);
-    font-size: var(--body-size-medium);
+    color: var(--color-foreground-default-primary);
+    font-size: var(--typography-body-size-base);
     font-style: normal;
-    font-weight: var(--body-font-weight-regular);
+    font-weight: var(--typography-body-font-weight-regular);
     line-height: 140%;
   }
 
@@ -175,7 +175,7 @@ const { name, description, techStack, href, thumbnailSrc, thumbnailAlt } =
 
   .project-card:focus-visible {
     outline-offset: 1rem;
-    outline: var(--space-100) solid var(--right-color-1000);
+    outline: var(--space-100) solid var(--color-primary-gradient-right-1000);
     outline-width: 0.188rem;
     outline-offset: var(--space-100);
     border-radius: var(--radius-200);
@@ -197,7 +197,7 @@ const { name, description, techStack, href, thumbnailSrc, thumbnailAlt } =
     background: linear-gradient(
       to bottom,
       rgba(255, 255, 255, 0),
-      var(--left-color-100)
+      var(--color-primary-gradient-left-100)
     );
 
     /* Animations */
@@ -224,7 +224,7 @@ const { name, description, techStack, href, thumbnailSrc, thumbnailAlt } =
       flex: 1 0 0;
 
       /* Style */
-      border-right: 1px solid var(--color-border-default-default);
+      border-right: 1px solid var(--color-border-default-primary);
       border-bottom: none;
     }
 

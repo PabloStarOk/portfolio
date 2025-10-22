@@ -40,7 +40,7 @@ const {
     <div class="contact-card__content">
       <Icon
         size={24}
-        color="var(--color-icon-default-default)"
+        color="var(--color-foreground-default-primary)"
         class="contact-card__icon"
       />
       <p class="contact-card__info"><span>{contactInfo}</span></p>
@@ -103,12 +103,12 @@ const {
 
     /* Style */
     border-radius: var(--radius-100);
-    border: 1px solid var(--color-border-default-default);
-    background: var(--background-color);
+    border: 1px solid var(--color-border-default-primary);
+    background: var(--color-background-default-primary);
 
     /* Drop Shadow */
-    box-shadow: var(--size-depth-0) var(--size-depth-200) var(--size-depth-400)
-      var(--size-depth-negative-200) var(--color-black-300);
+    box-shadow: var(--depth-0) var(--depth-200) var(--depth-400)
+      var(--depth-negative-200) var(--color-black-300);
   }
 
   .contact-card__wrapper {
@@ -126,12 +126,12 @@ const {
 
   .contact-card__title {
     /* Typography */
-    font-size: var(--body-size-small);
+    font-size: var(--typography-body-size-small);
     font-style: normal;
-    font-weight: var(--body-font-weight-regular);
+    font-weight: var(--typography-body-font-weight-regular);
 
     /* Style */
-    color: var(--color-text-default-secondary);
+    color: var(--color-foreground-default-secondary);
   }
 
   .contact-card__content {
@@ -151,10 +151,10 @@ const {
 
     /* Typography */
     overflow: hidden;
-    color: var(--color-text-default-default);
-    font-size: var(--body-size-medium);
+    color: var(--color-foreground-default-primary);
+    font-size: var(--typography-body-size-base);
     font-style: normal;
-    font-weight: var(--body-font-weight-regular);
+    font-weight: var(--typography-body-font-weight-regular);
   }
 
   .contact-card__icon {
