@@ -41,12 +41,12 @@
     --size-icon-large: 2.5rem;
 
     /* Depth */
-    --size-depth-0: 0;
-    --size-depth-100: 0.25rem;
-    --size-depth-200: 0.5rem;
-    --size-depth-400: 1rem;
-    --size-depth-negative-100: -0.25rem;
-    --size-depth-negative-200: -0.5rem;
+    --depth-0: 0;
+    --depth-100: 0.25rem;
+    --depth-200: 0.5rem;
+    --depth-400: 1rem;
+    --depth-negative-100: -0.25rem;
+    --depth-negative-200: -0.5rem;
 
     /* Typography Size */
     --typography-title-hero-size: 4.5rem;
