@@ -30,8 +30,6 @@ const { targetDevice } = Astro.props;
     line-height: 120%;
 
     color: var(--color-text-default-secondary);
-    font-size: var(--subheading-size-base);
-    font-weight: var(--subtitle-font-weight);
 
     transition:
       color 0.2s ease-in-out,
@@ -41,10 +39,10 @@ const { targetDevice } = Astro.props;
 
   .menu-links__link span {
     /* Typography */
-    font-size: var(--body-size-medium);
+    font-size: var(--typography-body-size-base);
     font-style: normal;
-    font-weight: var(--body-font-weight-regular);
-    line-height: normal;
+    font-weight: var(--typography-body-font-weight-regular);
+    line-height: 140%;
   }
 
   .menu-links__link.active {
@@ -53,7 +51,7 @@ const { targetDevice } = Astro.props;
 
   .menu-links__link.active span {
     /* Typography */
-    font-weight: var(--body-font-weight-strong);
+    font-weight: var(--typography-body-font-weight-strong);
 
     /* Style */
     background: var(--primary-color-1000);

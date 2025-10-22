@@ -11,6 +11,7 @@
     --color-black-200: rgba(12, 12, 13, 0.1);
     --color-black-300: rgba(12, 12, 13, 0.2);
 
+    /* Spacing */
     --space-0: 0;
     --space-25: 0.063rem;
     --space-50: 0.125rem;
@@ -47,33 +48,25 @@
     --size-depth-negative-100: -0.25rem;
     --size-depth-negative-200: -0.5rem;
 
-    /* Typography */
-    --title-page-font-weight: 700;
-    --subtitle-font-weight: 400;
-    --typography-weight-bold: 700;
-    --font-weight-semibold: 600;
+    /* Typography Size */
+    --typography-title-hero-size: 4.5rem;
+    --typography-title-size-base: 3rem;
+    --typography-subtitle-size-base: 2rem;
+    --typography-heading-size-base: 1.5rem;
+    --typography-subheading-size-base: 1.25rem;
+    --typography-subheading-size-small: 1rem;
+    --typography-body-size-large: 1.25rem;
+    --typography-body-size-base: 1rem;
+    --typography-body-size-small: 0.875rem;
+
+    /* Typography Weight */
+    --typography-title-hero-font-weight: 700;
+    --typography-title-font-weight: 700;
+    --typography-subtitle-font-weight: 700;
     --typography-heading-font-weight: 600;
-    --subheading-font-weight-strong: 600;
-    --body-font-weight-strong: 600;
-    --body-font-weight-regular: 400;
-
-    /* Title Page */
-    --title-page-size-base: 3rem;
-
-    /* Heading */
-    --heading-size-base: 1.5rem;
-
-    /* Subheading */
-    --subheading-size-medium: 1.25rem;
-    --subheading-size-base: 1rem;
-
-    /* Subtitle */
-    --subtitle-size-base: 2rem;
-
-    /* Body */
-    --body-size-large: 1.25rem;
-    --body-size-medium: 1rem;
-    --body-size-small: 0.875rem;
+    --typography-subheading-font-weight: 600;
+    --typography-body-font-weight-regular: 400;
+    --typography-body-font-weight-strong: 600;
 }
 
 /* Default Theme */
@@ -154,5 +147,5 @@ body {
 
 h1 {
     text-align: center;
-    font-size: var(--subtitle-font-base);
+    font-size: var(--typography-title-size-base);
 }

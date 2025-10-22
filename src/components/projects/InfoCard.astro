@@ -59,10 +59,10 @@ const { title, Icon } = Astro.props;
 
     /* Typography */
     color: var(--color-text-default-default);
-    font-size: var(--body-size-medium);
+    font-size: var(--typography-subheading-size-base);
     font-style: normal;
-    font-weight: var(--body-font-weight-strong);
-    line-height: 140%;
+    font-weight: var(--typography-subheading-font-weight);
+    line-height: 120%;
 
     /* Remove [id]-project.astro styles */
     background: unset !important;
@@ -72,20 +72,15 @@ const { title, Icon } = Astro.props;
   }
 
   .project-info-card__description {
-    font-weight: var(--body-font-weight-regular);
+    font-size: var(--typography-body-size-base);
+    font-weight: var(--typography-body-font-weight-regular);
+    line-height: 140%;
   }
 
   @media screen and (min-width: 48em) {
     .project-info-card {
       /* Layout */
       flex-direction: row;
-    }
-
-    .project-info-card__title {
-      /* Typography */
-      font-size: var(--subheading-size-medium);
-      font-style: normal;
-      font-weight: var(--subheading-font-weight-strong);
     }
   }
 </style>
