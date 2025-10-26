@@ -59,9 +59,9 @@ const { title, Icon } = Astro.props;
 
     /* Typography */
     color: var(--color-foreground-default-primary);
-    font-size: var(--typography-subheading-size-base);
+    font-size: var(--typography-body-size-base) !important;
     font-style: normal;
-    font-weight: var(--typography-subheading-font-weight);
+    font-weight: var(--typography-body-font-weight-strong);
     line-height: 120%;
 
     /* Remove [id]-project.astro styles */
@@ -72,7 +72,6 @@ const { title, Icon } = Astro.props;
   }
 
   .project-info-card__description {
-    font-size: var(--typography-body-size-base);
     font-weight: var(--typography-body-font-weight-regular);
     line-height: 140%;
   }

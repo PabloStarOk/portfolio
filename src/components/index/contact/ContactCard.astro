@@ -53,6 +53,7 @@ const {
           type="tertiary"
           size="small"
           href={sendButtonData.href}
+          class="contact-card__button contact-card__send-button"
           ariaLabel={sendButtonData.ariaLabel}
         >
           <SendIcon size={20} style="stroke: url(#brandGradient)" />
@@ -66,6 +67,7 @@ const {
           type="tertiary"
           size="small"
           href={redirectButtonData.href}
+          class="contact-card__button contact-card__redirect-button"
           ariaLabel={redirectButtonData.ariaLabel}
         >
           <ExternalLinkIcon size={20} style="stroke: url(#brandGradient)" />
@@ -78,7 +80,7 @@ const {
         <IconButton
           buttonType="tertiary"
           size="small"
-          className="contact-card__copy-button"
+          className="contact-card__button contact-card__copy-button"
           ariaLabel={copyButtonData.ariaLabel ?? ""}
         >
           <CopyIcon size={20} style="stroke: url(#brandGradient)" />
@@ -197,32 +199,52 @@ const {
   import "tippy.js/animations/scale.css";
   import "tippy.js/dist/tippy.css";
 
+  class ButtonTooltip {
+    button: HTMLButtonElement;
+    tooltipContent: string = "";
+
+    constructor(button: HTMLButtonElement) {
+      this.button = button;
+
+      if (button.classList.contains("contact-card__send-button")) {
+        this.tooltipContent = "Enviar";
+      } else if (button.classList.contains("contact-card__redirect-button")) {
+        this.tooltipContent = "Redirigir";
+      } else if (button.classList.contains("contact-card__copy-button")) {
+        this.tooltipContent = "Copiar";
+      }
+    }
+  }
+
   document.addEventListener("astro:page-load", () => {
-    const copyButtons = document.querySelectorAll(
-      ".contact-card__copy-button"
-    ) as NodeListOf<HTMLButtonElement>;
+    const buttons: ButtonTooltip[] = [];
+    document.querySelectorAll(".contact-card__button").forEach((button) => {
+      const buttonInfo = new ButtonTooltip(button as HTMLButtonElement);
+      buttons.push(buttonInfo);
+    });
+
     const contactMap = new WeakMap<HTMLButtonElement>();
     const tippyInstancesMap = new WeakMap<HTMLButtonElement>();
     let clicked: boolean;
 
     // Map all contact information related to each button
-    copyButtons.forEach((button) => {
-      const tooltip = tippy(button, {
-        content: "Copiar",
+    buttons.forEach((buttonInfo) => {
+      const tooltip = tippy(buttonInfo.button, {
+        content: buttonInfo.tooltipContent,
         trigger: "manual",
         hideOnClick: false,
         animation: "scale",
       });
-      tippyInstancesMap.set(button, tooltip);
+      tippyInstancesMap.set(buttonInfo.button, tooltip);
 
-      const wrapper = button.closest(".contact-card");
+      const wrapper = buttonInfo.button.closest(".contact-card");
       if (!wrapper) return;
 
       const info = wrapper.querySelector(
         ".contact-card__info"
       ) as HTMLParagraphElement;
 
-      contactMap.set(button, info.textContent as string);
+      contactMap.set(buttonInfo.button, info.textContent as string);
     });
 
     function handleTooltip(
@@ -261,7 +283,7 @@ const {
       }
     }
 
-    copyButtons.forEach((button) => {
+    buttons.forEach(({ button }) => {
       button.addEventListener(
         "click",
         async () => await copyToClipboard(button)
