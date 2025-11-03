@@ -29,9 +29,7 @@ const { targetDevice } = Astro.props;
     text-align: center;
     line-height: 120%;
 
-    color: var(--color-text-default-secondary);
-    font-size: var(--subheading-size-base);
-    font-weight: var(--subtitle-font-weight);
+    color: var(--color-foreground-default-secondary);
 
     transition:
       color 0.2s ease-in-out,
@@ -41,33 +39,33 @@ const { targetDevice } = Astro.props;
 
   .menu-links__link span {
     /* Typography */
-    font-size: var(--body-size-medium);
+    font-size: var(--typography-body-size-base);
     font-style: normal;
-    font-weight: var(--body-font-weight-regular);
-    line-height: normal;
+    font-weight: var(--typography-body-font-weight-medium);
+    line-height: 140%;
   }
 
   .menu-links__link.active {
-    background: var(--primary-color-100);
+    background: var(--color-primary-100);
   }
 
   .menu-links__link.active span {
     /* Typography */
-    font-weight: var(--body-font-weight-strong);
+    font-weight: var(--typography-body-font-weight-medium);
 
     /* Style */
-    background: var(--primary-color-1000);
+    background: var(--color-primary-1000);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
   }
 
   .menu-links__link:hover,
   .menu-links__link:focus-visible {
-    color: var(--color-text-default-default);
+    color: var(--color-foreground-default-primary);
   }
 
   .menu-links__link:focus-visible {
-    outline: var(--space-100) solid var(--right-color-1000);
+    outline: var(--space-100) solid var(--color-primary-gradient-right-1000);
     outline-width: 0.188rem;
     outline-offset: var(--space-200);
     border-radius: var(--radius-50);
@@ -89,7 +87,7 @@ const { targetDevice } = Astro.props;
     text-align: center;
     align-content: center;
 
-    border-top: 1px solid var(--color-border-default-default);
+    border-top: 1px solid var(--color-border-default-primary);
   }
 
   @media screen and (min-width: 64em) {
@@ -109,7 +107,7 @@ const { targetDevice } = Astro.props;
 
       transform: scaleX(0); /* Start with no width */
 
-      background: var(--primary-color-1000); /* Color of the underline */
+      background: var(--color-primary-1000); /* Color of the underline */
       border-radius: var(--radius-100);
 
       transform-origin: bottom center;

@@ -29,21 +29,21 @@ const { targetDevice } = Astro.props;
     <div class="theme-toggle__icons">
       <SunMoonIcon
         size={20}
-        color="var(--color-icon-neutral-onneutral)"
+        color="var(--color-foreground-neutral-onneutral-primary)"
         class="theme-toggle__icon"
         data-icon="auto"
       />
 
       <MoonIcon
         size={20}
-        color="var(--color-icon-neutral-onneutral)"
+        color="var(--color-foreground-neutral-onneutral-primary)"
         class="theme-toggle__icon"
         data-icon="dark"
       />
 
       <SunIcon
         size={20}
-        color="var(--color-icon-neutral-onneutral)"
+        color="var(--color-foreground-neutral-onneutral-primary)"
         class="theme-toggle__icon"
         data-icon="light"
       />
@@ -83,7 +83,7 @@ const { targetDevice } = Astro.props;
     gap: var(--space-150);
 
     padding: var(--space-50);
-    background: var(--primary-color-1000);
+    background: var(--color-primary-1000);
     border-radius: var(--radius-100);
     border: transparent;
 
@@ -117,10 +117,10 @@ const { targetDevice } = Astro.props;
     opacity: 0;
     visibility: hidden;
     display: none;
-    font-family: "Montserrat Variable";
-    font-size: var(--body-size-small);
-    font-weight: var(--body-font-weight-strong);
-    color: var(--color-text-neutral-onneutral);
+    font-family: var(--typography-font-family-default);
+    font-size: var(--typography-body-size-small);
+    font-weight: var(--typography-body-font-weight-medium);
+    color: var(--color-foreground-neutral-onneutral-primary);
 
     transition: opacity 0.3s ease-in-out;
   }
@@ -136,7 +136,7 @@ const { targetDevice } = Astro.props;
 
     /* Solid gradient border */
     border: 1px solid transparent;
-    background: var(--primary-color-1000);
+    background: var(--color-primary-1000);
     mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
@@ -154,7 +154,7 @@ const { targetDevice } = Astro.props;
   }
 
   .theme-toggle__button:focus-visible {
-    outline: var(--space-100) solid var(--right-color-1000);
+    outline: var(--space-100) solid var(--color-primary-gradient-right-1000);
     outline-width: 0.188rem;
     outline-offset: var(--space-200);
     border-radius: var(--radius-50);
@@ -218,124 +218,151 @@ const { targetDevice } = Astro.props;
 </script>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    // Types
-    type ToggleElements = {
-      container: HTMLDivElement;
-      icon: HTMLImageElement;
-      content: HTMLParagraphElement;
-    };
+  enum Theme {
+    Auto = "auto",
+    Dark = "dark",
+    Light = "light",
+  }
 
-    type ToggleState = {
-      content: string;
-      width: string;
-      alignment: string;
-      hasTimeout: boolean;
-      timeout?: number;
-    };
+  type ToggleState = {
+    label: string;
+    width: string;
+    hasTimeout: boolean;
+    timeout?: number;
+  };
 
-    // Global constants
-    const toggles = document.querySelectorAll(
-      ".theme-toggle__button"
-    ) as NodeListOf<HTMLButtonElement>;
-    const containersMap = new WeakMap<HTMLButtonElement, ToggleElements>();
-    const timeoutPool: WeakMap<HTMLButtonElement, { timeout: NodeJS.Timeout }> =
-      new WeakMap();
+  class ThemeToggle {
+    containerElement: HTMLDivElement;
+    buttonElement: HTMLButtonElement;
+    paragraphElement: HTMLParagraphElement;
+    states: Map<string, ToggleState>;
+    defaultState: ToggleState;
+    animationTimeout: Timeout = 0;
 
-    const defaultState: ToggleState = {
-      content: "Auto",
-      width: "100%",
-      alignment: "flex-start",
-      hasTimeout: false,
-      timeout: 0,
-    };
-    const toggleStates: Map<string, ToggleState> = new Map([
-      ["auto", defaultState],
-      [
-        "dark",
-        {
-          content: "",
-          width: "1.8rem",
-          alignment: "flex-start",
-          hasTimeout: true,
-          timeout: 150,
-        },
-      ],
-      [
-        "light",
-        {
-          content: "",
-          width: "1.8rem",
-          alignment: "flex-end",
-          hasTimeout: false,
-          timeout: 0,
-        },
-      ],
-    ]);
+    private boundSwitchTheme: () => void;
+    private boundOnThemeChanged: (event: Event) => void;
 
-    // Map related elements (container <div>, icon <svg> and content <p>) of each toggle.
-    for (const toggle of toggles) {
-      let icon: HTMLImageElement | any;
-      let content: HTMLParagraphElement | any;
+    constructor(
+      containerElement: HTMLDivElement,
+      buttonElement: HTMLButtonElement,
+      paragraphElement: HTMLParagraphElement,
+      states: Map<string, ToggleState>,
+      defaultState: ToggleState
+    ) {
+      this.containerElement = containerElement;
+      this.buttonElement = buttonElement;
+      this.paragraphElement = paragraphElement;
+      this.states = states;
+      this.defaultState = defaultState;
 
-      const container = toggle.closest(".theme-toggle") as HTMLDivElement;
+      this.boundSwitchTheme = this.switchTheme.bind(this);
+      this.boundOnThemeChanged = this.onThemeChanged.bind(this);
+      this.buttonElement.addEventListener("click", this.boundSwitchTheme);
+      document.addEventListener("theme-changed", this.boundOnThemeChanged);
+      this.switchState(window.theme.getTheme() as Theme);
+    }
 
-      for (const child of toggle.children) {
-        switch (child.tagName) {
-          case "IMG":
-            icon = child as HTMLImageElement;
-          case "P":
-            content = child as HTMLParagraphElement;
-        }
-      }
+    destroy() {
+      this.buttonElement.removeEventListener("click", this.boundSwitchTheme);
+      document.removeEventListener("theme-changed", this.boundOnThemeChanged);
+    }
 
-      const elements: ToggleElements = {
+    private switchTheme() {
+      const stateCycle = [Theme.Dark, Theme.Auto, Theme.Light];
+      const currentState =
+        (this.buttonElement.dataset.state as Theme) || Theme.Dark;
+
+      const nextThemeIndex =
+        (stateCycle.indexOf(currentState) + 1) % stateCycle.length;
+      const nextTheme = stateCycle[nextThemeIndex];
+      window.theme.setTheme(nextTheme);
+    }
+
+    private onThemeChanged(event: Event) {
+      const themeChangedEvent = event as CustomEvent<{ theme: string }>;
+      const theme = themeChangedEvent.detail.theme as Theme;
+      this.switchState(theme);
+    }
+
+    private switchState(targetTheme: Theme) {
+      if (this.buttonElement.dataset.state === targetTheme) return;
+
+      clearTimeout(this.animationTimeout);
+
+      const state = toggleStates.get(targetTheme) || this.defaultState;
+
+      if (!state) return;
+
+      // Fill the container to simulate an translation animation. (Specially used to move from light theme (right side) to dark theme (left side) mode)
+      if (state.hasTimeout) this.buttonElement.style.width = "100%";
+
+      this.paragraphElement.textContent = state.label;
+      this.animationTimeout = setTimeout(() => {
+        this.containerElement.dataset.state = targetTheme;
+        this.buttonElement.style.width = state.width;
+        this.buttonElement.dataset.state = targetTheme;
+      }, state.timeout);
+    }
+  }
+
+  const toggleStates: Map<Theme, ToggleState> = new Map([
+    [
+      Theme.Auto,
+      {
+        label: "Auto",
+        width: "100%",
+        hasTimeout: false,
+        timeout: 0,
+      },
+    ],
+    [
+      Theme.Dark,
+      {
+        label: "",
+        width: "1.8rem",
+        hasTimeout: true,
+        timeout: 150,
+      },
+    ],
+    [
+      Theme.Light,
+      {
+        label: "",
+        width: "1.8rem",
+        hasTimeout: false,
+        timeout: 0,
+      },
+    ],
+  ]);
+
+  const themeToggles: ThemeToggle[] = [];
+  function setupThemeToggles() {
+    document.querySelectorAll(".theme-toggle__button").forEach((button) => {
+      const container = button.closest(".theme-toggle") as HTMLDivElement;
+      const paragraph = button.querySelector(
+        ".theme-toggle__content"
+      ) as HTMLParagraphElement;
+
+      const themeToggle = new ThemeToggle(
         container,
-        icon,
-        content,
-      };
-      containersMap.set(toggle, elements);
-    }
-
-    // Set the state of the toggle
-    function setToggleState(toggle: HTMLButtonElement, targetTheme: string) {
-      if (toggle.dataset.state === targetTheme) return;
-
-      clearTimeout(timeoutPool.get(toggle)?.timeout);
-
-      const state = toggleStates.get(targetTheme) || defaultState;
-      const elements = containersMap.get(toggle);
-
-      if (state && elements) {
-        elements.content.textContent = state.content;
-        // Fill the container to simulate an translation animation.
-        // (Specially used to move from light theme (right side) to dark theme (left side) mode)
-        if (state.hasTimeout) toggle.style.width = "100%";
-        let timeout = setTimeout(() => {
-          toggle.style.width = state.width;
-          elements.container.dataset.state = targetTheme;
-          toggle.dataset.state = targetTheme;
-        }, state.timeout);
-
-        timeoutPool.set(toggle, { timeout });
-      }
-    }
-
-    // Change the current theme of the portfolio
-    function changeTheme(toggle: HTMLButtonElement) {
-      const stateCycle = ["dark", "auto", "light"];
-      const currentState = toggle.dataset.state || "dark";
-      const nextTheme =
-        stateCycle[(stateCycle.indexOf(currentState) + 1) % stateCycle.length];
-      window.theme.setTheme(nextTheme as "auto" | "dark" | "light");
-    }
-
-    toggles.forEach((s) => s.addEventListener("click", () => changeTheme(s)));
-    document.addEventListener("theme-changed", (event: Event) => {
-      const themeChangedEvent = event as CustomEvent<ThemeChangedDetail>;
-      for (const toggle of toggles) {
-        setToggleState(toggle, themeChangedEvent.detail.theme);
-      }
+        button as HTMLButtonElement,
+        paragraph,
+        toggleStates,
+        toggleStates.get(Theme.Auto) as ToggleState
+      );
+      themeToggles.push(themeToggle);
     });
+  }
+
+  function cleanupThemeToggles() {
+    themeToggles.forEach((instance) => instance.destroy());
+    themeToggles.length = 0;
+  }
+
+  setupThemeToggles();
+  document.addEventListener("astro:before-swap", cleanupThemeToggles);
+  document.addEventListener("astro:page-load", () => {
+    cleanupThemeToggles();
+    setupThemeToggles();
   });
 </script>

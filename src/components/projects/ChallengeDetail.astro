@@ -13,7 +13,7 @@ const { title } = Astro.props;
     <h3 class="project-challenge__summary__title">{title}</h3>
     <ChevronDownIcon
       size={32}
-      color="var(--color-icon-default-default)"
+      color="var(--color-foreground-default-primary)"
       class="project-challenge__summary__chevron"
     />
   </summary>
@@ -55,10 +55,10 @@ const { title } = Astro.props;
 
     /* Style */
     border-radius: var(--radius-100);
-    border: 1px solid var(--color-border-default-default);
-    background: var(--background-color);
-    box-shadow: var(--size-depth-0) var(--size-depth-100) var(--size-depth-200)
-      var(--size-depth-negative-100) var(--color-black-200);
+    border: 1px solid var(--color-border-default-primary);
+    background: var(--color-background-default-primary);
+    box-shadow: var(--depth-0) var(--depth-100) var(--depth-200)
+      var(--depth-negative-100) var(--color-black-200);
   }
 
   .project-challenge__summary {
@@ -76,10 +76,10 @@ const { title } = Astro.props;
     flex: 1 0 0;
 
     /* Typography */
-    color: var(--color-text-default-default);
-    font-size: var(--subheading-size-medium);
+    color: var(--color-foreground-default-primary);
+    font-size: var(--typography-subheading-size-base);
     font-style: normal;
-    font-weight: var(--subheading-font-weight-strong);
+    font-weight: var(--typography-subheading-font-weight);
     line-height: normal;
   }
 
@@ -119,20 +119,20 @@ const { title } = Astro.props;
     align-self: stretch;
 
     /* Style */
-    font-size: var(--body-size-medium);
+    font-size: var(--typography-body-size-base);
     font-style: normal;
-    font-weight: var(--body-font-weight-strong);
+    font-weight: var(--typography-body-font-weight-strong);
     line-height: 140%;
   }
 
   .project-challenge__subtitle--situation {
     /* Style */
-    color: var(--color-text-danger-tertiary);
+    color: var(--color-foreground-danger-tertiary);
   }
 
   .project-challenge__subtitle--solution {
     /* Style */
-    color: var(--color-text-positive-tertiary);
+    color: var(--color-foreground-positive-tertiary);
   }
 
   .project-challenge__description {
@@ -140,10 +140,10 @@ const { title } = Astro.props;
     align-self: stretch;
 
     /* Style */
-    color: var(--color-text-default-default);
-    font-size: var(--body-size-medium);
+    color: var(--color-foreground-default-primary);
+    font-size: var(--typography-body-size-base);
     font-style: normal;
-    font-weight: var(--body-font-weight-regular);
+    font-weight: var(--typography-body-font-weight-regular);
     line-height: 140%;
   }
 
@@ -161,7 +161,7 @@ const { title } = Astro.props;
   }
 
   .project-challenge__summary:focus-visible {
-    outline: var(--space-100) solid var(--right-color-1000);
+    outline: var(--space-100) solid var(--color-primary-gradient-right-1000);
     outline-width: 0.188rem;
     outline-offset: var(--space-100);
     border-radius: var(--radius-100);

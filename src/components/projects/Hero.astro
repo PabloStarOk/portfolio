@@ -43,7 +43,7 @@ let buttonStyle: string;
           buttonStyle =
             buttonCount > 1
               ? "stroke: url(#brandGradient);"
-              : "stroke: var(--color-icon-neutral-onneutral, red);";
+              : "stroke: var(--color-foreground-neutral-onneutral-primary);";
           return (
             <AnchorButton
               href={button.href}
@@ -92,10 +92,10 @@ let buttonStyle: string;
     align-self: stretch;
 
     /* Styles */
-    color: var(--color-text-default-default);
-    font-size: var(--body-size-medium);
+    color: var(--color-foreground-default-primary);
+    font-size: var(--typography-body-size-base);
     font-style: normal;
-    font-weight: var(--body-font-weight-regular);
+    font-weight: var(--typography-body-font-weight-regular);
     line-height: 140%;
   }
 

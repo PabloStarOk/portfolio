@@ -19,13 +19,13 @@ if (!icon)
 const formattedName = technologyName + (version ? " " + version : "");
 ---
 
-<article class="technology-card">
+<div class="technology-card">
   <Image class="technology-card__icon" src={icon.metadata} alt={icon.alt} />
   <div class="technology-card__info">
     <h3 class="technology-card__name">{formattedName}</h3>
     <p class="technology-card__purpose">{purpose}</p>
   </div>
-</article>
+</div>
 
 <style>
   .technology-card {
@@ -41,9 +41,9 @@ const formattedName = technologyName + (version ? " " + version : "");
 
     /* Style */
     border-radius: var(--radius-100);
-    border: 1px solid var(--color-border-default-default);
-    box-shadow: var(--size-depth-0) var(--size-depth-100) var(--size-depth-200)
-      var(--size-depth-negative-100) var(--color-black-200);
+    border: 1px solid var(--color-border-default-primary);
+    box-shadow: var(--depth-0) var(--depth-100) var(--depth-200)
+      var(--depth-negative-100) var(--color-black-200);
   }
 
   .technology-card__icon {
@@ -77,19 +77,19 @@ const formattedName = technologyName + (version ? " " + version : "");
     align-self: stretch;
 
     /* Typography */
-    color: var(--color-text-default-default);
+    color: var(--color-foreground-default-primary);
 
     /* Body Strong */
-    font-size: var(--body-size-medium);
+    font-size: var(--typography-body-size-base);
     font-style: normal;
-    font-weight: var(--body-font-weight-strong);
+    font-weight: var(--typography-body-font-weight-strong);
     line-height: 140%;
   }
 
   .technology-card__purpose {
     /* Typography */
-    font-size: var(--body-size-small);
-    font-weight: var(--body-font-weight-regular);
+    font-size: var(--typography-body-size-small);
+    font-weight: var(--typography-body-font-weight-regular);
   }
 
   @media screen and (min-width: 48em) {

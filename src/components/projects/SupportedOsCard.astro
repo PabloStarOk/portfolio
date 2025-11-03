@@ -15,10 +15,10 @@ if (!osIcon)
   );
 ---
 
-<article class="project-os">
+<div class="project-os">
   <Image class="project-os__icon" src={osIcon.metadata} alt={osIcon.alt} />
   <p class="project-os__name">{osName}</p>
-</article>
+</div>
 
 <style>
   .project-os {
@@ -34,10 +34,10 @@ if (!osIcon)
 
     /* Style */
     border-radius: var(--radius-100);
-    border: 1px solid var(--color-border-default-default);
-    background: var(--background-color);
-    box-shadow: var(--size-depth-0) var(--size-depth-100) var(--size-depth-200)
-      var(--size-depth-negative-100) var(--color-black-200);
+    border: 1px solid var(--color-border-default-primary);
+    background: var(--color-background-default-primary);
+    box-shadow: var(--depth-0) var(--depth-100) var(--depth-200)
+      var(--depth-negative-100) var(--color-black-200);
   }
 
   .project-os__icon {
@@ -54,11 +54,11 @@ if (!osIcon)
     align-self: stretch;
 
     /* Style */
-    color: var(--color-text-default-default);
+    color: var(--color-foreground-default-primary);
     text-align: center;
-    font-size: var(--body-size-medium);
+    font-size: var(--typography-body-size-base);
     font-style: normal;
-    font-weight: var(--body-font-weight-strong);
+    font-weight: var(--typography-body-font-weight-strong);
     line-height: 140%;
   }
 </style>
