@@ -9,7 +9,7 @@ interface Props {
 const { title, Icon } = Astro.props;
 ---
 
-<article class="project-info-card">
+<div class="project-info-card">
   <Icon size={48} color="var(--color-foreground-default-primary)" />
   <div class="project-info-card__content">
     {title && <h3 class="project-info-card__title">{title}</h3>}
@@ -17,7 +17,7 @@ const { title, Icon } = Astro.props;
       <slot />
     </p>
   </div>
-</article>
+</div>
 
 <style>
   .project-info-card {
