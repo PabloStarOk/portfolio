@@ -19,13 +19,13 @@ if (!icon)
 const formattedName = technologyName + (version ? " " + version : "");
 ---
 
-<article class="technology-card">
+<div class="technology-card">
   <Image class="technology-card__icon" src={icon.metadata} alt={icon.alt} />
   <div class="technology-card__info">
     <h3 class="technology-card__name">{formattedName}</h3>
     <p class="technology-card__purpose">{purpose}</p>
   </div>
-</article>
+</div>
 
 <style>
   .technology-card {

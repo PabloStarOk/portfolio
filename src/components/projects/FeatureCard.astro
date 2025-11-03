@@ -7,11 +7,11 @@ interface Props {
 const { title, description } = Astro.props;
 ---
 
-<article class="project-feature">
+<div class="project-feature">
   <h3 class="project-feature__title">{title}</h3>
   <p class="project-feature__description">{description}</p>
   <rect class="project-feature__rect"></rect>
-</article>
+</div>
 
 <style>
   .project-feature {
