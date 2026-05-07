@@ -33,6 +33,7 @@ const {
   supportedOs,
   objective,
   challenges,
+  hasContent
 } = project.data;
 
 const thumbnail =
@@ -140,9 +141,14 @@ techStack.map((technology) => {
       <InfoCard Icon={CrossHairIcon}>{objective}</InfoCard>
     </SectionLayout>
 
-    <div class="project-page__md-content">
-      <Content />
-    </div>
+    {
+      hasContent &&
+      (
+        <div class="project-page__md-content">
+          <Content />
+        </div>
+      )
+    }
 
     {
       challenges.length > 0 && (
