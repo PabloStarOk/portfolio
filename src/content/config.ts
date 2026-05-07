@@ -50,7 +50,8 @@ const projects = defineCollection({
             title: z.string().max(70),
             situation: z.string().max(350),
             solution: z.string().max(350)
-        }))
+        })),
+        hasContent: z.boolean().default(true)
     })
 })
 
