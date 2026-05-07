@@ -1,0 +1,47 @@
+---
+name: PadPoll
+shortDescription: Herramienta para medir la tasa de sondeo de mandos en Windows y Linux.
+featuredProject: true
+assets:
+  thumbnail:
+    fileName: PadPoll.webp
+    alt: Una interfaz de línea de comandos mostrando métricas de rendimiento de un mando de videojuego.
+  icon:
+    fileName: PadPoll.svg
+    alt: Icono de PadPoll.
+hero:
+  description: PadPoll es una herramienta multiplataforma para medir la frecuencia de sondeo de los mandos de videojuegos en Windows y Linux, la cual utiliza APIs de bajo nivel ofrecidos por los sistemas operativos para obtener los datos de entrada de los dispositivos y calcular las métricas que son mostradas al usuario mediante una aplicación de consola.
+  buttons:
+    - { type: "GitHub", url: "https://github.com/PabloStarOk/padpoll" }
+techStack:
+  [
+    {
+      name: ".NET",
+      version: "10",
+      purpose: "Utilizado para construir la aplicación de consola.",
+    },
+    { name: "C#", purpose: "Lenguaje de desarrollo utilizado con .NET." },
+  ]
+features:
+  [
+    {
+      title: "Uso de APIs de Bajo Nivel",
+      description: "Emplea 'GameInput' en Windows y 'evdev' en Linux para obtener la entrada de los mandos.",
+    },
+    {
+      title: "Compilación Nativa",
+      description: "Usa NativeAOT para compilar a un binario portable y de alto rendimiento.",
+    },
+  ]
+supportedOs: [Linux, Windows 10, Windows 11]
+objective: "Ofrecer una herramienta de código abierto nativa, portable y eficiente que compruebe de forma efectiva el rendimiento de mandos de videojuegos en Windows y Linux mostrando métricas confiables que reflejen la experiencia de juego."
+challenges:
+  [
+    {
+      title: "GameInput API de Windows",
+      situation: "La implementación de GameInput en Windows fue compleja debido a su diseño nativo para C++. La integración mediante P/Invoke e interfaces COM resultó difícil por la ambigüedad y discrepancias entre versiones en la documentación oficial.",
+      solution: "Aunque GameInputNet ofrecía una solución, era incompatible con NativeAOT. Por ello, se utilizo dicha librería como referencia técnica para desarrollar una integración propia, minimalista y optimizada, garantizando el máximo rendimiento en PadPoll."
+    }
+  ]
+hasContent: false
+---
